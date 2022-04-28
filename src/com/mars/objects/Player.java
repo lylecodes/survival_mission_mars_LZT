@@ -1,2 +1,3 @@
-package com.mars.objects;class Player {
+package com.mars.objects;
+public class Player {
 }

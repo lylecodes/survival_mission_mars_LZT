@@ -1,2 +1,3 @@
-package com.mars.objects;class Location {
+package com.mars.objects;
+public class Location {
 }

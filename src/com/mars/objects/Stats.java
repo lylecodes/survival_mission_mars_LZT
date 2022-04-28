@@ -1,2 +1,3 @@
-package com.mars.objects;class Stats {
+package com.mars.objects;
+public class Stats {
 }
