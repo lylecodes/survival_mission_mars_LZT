@@ -2,13 +2,12 @@ package com.mars;
 
 import com.mars.display.Display;
 import com.mars.util.TextParser;
-
 import java.util.List;
 import java.util.Scanner;
 
 public class Engine {
-Display display = new Display();
-TextParser parser = new TextParser();
+    private Display display = new Display();
+    private TextParser parser = new TextParser();
 
     public void runApp() {
         display.displaySplash();                        //Display welcome screen to user
@@ -22,9 +21,11 @@ TextParser parser = new TextParser();
             System.out.println("You chose to not play :(");
             System.exit(0);
         }
+
+        display.displayGameInfo();                      //display basic game info
         //boolean choseQuit = false;
         while (isRunning) {
-            display.displayGameInfo();                  //display basic game info
+
             display.displayMenu();                      //display available game commands
 
             Scanner scanner = new Scanner(System.in);
