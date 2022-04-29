@@ -25,9 +25,11 @@ TextParser parser = new TextParser();
         }
         //boolean choseQuit = false;
         while (isRunning) {
-            display.displayGameInfo();                  //display basic game info
-            display.displayMenu();                      //display available game commands
+//            display.displayGameInfo();                  //display basic game info
+//            display.displayMenu();                      //display available game commands
 
+            display.displayText("data/game_info.txt");
+            display.displayText("data/game_menu.txt");
             Scanner scanner = new Scanner(System.in);
             System.out.println("Enter a command: ");
             String userInput = scanner.nextLine();
