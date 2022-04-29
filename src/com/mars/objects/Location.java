@@ -10,7 +10,7 @@ public class Location {
     private Boolean oxygen;
     private String asciiArt;
 
-    public Location(String name, Map<String, String> directions,String description, String[] items,Boolean oxygen, String asciiArt){
+    public Location(String name, Map<String, String> directions, String description, String[] items, Boolean oxygen, String asciiArt) {
         setName(name);
         setDirections(directions);
         setDescription(description);
