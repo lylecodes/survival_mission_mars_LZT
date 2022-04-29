@@ -13,10 +13,10 @@ public class TextParser {
     public List<String> getCommand(String userInput){
         List<String> cmdInput = new ArrayList<>();
         String cleanInput = cleanUserInput(userInput);
+
         //Parse into verb + noun
         cleanInput = cleanInput.toLowerCase();
         cmdInput = Arrays.asList(cleanInput.split(" "));
-        System.out.println(cmdInput); //testing
         return cmdInput;
 
     }

@@ -1,21 +1,28 @@
 package com.mars;
 
 import com.mars.display.Display;
+import com.mars.objects.Location;
+import com.mars.util.CommandProcessor;
+import com.mars.util.JSONHandler;
 import com.mars.util.TextParser;
+
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
-import com.mars.util.TextParser;
 
 public class Engine {
     private Display display = new Display();
     private TextParser parser = new TextParser();
+    private CommandProcessor processor = new CommandProcessor();
+    private JSONHandler jsonhandler = new JSONHandler();
+    private Map<String, Location> locationMap = jsonhandler.loadLocationMap();
 
     public void runApp() {
         display.displaySplash();                        //Display welcome screen to user
 
         boolean isRunning = false;
         String answer = display.playGame();             //Ask if user wants to play a game
-        if(answer.equals("Y")){
+        if(answer.equals("y")){
             isRunning = true;
         }
         else{
@@ -23,23 +30,19 @@ public class Engine {
             System.exit(0);
         }
 
-        display.displayGameInfo();                      //display basic game info
-        //boolean choseQuit = false;
+        Location currentLocation = locationMap.get("Docking Station");
+        display.displayText("data/game_info.txt");
+        display.displayText("data/game_menu.txt");
+
         while (isRunning) {
-            display.displayText("data/game_info.txt");
-            display.displayText("data/game_menu.txt");
+            display.displayCurrentStatus(currentLocation);
           
             Scanner scanner = new Scanner(System.in);
             System.out.println("Enter a command: ");
             String userInput = scanner.nextLine();
             List<String> nextCommand = parser.getCommand(userInput);
+            currentLocation = locationMap.get(processor.processCommand(nextCommand, currentLocation, locationMap));
 
-            System.out.println("Do you want to exit the game?");
-            String userAnswer = scanner.nextLine();
-            if (userAnswer.equals("Y")) {
-                System.out.println("Exiting game...");
-                break;
-            }
         }
     }//end method runApp
 }//end class engine

@@ -36,7 +36,8 @@
   ],
   "quit": [
     "q",
-    "end"
+    "end",
+    "exit"
   ],
   "help": [
     "h",

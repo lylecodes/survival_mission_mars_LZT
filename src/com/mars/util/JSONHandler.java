@@ -1,16 +1,16 @@
 package com.mars.util;
 
 import com.mars.objects.Location;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.*;
-
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class JSONHandler {
     private Map<String, Location> locationMap = new HashMap<>();
@@ -32,7 +32,6 @@ public class JSONHandler {
             Object obj = jsonParser.parse(reader);
 
             JSONArray locationList = (JSONArray) obj;
-            //System.out.println(locationList);
 
             locationList.forEach(loc -> addLocation((JSONObject) loc));
 
