@@ -4,6 +4,7 @@ import com.mars.display.Display;
 import com.mars.util.TextParser;
 import java.util.List;
 import java.util.Scanner;
+import com.mars.util.TextParser;
 
 public class Engine {
     private Display display = new Display();
@@ -25,9 +26,9 @@ public class Engine {
         display.displayGameInfo();                      //display basic game info
         //boolean choseQuit = false;
         while (isRunning) {
-
-            display.displayMenu();                      //display available game commands
-
+            display.displayText("data/game_info.txt");
+            display.displayText("data/game_menu.txt");
+          
             Scanner scanner = new Scanner(System.in);
             System.out.println("Enter a command: ");
             String userInput = scanner.nextLine();

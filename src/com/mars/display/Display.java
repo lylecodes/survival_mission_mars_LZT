@@ -4,6 +4,9 @@ import com.mars.objects.Location;
 import com.mars.objects.Player;
 import com.mars.objects.Stats;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -18,6 +21,20 @@ public class Display {
         System.out.println("Would you like to play a game? Enter Y or N: "); //TODO input validation
         String userInput = scanner.nextLine();
         return userInput;
+    }
+    public void displayText(String filePath) {
+        //read in the txt file and display lines
+        try (BufferedReader reader =
+                     new BufferedReader(new FileReader(filePath))){
+            String line;
+            while ((line = reader.readLine()) != null){
+                System.out.println(line);
+            }
+            System.out.println(); //empty line for looks
+        }
+        catch (IOException e) {
+            System.out.println("Sorry, file not found");
+        }
     }
     public void displayGameInfo(){
         System.out.println("You have been deployed from Mars HQ to a remote outpost.  Your objective is to return this outpost to operational status.\n" +
