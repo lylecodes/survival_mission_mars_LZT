@@ -18,6 +18,9 @@ public class Display {
         String userInput = scanner.nextLine();
         return userInput;
     }
+    public void displayText(String filePath) {
+
+    }
     public void displayGameInfo(){
         System.out.println("You have been deployed from Mars HQ to a remote outpost.  Your objective is to return this outpost to operational status.\n" +
                 "In order to do so, you must return the Solar farm to operational status for basic lighting, turn on the reactor for full power,\n" +
