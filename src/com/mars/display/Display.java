@@ -27,7 +27,10 @@ public class Display {
                 "total failure, with your head held low.");
     }
     public void displayMenu(){
-        System.out.println("Avail. Game Commands here..."); //TODO
+        System.out.println("This is a text-based, free-adventure style game (meaning you are free to roam about as you see fit.) You will be\n" +
+                "prompted for input at the cursor '>> ' and your commands should be simple (for example: 'go north', 'take cup', etc...\n" +
+                "The following are the available actions: 'GO', 'GET', 'DROP', 'USE', 'LOOK' -- and of course, there are a variety of synonyms\n" +
+                "available for you to discover as well.  At any time, you can also use the available 'HELP' for assistance and 'QUIT' to quit the game.");
     }
     public void displayCurrentStatus(Location location, Stats stats, Player player){
         System.out.println("Display player stats here"); //TODO

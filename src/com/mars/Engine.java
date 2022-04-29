@@ -1,6 +1,7 @@
 package com.mars;
 
 import com.mars.display.Display;
+import com.mars.util.TextParser;
 
 import java.util.List;
 import java.util.Scanner;
@@ -30,7 +31,6 @@ TextParser parser = new TextParser();
             System.out.println("Enter a command: ");
             String userInput = scanner.nextLine();
             List<String> nextCommand = parser.getCommand(userInput);
-
 
             System.out.println("Do you want to exit the game?");
             String userAnswer = scanner.nextLine();

@@ -1,11 +1,10 @@
-package com.mars;
+package com.mars.util;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 
-class TextParser {
+public class TextParser {
     //method to remove "extra" words from user input (to, a, the, etc)
     private String cleanUserInput(String userInput){
         //TODO logic to strip extra words
