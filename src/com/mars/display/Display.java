@@ -4,6 +4,7 @@ import com.mars.objects.Location;
 import com.mars.objects.Player;
 import com.mars.objects.Stats;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Display {
@@ -32,8 +33,17 @@ public class Display {
                 "The following are the available actions: 'GO', 'GET', 'DROP', 'USE', 'LOOK' -- and of course, there are a variety of synonyms\n" +
                 "available for you to discover as well.  At any time, you can also use the available 'HELP' for assistance and 'QUIT' to quit the game.");
     }
+
     public void displayCurrentStatus(Location location, Stats stats, Player player){
         System.out.println("Display player stats here"); //TODO
 
+    }
+
+    // Delete for test only
+    public void displayCurrentStatus(Location location){
+        System.out.println("----------------------");
+        System.out.println("You are in " + location.getName());
+        System.out.println("Description: " + location.getDescription());
+        System.out.println("You see a " + Arrays.toString(location.getItems()));
     }
 }//end class display

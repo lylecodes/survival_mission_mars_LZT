@@ -1,2 +1,3 @@
-package com.mars.objects;class Inventory {
+package com.mars.objects;
+class Inventory {
 }
