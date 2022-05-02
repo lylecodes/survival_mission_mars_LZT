@@ -7,8 +7,7 @@ import com.mars.objects.Stats;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 
 public class Display {
 
@@ -43,9 +42,15 @@ public class Display {
 
     // Delete for test only
     public void displayCurrentStatus(Location location){
+        List<String> allItems = new ArrayList<>();
+
         System.out.println("----------------------");
         System.out.println("You are in " + location.getName());
         System.out.println("Description: " + location.getDescription());
-        System.out.println("You see a " + Arrays.toString(location.getItems()));
+//        System.out.println("Items: " + location.getItems());
+        for(Map.Entry<String, String> entry: location.getItems().entrySet()){
+            allItems.add(entry.getKey());
+        }
+        System.out.println("You see the following items in the room: " + allItems);
     }
 }//end class display

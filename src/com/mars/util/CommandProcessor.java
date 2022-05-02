@@ -21,6 +21,16 @@ public class CommandProcessor {
             System.out.println("Fine then! Bye!!");                                                                     // sends quit message
             System.exit(0);                                                                                      // exits game
         }
+        else if(command.get(0).equals("look")) {
+            String lookItem = "";
+            if(currentLocation.getItems().containsKey(command.get(1))) {
+                System.out.println("Upon examination you find " + currentLocation.getItems().get(command.get(1)));
+            }
+            else {
+                System.out.println("There is no item to examine.");
+            }
+
+        }
         else {
             System.out.println("That is an invalid command. Please try again.");                                        // if user input is not 'go' or 'quit', informs user of invalid command input
         }
