@@ -6,11 +6,11 @@ public class Location {
     private String name;
     private Map<String, String> directions;
     private String description;
-    private String[] items;
+    private Map<String, String> items;
     private Boolean oxygen;
     private String asciiArt;
 
-    public Location(String name, Map<String, String> directions, String description, String[] items, Boolean oxygen, String asciiArt) {
+    public Location(String name, Map<String, String> directions, String description, Map<String, String> items, Boolean oxygen, String asciiArt) {
         setName(name);
         setDirections(directions);
         setDescription(description);
@@ -43,11 +43,11 @@ public class Location {
         this.description = description;
     }
 
-    public String[] getItems() {
+    public Map<String, String> getItems() {
         return items;
     }
 
-    public void setItems(String[] items) {
+    public void setItems(Map<String, String> items) {
         this.items = items;
     }
 
