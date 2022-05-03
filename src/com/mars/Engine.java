@@ -1,8 +1,7 @@
 package com.mars;
 
-import com.apps.util.SplashApp;
-import com.apps.util.client.SplashAppMain;
 import com.mars.display.Display;
+import com.mars.objects.Inventory;
 import com.mars.objects.Location;
 import com.mars.util.CommandProcessor;
 import com.mars.util.JSONHandler;
@@ -20,7 +19,7 @@ public class Engine  {
     private CommandProcessor processor = new CommandProcessor();
     private JSONHandler jsonhandler = new JSONHandler();
     private Map<String, Location> locationMap = jsonhandler.loadLocationMap();
-    private SplashAppMain app = new SplashAppMain();
+
 
     // method to actually run the application
     public void runApp() {
@@ -44,7 +43,7 @@ public class Engine  {
         // functions while game is running
         while (isRunning) {
             display.displayCurrentStatus(currentLocation);                      // display of location
-          
+
             Scanner scanner = new Scanner(System.in);
             System.out.println("Enter a command: ");                            // asking for input from user
             String userInput = scanner.nextLine();                              // getting input from user

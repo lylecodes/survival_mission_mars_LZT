@@ -1,5 +1,6 @@
 package com.mars.display;
 
+import com.mars.objects.Inventory;
 import com.mars.objects.Location;
 import com.mars.objects.Player;
 import com.mars.objects.Stats;
@@ -11,7 +12,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class Display {
-
+    Inventory inventory = Inventory.getInstance();
 //Implemented via displayText() method
 //    public void displaySplash(){
 //        //TODO: ASCII Art later (sort of done...)
@@ -72,7 +73,7 @@ public class Display {
     public void displayCurrentStatus(Location location){
         List<String> allItems = new ArrayList<>();
 
-        System.out.println("----------------------");
+        System.out.println("-----------------------------------------");
         System.out.println("You are in " + location.getName());
         System.out.println("Description: " + location.getDescription());
 
@@ -85,5 +86,9 @@ public class Display {
         for(Map.Entry<String, String> entry: location.getDirections().entrySet()){
             System.out.println("You see a door to the " + entry.getKey());
         }
+    }
+
+    public void displayPlayerInventory(){
+        System.out.println(inventory.getInventory());
     }
 }//end class display
