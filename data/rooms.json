@@ -7,7 +7,10 @@
         "south": "Hydro"
       },
       "description":"Docking Station description",
-      "items" : ["item1","item2"],
+      "items" : {
+        "mealkit": "single use emergency meal",
+        "random_item": "here for hardcoding"
+      },
       "oxygen": "false",
       "asciiArt": "url"
     }
@@ -20,7 +23,10 @@
         "east": "Reactor"
       },
       "description":"Hydro description",
-      "items" : ["item1","item2"],
+      "items" : {
+        "item1" : "hardcode for test",
+        "item2" : "hardcode for test"
+      },
       "oxygen": "false",
       "asciiArt": "url"
     }
@@ -33,7 +39,10 @@
         "south" : "Solar Plant"
       },
       "description":"Reactor description",
-      "items" : ["item1"],
+      "items" : {
+        "item1" : "hardcode for test",
+        "item2" : "hardcode for test"
+      },
       "oxygen": "false",
       "asciiArt": "url"
     }
@@ -45,7 +54,11 @@
         "north": "Reactor"
       },
       "description":"Solar Planet description",
-      "items" : ["item1","item2","item3"],
+      "items" : {
+        "item1" : "hardcode for test",
+        "item2" : "hardcode for test",
+        "item3" : "hardcode for test"
+      },
       "oxygen": "false",
       "asciiArt": "url"
     }
@@ -58,7 +71,10 @@
         "east": "Kitchen"
       },
       "description":"Green House description",
-      "items" : [],
+      "items" : {
+        "item1" : "hardcode for test",
+        "item2" : "hardcode for test"
+      },
       "oxygen": "false",
       "asciiArt": "url"
     }
@@ -71,7 +87,10 @@
         "south": "Gym"
       },
       "description":"Kitchen description",
-      "items" : [],
+      "items" : {
+        "item1" : "hardcode for test",
+        "item2" : "hardcode for test"
+      },
       "oxygen": "false",
       "asciiArt": "url"
     }
@@ -84,7 +103,10 @@
         "east": "SQ"
       },
       "description":"Gym description",
-      "items" : ["item1"],
+      "items" : {
+        "item1" : "hardcode for test",
+        "item2" : "hardcode for test"
+      },
       "oxygen": "false",
       "asciiArt": "url"
     }
@@ -96,7 +118,10 @@
         "west": "Gym"
       },
       "description":"SQ description",
-      "items" : ["item1","item2"],
+      "items" : {
+        "item1" : "hardcode for test",
+        "item2" : "hardcode for test"
+      },
       "oxygen": "false",
       "asciiArt": "url"
     }

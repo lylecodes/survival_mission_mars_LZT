@@ -53,6 +53,7 @@ public class JSONHandler {
 
         // Map to hold directions
         Map<String,String> directions = new HashMap<>();
+        Map<String,String> lookitems = new HashMap<>();
 
         // Get directions from locationsObject
         Object locArray = locationsObject.get("directions");
@@ -76,15 +77,18 @@ public class JSONHandler {
 
         // Get items and store them in String[]
         locArray = locationsObject.get("items");
-        // Cas locArray to a String and remove special characters [ ]
-        String items = locArray.toString().replaceAll("\\[", "").replaceAll("\\]","");
-        // Split the input to get every item individually
-        String[] itemsArr = items.split(",");
-
-        for (int i = 0; i < itemsArr.length; i++){
-            // Remove special character " from string and store out into itemsArr[]
-            itemsArr[i] = itemsArr[i].replaceAll("[\"]","");
+//        System.out.println(locArray);
+        String[] itemsKVPair = locArray.toString().split(",");
+        for (int i = 0; i <itemsKVPair.length; i++) {
+            itemsKVPair[i] = itemsKVPair[i].replaceAll("[{}\"]","");
+//            System.out.println(itemsKVPair[i]);
+            String[] holder = itemsKVPair[i].split(":");
+            lookitems.put(holder[0], holder[1]);
+//            System.out.println(Arrays.toString(holder));
         }
+//        for(Map.Entry<String, String> entry: items.entrySet()){
+//            System.out.println("You see the following items in the room: " + entry.getKey());
+//        }
 
         // might not need
         locArray = locationsObject.get("oxygen");
@@ -95,7 +99,7 @@ public class JSONHandler {
 
         // Update locationMap with new location
         // Key = name of location, Value = new Location with values parsed from locationsObject
-        locationMap.put(name, new Location(name,directions, description,itemsArr,false,ascii));
+        locationMap.put(name, new Location(name, directions, description, lookitems,false,ascii));
 
     }
 
