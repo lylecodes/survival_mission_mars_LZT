@@ -1,5 +1,7 @@
 package com.mars;
 
+import com.apps.util.SplashApp;
+import com.apps.util.client.SplashAppMain;
 import com.mars.display.Display;
 import com.mars.objects.Location;
 import com.mars.util.CommandProcessor;
@@ -11,18 +13,19 @@ import java.util.Map;
 import java.util.Scanner;
 
 // main engine for execution of program
-public class Engine {
+public class Engine  {
     // instantiation of necessary variables required
     private Display display = new Display();
     private TextParser parser = new TextParser();
     private CommandProcessor processor = new CommandProcessor();
     private JSONHandler jsonhandler = new JSONHandler();
     private Map<String, Location> locationMap = jsonhandler.loadLocationMap();
+    private SplashAppMain app = new SplashAppMain();
 
     // method to actually run the application
     public void runApp() {
-        display.displaySplash();                        // Display welcome screen to user
-
+        display.displayText("data/splash.txt");
+        //display.displaySplash();                        // Display welcome screen to user
         boolean isRunning = false;                      // establish & setting boolean to default off for game execution
         String answer = display.playGame();             // Ask if user wants to play a game
         if(answer.equals("y")){
@@ -36,6 +39,7 @@ public class Engine {
         Location currentLocation = locationMap.get("Docking Station");          // setting game start location on Map
         display.displayText("data/game_info.txt");                      // display of game information
         display.displayText("data/game_menu.txt");                      // display of game menu
+        display.clearScreen();
 
         // functions while game is running
         while (isRunning) {
