@@ -77,10 +77,10 @@ public class Display {
         System.out.println("You are in " + location.getName());
         System.out.println("Description: " + location.getDescription());
 
-        for(Map.Entry<String, String> entry: location.getItems().entrySet()){
-            allItems.add(entry.getKey());
-        }
-        System.out.println("You see the following items in the room: " + allItems);
+//        for(Map.Entry<String, String> entry: location.getItems().entrySet()){
+//            allItems.add(entry.getKey());
+//        }
+        System.out.println("You see the following items in the room: " + location.getItemNames());
 
     
         for(Map.Entry<String, String> entry: location.getDirections().entrySet()){
