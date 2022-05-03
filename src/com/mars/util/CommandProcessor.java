@@ -22,8 +22,8 @@ public class CommandProcessor {
             System.exit(0);                                                                                      // exits game
         }
         else if(command.get(0).equals("look")) {
-            if(currentLocation.getItems().containsKey(command.get(1))) {
-                System.out.println("Upon examination you find " + currentLocation.getItems().get(command.get(1)));
+            if(currentLocation.getItemNames().contains(command.get(1))) {
+                System.out.println("Upon examination you find " + currentLocation.getItemDescription(command.get(1)));
             }
             else {
                 System.out.println("There is no item to examine.");

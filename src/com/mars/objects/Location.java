@@ -1,16 +1,21 @@
 package com.mars.objects;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class Location {
     private String name;
     private Map<String, String> directions;
     private String description;
-    private Map<String, String> items;
+    private List<Item> items;
     private Boolean oxygen;
+
+
+
     private String asciiArt;
 
-    public Location(String name, Map<String, String> directions, String description, Map<String, String> items, Boolean oxygen, String asciiArt) {
+    public Location(String name, Map<String, String> directions, String description, List<Item> items, Boolean oxygen, String asciiArt) {
         setName(name);
         setDirections(directions);
         setDescription(description);
@@ -42,12 +47,42 @@ public class Location {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    public Map<String, String> getItems() {
+    public List<Item> getItems() {
         return items;
     }
 
-    public void setItems(Map<String, String> items) {
+    public String getItemName(String name){
+        int index = getItemIndex(name);
+        return items.get(index).getName();
+    }
+
+    public String getItemDescription(String name){
+        int index = getItemIndex(name);
+
+        return items.get(index).getDescription();
+    }
+
+    private int getItemIndex(String itemName){
+        int index = 0;
+        int counter = 0;
+        for(Item item: items){
+            if (item.getName().equals(itemName)){
+                index = counter;
+            }
+            counter++;
+        }
+        return index;
+    }
+
+    public List<String>  getItemNames(){
+        List<String> names = new ArrayList<>();
+        for(Item item : items){
+            names.add(item.getName());
+        }
+        return names;
+    }
+
+    public void setItems(List<Item> items) {
         this.items = items;
     }
 

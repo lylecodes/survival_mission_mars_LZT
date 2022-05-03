@@ -1,5 +1,6 @@
 package com.mars.util;
 
+import com.mars.objects.Item;
 import com.mars.objects.Location;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -9,7 +10,9 @@ import org.json.simple.parser.ParseException;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class JSONHandler {
@@ -53,7 +56,8 @@ public class JSONHandler {
 
         // Map to hold directions
         Map<String,String> directions = new HashMap<>();
-        Map<String,String> lookitems = new HashMap<>();
+//        Map<String,String> lookitems = new HashMap<>();
+        List<Item> lookitems = new ArrayList<>();
 
         // Get directions from locationsObject
         Object locArray = locationsObject.get("directions");
@@ -83,11 +87,14 @@ public class JSONHandler {
             itemsKVPair[i] = itemsKVPair[i].replaceAll("[{}\"]","");
 //            System.out.println(itemsKVPair[i]);
             String[] holder = itemsKVPair[i].split(":");
-            lookitems.put(holder[0], holder[1]);
+           // lookitems.put(holder[0], holder[1]);
+            lookitems.add(new Item(holder[0],holder[1]));
 //            System.out.println(Arrays.toString(holder));
         }
-        // might not need
+
         locArray = locationsObject.get("oxygen");
+        String oxygenHolder = (String) locArray;
+        boolean oxygen = oxygenHolder.equals("true");
 
         // Get  ascii art
         locArray = locationsObject.get("asciiArt");
@@ -95,7 +102,7 @@ public class JSONHandler {
 
         // Update locationMap with new location
         // Key = name of location, Value = new Location with values parsed from locationsObject
-        locationMap.put(name, new Location(name, directions, description, lookitems,false,ascii));
+        locationMap.put(name, new Location(name, directions, description, lookitems,oxygen,ascii));
 
     }
 
