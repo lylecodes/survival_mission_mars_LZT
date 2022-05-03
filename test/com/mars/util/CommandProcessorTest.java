@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static jdk.nashorn.internal.objects.Global.print;
+//import static jdk.nashorn.internal.objects.Global.print;
 import static org.junit.Assert.assertEquals;
 
 public class CommandProcessorTest {
@@ -54,7 +54,7 @@ public class CommandProcessorTest {
         List<String> command = new ArrayList<>();
         command.add("go");
         command.add("west");
-        print("C'mon, get right, you can't go that way!");
+//        print("C'mon, get right, you can't go that way!");
 
         Assert.assertEquals("C'mon, get right, you can't go that way!", outputStreamCaptor.toString().trim());
     }

@@ -86,10 +86,6 @@ public class JSONHandler {
             lookitems.put(holder[0], holder[1]);
 //            System.out.println(Arrays.toString(holder));
         }
-//        for(Map.Entry<String, String> entry: items.entrySet()){
-//            System.out.println("You see the following items in the room: " + entry.getKey());
-//        }
-
         // might not need
         locArray = locationsObject.get("oxygen");
 

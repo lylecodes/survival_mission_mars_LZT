@@ -22,7 +22,6 @@ public class CommandProcessor {
             System.exit(0);                                                                                      // exits game
         }
         else if(command.get(0).equals("look")) {
-            String lookItem = "";
             if(currentLocation.getItems().containsKey(command.get(1))) {
                 System.out.println("Upon examination you find " + currentLocation.getItems().get(command.get(1)));
             }
