@@ -1,5 +1,7 @@
 package com.mars.util;
 
+import com.mars.objects.Inventory;
+import com.mars.objects.Item;
 import com.mars.objects.Location;
 
 import java.util.List;
@@ -21,14 +23,38 @@ public class CommandProcessor {
             System.out.println("Fine then! Bye!!");                                                                     // sends quit message
             System.exit(0);                                                                                      // exits game
         }
-        else if(command.get(0).equals("look")) {
-            if(currentLocation.getItemNames().contains(command.get(1))) {
-                System.out.println("Upon examination you find " + currentLocation.getItemDescription(command.get(1)));
+        else if(command.get(0).equals("look")) {                                                                        // 'look' functionality enabled to allow user to examine items and surroundings
+            if(currentLocation.getItemNames().contains(command.get(1))) {                                                       // checking if second parsed word is valid inside currentLocation
+                System.out.println("Upon examination you find " + currentLocation.getItemDescription(command.get(1)));          // output to user showing description of item, if valid in location
+            }
+            else if(Inventory.getInstance().lookItem().contains(command.get(1))) {                                                  // if not in currentLocation, check if in inventory
+                System.out.println("Upon examination you find " + Inventory.getInstance().getItemDescription(command.get(1)));      // if item present in inventory, output to user description of item
             }
             else {
-                System.out.println("There is no item to examine.");
+                System.out.println("There is no item to examine.");                                                     // if nothing to examine, output to user informing as such
             }
-
+        }
+        else if(command.get(0).equals("get")) {                                                                         // 'get' functionality enabled to allow user to acquire items, add to inventory
+            if(currentLocation.getItemNames().contains(command.get(1))) {                                               // checking if second parsed word is valid inside currentLocation
+                Item carry = currentLocation.removeItem(command.get(1));                                                // if so, then assigning it a variable named 'carry'
+                Inventory.getInstance().add(carry);                                                                     // adding to inventory
+                System.out.println("You've retrieved the " + carry.getName() + " and added it to your inventory.");     // output to user informing item added to inventory
+                System.out.println(String.join(", ", Inventory.getInstance().getInventory()));                 // output to user showing full inventory
+            }
+            else {
+                System.out.println("There is nothing here to pick up. Are you seeing things?  Maybe check your sugar levels...");       // output to user reminding them there is nothing to acquire from this room
+            }
+        }
+        else if(command.get(0).equals("drop")) {                                                                        // 'drop' functionality enabled to allow user to drop items from inventory, add to currentLocation
+            if(Inventory.getInstance().lookItem().contains(command.get(1))) {                                           // checking to see if item in inventory
+                Item dropping = Inventory.getInstance().drop(command.get(1));                                           // if so, assigning it a variable named 'dropping'
+                currentLocation.addItem(dropping);                                                                      // adding 'dropping' item to currentLocation
+                System.out.println("You have dropped the " + dropping.getName() + ", it is no longer in your " +        // output to user to inform them of the change
+                        "inventory. It has been placed in this location.");
+            }
+            else {
+                System.out.println("There is no item with that name in your inventory. Please try again.");             // output to user to inform them of invalid attempt to drop item
+            }
         }
         else {
             System.out.println("That is an invalid command. Please try again.");                                        // if user input is not 'go' or 'quit', informs user of invalid command input

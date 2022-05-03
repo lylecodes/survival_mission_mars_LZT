@@ -51,6 +51,16 @@ public class Location {
         return items;
     }
 
+    // removing item from location, but enabling description to port along with it
+    public Item removeItem(String itemName) {
+        int nameIndex = getItemIndex(itemName);
+        return items.remove(nameIndex);
+    }
+    // adding a dropped item into the room where dropped, while retaining item properties
+    public void addItem(Item addDropped) {
+        items.add(addDropped);
+    }
+
     public String getItemName(String name){
         int index = getItemIndex(name);
         return items.get(index).getName();
