@@ -1,5 +1,6 @@
 package com.mars.util;
 
+import com.mars.display.Display;
 import com.mars.objects.Inventory;
 import com.mars.objects.Item;
 import com.mars.objects.Location;
@@ -8,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class CommandProcessor {
+    private Display display = new Display();
 
     // method to resolve action command inputs from user
     public String processCommand(List<String> command, Location currentLocation, Map<String, Location> locationMap) {
@@ -30,6 +32,25 @@ public class CommandProcessor {
             else if(Inventory.getInstance().lookItem().contains(command.get(1))) {                                                  // if not in currentLocation, check if in inventory
                 System.out.println("Upon examination you find " + Inventory.getInstance().getItemDescription(command.get(1)));      // if item present in inventory, output to user description of item
             }
+            else if(command.get(1).equals("room")) {
+                System.out.println("Looking around this room, you see: " + currentLocation.getDescription());
+            }
+            else if(command.get(1).equals("inventory")) {
+                if(Inventory.getInstance().getInventory().size() > 0) {
+                    display.displayPlayerInventory();
+                }
+                else {
+                    System.out.println("You currently have nothing in your inventory.");
+                }
+            }
+            else if((command.get(1).equals("oxygen")) || (command.get(1).equals("O2"))) {
+                if(currentLocation.getOxygen().equals(true)) {
+                    System.out.println("The O2 Sensor indicates the oxygen levels are: SAFE");
+                }
+                else {
+                    System.out.println("The O2 Sensor indicates the oxygen levels are: DANGEROUS");
+                }
+            }
             else {
                 System.out.println("There is no item to examine.");                                                     // if nothing to examine, output to user informing as such
             }
@@ -39,7 +60,7 @@ public class CommandProcessor {
                 Item carry = currentLocation.removeItem(command.get(1));                                                // if so, then assigning it a variable named 'carry'
                 Inventory.getInstance().add(carry);                                                                     // adding to inventory
                 System.out.println("You've retrieved the " + carry.getName() + " and added it to your inventory.");     // output to user informing item added to inventory
-                System.out.println(String.join(", ", Inventory.getInstance().getInventory()));                 // output to user showing full inventory
+                display.displayPlayerInventory();                                                                       // output to user showing full inventory
             }
             else {
                 System.out.println("There is nothing here to pick up. Are you seeing things?  Maybe check your sugar levels...");       // output to user reminding them there is nothing to acquire from this room
@@ -51,9 +72,18 @@ public class CommandProcessor {
                 currentLocation.addItem(dropping);                                                                      // adding 'dropping' item to currentLocation
                 System.out.println("You have dropped the " + dropping.getName() + ", it is no longer in your " +        // output to user to inform them of the change
                         "inventory. It has been placed in this location.");
+                display.displayPlayerInventory();
             }
             else {
                 System.out.println("There is no item with that name in your inventory. Please try again.");             // output to user to inform them of invalid attempt to drop item
+            }
+        }
+        else if(command.get(0).equals("use")) {                                 // TODO: what about consumable items? (mealkit) ...or Items that actuate something else? (key -> reactor)
+            if(Inventory.getInstance().lookItem().contains(command.get(1))) {
+                System.out.println("Item is here");
+            }
+            else {
+                System.out.println("Use what?");
             }
         }
         else {
