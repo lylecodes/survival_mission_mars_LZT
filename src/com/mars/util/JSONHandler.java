@@ -100,9 +100,13 @@ public class JSONHandler {
         locArray = locationsObject.get("asciiArt");
         String ascii = (String) locArray;
 
+        locArray = locationsObject.get("puzzle");
+        String puzzleHolder = (String) locArray;
+        boolean puzzle = puzzleHolder.equals("true");
+
         // Update locationMap with new location
         // Key = name of location, Value = new Location with values parsed from locationsObject
-        locationMap.put(name, new Location(name, directions, description, lookitems,oxygen,ascii));
+        locationMap.put(name, new Location(name, directions, description, lookitems,oxygen,ascii, puzzle));
 
     }
 

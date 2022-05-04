@@ -38,18 +38,16 @@ public class Engine  {
         Location currentLocation = locationMap.get("Docking Station");          // setting game start location on Map
         display.displayText("data/game_info.txt");                      // display of game information
         display.displayText("data/game_menu.txt");                      // display of game menu
-        display.clearScreen();
 
         // functions while game is running
         while (isRunning) {
             display.displayCurrentStatus(currentLocation);                      // display of location
 
             Scanner scanner = new Scanner(System.in);
-            System.out.println("Enter a command: ");                            // asking for input from user
+            System.out.print("Enter a command: \n>> ");                            // asking for input from user
             String userInput = scanner.nextLine();                              // getting input from user
             List<String> nextCommand = parser.getCommand(userInput);            // calling upon Parser to begin parse process
             currentLocation = locationMap.get(processor.processCommand(nextCommand, currentLocation, locationMap));    // setting location
-
         }
     }//end method runApp
 }//end class engine
