@@ -27,7 +27,7 @@
         "item1" : "hardcode for test",
         "item2" : "hardcode for test"
       },
-      "oxygen": "false",
+      "oxygen": "true",
       "asciiArt": "url"
     }
   },

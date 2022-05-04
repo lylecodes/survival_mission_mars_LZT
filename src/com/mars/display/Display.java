@@ -89,6 +89,6 @@ public class Display {
     }
 
     public void displayPlayerInventory(){
-        System.out.println(inventory.getInventory());
+        System.out.println(String.join(", ", inventory.getInventory()));
     }
 }//end class display
