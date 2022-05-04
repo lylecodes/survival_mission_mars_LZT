@@ -34,6 +34,14 @@ public class CommandProcessor {
             }
             else if(command.get(1).equals("room")) {
                 System.out.println("Looking around this room, you see: " + currentLocation.getDescription());
+                if(currentLocation.getPuzzle()){
+                    System.out.println("Lucky you, it also appears there is a challenge here for you to solve!" +
+                            "Perhaps you could 'look challenge' to find out more");                                             //if puzzle present, let the user know it is there
+                }
+            }
+            else if (command.get(1).equals("challenge") && currentLocation.getPuzzle()) {                                       //if user says "look challenge"
+                //currentLocation.createPuzzle();                                                                                //create the challenge/puzzle
+                currentLocation.startPuzzle();                                                                              //start or kick off the challenge for them to solve
             }
             else if(command.get(1).equals("inventory")) {
                 if(Inventory.getInstance().getInventory().size() > 0) {
@@ -44,7 +52,7 @@ public class CommandProcessor {
                 }
             }
             else if((command.get(1).equals("oxygen")) || (command.get(1).equals("O2"))) {
-                if(currentLocation.getOxygen().equals(true)) {
+                if(currentLocation.getOxygen()) {
                     System.out.println("The O2 Sensor indicates the oxygen levels are: SAFE");
                 }
                 else {

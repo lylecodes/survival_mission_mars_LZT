@@ -36,7 +36,7 @@ public class Display {
     }
     public String playGame(){
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Would you like to play a game? Enter y or n: ");
+        System.out.print("Would you like to play a game? Enter y or n: \n>> ");
         boolean isValid = false;
         String userInput = "";
         while (!isValid){
