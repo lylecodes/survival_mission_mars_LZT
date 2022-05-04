@@ -1,0 +1,48 @@
+{
+  "go": [
+    "move",
+    "walk",
+    "run",
+    "turn"
+  ],
+  "add": [
+    "take",
+    "get",
+    "grab"
+  ],
+  "drop": [
+    "toss",
+    "throw",
+    "leave",
+    "discard"
+  ],
+  "use": [
+    "push",
+    "pull",
+    "enter",
+    "align",
+    "open",
+    "swing"
+  ],
+  "look": [
+    "examine",
+    "inspect",
+    "check",
+    "verify",
+    "study",
+    "view",
+    "review",
+    "scan"
+  ],
+  "quit": [
+    "q",
+    "end",
+    "exit"
+  ],
+  "help": [
+    "h",
+    "assist",
+    "commands",
+    "command"
+  ]
+}
