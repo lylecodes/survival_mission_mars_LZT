@@ -1,0 +1,4 @@
+This is a text-based, free-adventure style game (meaning you are free to roam about as you see fit.) You will be
+prompted for input at the cursor '>> ' and your commands should be simple (for example: 'go north', 'take cup', etc...
+The following are the available actions: 'GO', 'GET', 'DROP', 'USE', 'LOOK' -- and of course, there are a variety of synonyms
+available for you to discover as well.  At any time, you can also use the available 'HELP' for assistance and 'QUIT' to quit the game.

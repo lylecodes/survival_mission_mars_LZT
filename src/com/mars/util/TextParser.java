@@ -11,13 +11,13 @@ public class TextParser {
         return userInput;
     }
     public List<String> getCommand(String userInput){
-        List<String> cmdInput = new ArrayList<>();
-        String cleanInput = cleanUserInput(userInput);
+        List<String> cmdInput = new ArrayList<>(); //empty arraylist to store parsed command
+        String cleanInput = cleanUserInput(userInput); //pass string through function to strip out extra words
 
         //Parse into verb + noun
-        cleanInput = cleanInput.toLowerCase();
-        cmdInput = Arrays.asList(cleanInput.split(" "));
-        return cmdInput;
+        cleanInput = cleanInput.toLowerCase(); //make string all lowercase
+        cmdInput = Arrays.asList(cleanInput.split(" ")); //split into two on the space " "
+        return cmdInput; //return the list of verb, noun
 
     }
 }

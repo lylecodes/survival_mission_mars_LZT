@@ -5,9 +5,9 @@
     "run",
     "turn"
   ],
-  "add": [
+  "get": [
     "take",
-    "get",
+    "add",
     "grab"
   ],
   "drop": [

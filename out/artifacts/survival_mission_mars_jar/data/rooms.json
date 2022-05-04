@@ -7,11 +7,7 @@
         "south": "Hydro"
       },
       "description":"Docking Station description",
-      "puzzle" : "false",
-      "items" : {
-        "mealkit": "single use emergency meal",
-        "random_item": "here for hardcoding"
-      },
+      "items" : ["item1","item2"],
       "oxygen": "false",
       "asciiArt": "url"
     }
@@ -24,12 +20,8 @@
         "east": "Reactor"
       },
       "description":"Hydro description",
-      "puzzle" : "true",
-      "items" : {
-        "item1" : "hardcode for test",
-        "item2" : "hardcode for test"
-      },
-      "oxygen": "true",
+      "items" : ["item1","item2"],
+      "oxygen": "false",
       "asciiArt": "url"
     }
   },
@@ -41,11 +33,7 @@
         "south" : "Solar Plant"
       },
       "description":"Reactor description",
-      "puzzle" : "true",
-      "items" : {
-        "item1" : "hardcode for test",
-        "item2" : "hardcode for test"
-      },
+      "items" : ["item1"],
       "oxygen": "false",
       "asciiArt": "url"
     }
@@ -57,12 +45,7 @@
         "north": "Reactor"
       },
       "description":"Solar Planet description",
-      "puzzle" : "true",
-      "items" : {
-        "item1" : "hardcode for test",
-        "item2" : "hardcode for test",
-        "item3" : "hardcode for test"
-      },
+      "items" : ["item1","item2","item3"],
       "oxygen": "false",
       "asciiArt": "url"
     }
@@ -75,11 +58,7 @@
         "east": "Kitchen"
       },
       "description":"Green House description",
-      "puzzle" : "true",
-      "items" : {
-        "item1" : "hardcode for test",
-        "item2" : "hardcode for test"
-      },
+      "items" : [],
       "oxygen": "false",
       "asciiArt": "url"
     }
@@ -92,11 +71,7 @@
         "south": "Gym"
       },
       "description":"Kitchen description",
-      "puzzle" : "false",
-      "items" : {
-        "item1" : "hardcode for test",
-        "item2" : "hardcode for test"
-      },
+      "items" : [],
       "oxygen": "false",
       "asciiArt": "url"
     }
@@ -109,11 +84,7 @@
         "east": "SQ"
       },
       "description":"Gym description",
-      "puzzle" : "false",
-      "items" : {
-        "item1" : "hardcode for test",
-        "item2" : "hardcode for test"
-      },
+      "items" : ["item1"],
       "oxygen": "false",
       "asciiArt": "url"
     }
@@ -125,11 +96,7 @@
         "west": "Gym"
       },
       "description":"SQ description",
-      "puzzle" : "false",
-      "items" : {
-        "item1" : "hardcode for test",
-        "item2" : "hardcode for test"
-      },
+      "items" : ["item1","item2"],
       "oxygen": "false",
       "asciiArt": "url"
     }
