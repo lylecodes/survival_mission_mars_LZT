@@ -1,0 +1,104 @@
+[
+  {
+    "location": {
+      "name": "Docking Station",
+      "directions": {
+        "east": "Green House",
+        "south": "Hydro"
+      },
+      "description":"Docking Station description",
+      "items" : ["item1","item2"],
+      "oxygen": "false",
+      "asciiArt": "url"
+    }
+  },
+  {
+    "location": {
+      "name": "Hydro",
+      "directions": {
+        "north": "Docking Station",
+        "east": "Reactor"
+      },
+      "description":"Hydro description",
+      "items" : ["item1","item2"],
+      "oxygen": "false",
+      "asciiArt": "url"
+    }
+  },
+  {
+    "location": {
+      "name": "Reactor",
+      "directions": {
+        "west": "Hydro",
+        "south" : "Solar Plant"
+      },
+      "description":"Reactor description",
+      "items" : ["item1"],
+      "oxygen": "false",
+      "asciiArt": "url"
+    }
+  },
+  {
+    "location": {
+      "name": "Solar Plant",
+      "directions": {
+        "north": "Reactor"
+      },
+      "description":"Solar Planet description",
+      "items" : ["item1","item2","item3"],
+      "oxygen": "false",
+      "asciiArt": "url"
+    }
+  },
+  {
+    "location": {
+      "name": "Green House",
+      "directions": {
+        "west": "Docking Station",
+        "east": "Kitchen"
+      },
+      "description":"Green House description",
+      "items" : [],
+      "oxygen": "false",
+      "asciiArt": "url"
+    }
+  },
+  {
+    "location": {
+      "name": "Kitchen",
+      "directions": {
+        "west": "Green House",
+        "south": "Gym"
+      },
+      "description":"Kitchen description",
+      "items" : [],
+      "oxygen": "false",
+      "asciiArt": "url"
+    }
+  },
+  {
+    "location": {
+      "name": "Gym",
+      "directions":{
+        "north": "Kitchen",
+        "east": "SQ"
+      },
+      "description":"Gym description",
+      "items" : ["item1"],
+      "oxygen": "false",
+      "asciiArt": "url"
+    }
+  },
+  {
+    "location": {
+      "name": "SQ",
+      "directions": {
+        "west": "Gym"
+      },
+      "description":"SQ description",
+      "items" : ["item1","item2"],
+      "oxygen": "false",
+      "asciiArt": "url"
+    }
+  }
+]
