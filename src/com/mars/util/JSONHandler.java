@@ -7,9 +7,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,21 +29,36 @@ public class JSONHandler {
 
     private void populateLocations() throws FileNotFoundException {
         JSONParser jsonParser = new JSONParser();
+        String s = "json/rooms.json";
 
-        // Read from json file
-        try(FileReader reader = new FileReader("data/rooms.json")) {
-            // Parse json file
-            Object obj = jsonParser.parse(reader);
+        InputStream inputJSON = getFileFromResourceAsStream(s);
 
-            // Cast to JSONArray to make obj iterable
-            JSONArray locationList = (JSONArray) obj;
+       try(BufferedReader reader = new BufferedReader(new InputStreamReader(inputJSON,"UTF-8"))) {
+           Object obj = jsonParser.parse(reader);
+           JSONArray locationList = (JSONArray) obj;
+           locationList.forEach(loc -> addLocation((JSONObject) loc));
+       } catch (UnsupportedEncodingException e) {
+           e.printStackTrace();
+       } catch (IOException e) {
+           e.printStackTrace();
+       } catch (ParseException e) {
+           e.printStackTrace();
+       }
 
-            // Iterate through each item in locationList and pass item to addLocation()
-            locationList.forEach(loc -> addLocation((JSONObject) loc));
-
-        } catch (IOException | ParseException e) {
-            e.printStackTrace();
-        }
+//        // Read from json file
+//        try(FileReader reader = new FileReader("data/rooms.json")) {
+//            // Parse json file
+//            Object obj = jsonParser.parse(reader);
+//
+//            // Cast to JSONArray to make obj iterable
+//            JSONArray locationList = (JSONArray) obj;
+//
+//            // Iterate through each item in locationList and pass item to addLocation()
+//            locationList.forEach(loc -> addLocation((JSONObject) loc));
+//
+//        } catch (IOException | ParseException e) {
+//            e.printStackTrace();
+//        }
     }
 
     private void addLocation(JSONObject locations){
@@ -109,5 +122,15 @@ public class JSONHandler {
         locationMap.put(name, new Location(name, directions, description, lookitems,oxygen,ascii, puzzle));
 
     }
+    private static InputStream getFileFromResourceAsStream(String fileName) {
+        ClassLoader classLoader = JSONHandler.class.getClassLoader();
+        InputStream inputStream = classLoader.getResourceAsStream(fileName);
+        if (inputStream == null) {
+            throw new IllegalArgumentException("file not found! " + fileName);
+        } else {
+            return inputStream;
+        }
+    }
+
 
 }

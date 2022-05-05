@@ -11,15 +11,16 @@ public class SolarPuzzle implements Puzzle{
 
 
 
-    private void solarIntro(){
-        display.displayText("data/solarIntro.txt");
+    @Override // Puzzle interface
+    public void showIntro(){
+        display.displayText("text/solarIntro.txt");
     }
 
-    private boolean solarPuzzle(){
+    private void solarPuzzle(){
 
         //solar specific puzzle here
         if(!isSolved){
-            solarIntro();
+            showIntro();
             while(true) {
                 Scanner alignAttempt = new Scanner(System.in);
                 System.out.println("Would you like to try to align the panels?");
@@ -45,18 +46,16 @@ public class SolarPuzzle implements Puzzle{
         else{
             System.out.println("What are you doing? You solved this game already!");
         }
-        return isSolved;
     }
 
-    //method that must be implemented(per Challenge interface)
-    @Override
-    public void showInstructions(){
-        System.out.println("Here are some basic instructions for this solar challenge...");
-    }
     @Override
     public void runPuzzle(){
         //solarChallenge specific logic
 
         solarPuzzle();
+    }
+
+    public boolean isSolved() {
+        return isSolved;
     }
 }

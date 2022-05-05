@@ -1,0 +1,137 @@
+[
+  {
+    "location": {
+      "name": "Docking Station",
+      "directions": {
+        "east": "Green House",
+        "south": "Hydro"
+      },
+      "description":"Docking Station description",
+      "puzzle" : "false",
+      "items" : {
+        "mealkit": "single use emergency meal",
+        "r_key": "here for hardcoding"
+      },
+      "oxygen": "false",
+      "asciiArt": "url"
+    }
+  },
+  {
+    "location": {
+      "name": "Hydro",
+      "directions": {
+        "north": "Docking Station",
+        "east": "Reactor"
+      },
+      "description":"Hydro description",
+      "puzzle" : "true",
+      "items" : {
+        "item1" : "hardcode for test",
+        "item2" : "hardcode for test"
+      },
+      "oxygen": "true",
+      "asciiArt": "url"
+    }
+  },
+  {
+    "location": {
+      "name": "Reactor",
+      "directions": {
+        "west": "Hydro",
+        "south" : "Solar Plant"
+      },
+      "description":"Reactor description",
+      "puzzle" : "true",
+      "items" : {
+        "item1" : "hardcode for test",
+        "item2" : "hardcode for test"
+      },
+      "oxygen": "false",
+      "asciiArt": "url"
+    }
+  },
+  {
+    "location": {
+      "name": "Solar Plant",
+      "directions": {
+        "north": "Reactor"
+      },
+      "description":"Solar Planet description",
+      "puzzle" : "true",
+      "items" : {
+        "item1" : "hardcode for test",
+        "item2" : "hardcode for test",
+        "item3" : "hardcode for test"
+      },
+      "oxygen": "false",
+      "asciiArt": "url"
+    }
+  },
+  {
+    "location": {
+      "name": "Green House",
+      "directions": {
+        "west": "Docking Station",
+        "east": "Kitchen"
+      },
+      "description":"Green House description",
+      "puzzle" : "true",
+      "items" : {
+        "item1" : "hardcode for test",
+        "item2" : "hardcode for test"
+      },
+      "oxygen": "false",
+      "asciiArt": "url"
+    }
+  },
+  {
+    "location": {
+      "name": "Kitchen",
+      "directions": {
+        "west": "Green House",
+        "south": "Gym"
+      },
+      "description":"Kitchen description",
+      "puzzle" : "false",
+      "items" : {
+        "item1" : "hardcode for test",
+        "item2" : "hardcode for test"
+      },
+      "oxygen": "false",
+      "asciiArt": "url"
+    }
+  },
+  {
+    "location": {
+      "name": "Gym",
+      "directions":{
+        "north": "Kitchen",
+        "east": "SQ"
+      },
+      "description":"Gym description",
+      "puzzle" : "false",
+      "items" : {
+        "item1" : "hardcode for test",
+        "item2" : "hardcode for test"
+      },
+      "oxygen": "false",
+      "asciiArt": "url"
+    }
+  },
+  {
+    "location": {
+      "name": "SQ",
+      "directions": {
+        "west": "Gym"
+      },
+      "description":"SQ description",
+      "puzzle" : "false",
+      "items" : {
+        "item1" : "hardcode for test",
+        "item2" : "hardcode for test"
+      },
+      "oxygen": "false",
+      "asciiArt": "url"
+    }
+  }
+]
