@@ -10,7 +10,7 @@
       "puzzle" : "false",
       "items" : {
         "mealkit": "single use emergency meal",
-        "random_item": "here for hardcoding"
+        "r_key": "here for hardcoding"
       },
       "oxygen": "false",
       "asciiArt": "url"

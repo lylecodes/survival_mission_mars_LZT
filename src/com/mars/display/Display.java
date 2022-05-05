@@ -5,9 +5,7 @@ import com.mars.objects.Location;
 import com.mars.objects.Player;
 import com.mars.objects.Stats;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 import java.util.*;
 
@@ -51,19 +49,31 @@ public class Display {
         }
         return userInput;
     }
-    public void displayText(String filePath) {
-        //read in the txt file and display lines
-        try (BufferedReader reader =
-                     new BufferedReader(new FileReader(filePath))){
+    public void displayText(String filePath){
+
+        InputStream textInput = getFileFromResourceAsStream(filePath);
+
+        try(BufferedReader reader = new BufferedReader(new InputStreamReader(textInput,"UTF-8"))){
             String line;
             while ((line = reader.readLine()) != null){
                 System.out.println(line);
             }
-            System.out.println(); //empty line for looks
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        catch (IOException e) {
-            System.out.println("Sorry, file not found");
-        }
+
+        //read in the txt file and display lines
+//        try (BufferedReader reader =
+//                     new BufferedReader(new FileReader(filePath))){
+//            String line;
+//            while ((line = reader.readLine()) != null){
+//                System.out.println(line);
+//            }
+//            System.out.println(); //empty line for looks
+//        }
+//        catch (IOException e) {
+//            System.out.println("Sorry, file not found");
+//        }
     }
 
     public void displayCurrentStatus(Location location, Stats stats, Player player){
@@ -91,4 +101,15 @@ public class Display {
     public void displayPlayerInventory(){
         System.out.println(String.join(", ", inventory.getInventory()));
     }
+
+    private static InputStream getFileFromResourceAsStream(String fileName) {
+        ClassLoader classLoader = Display.class.getClassLoader();
+        InputStream inputStream = classLoader.getResourceAsStream(fileName);
+        if (inputStream == null) {
+            throw new IllegalArgumentException("file not found! " + fileName);
+        } else {
+            return inputStream;
+        }
+    }
+
 }//end class display

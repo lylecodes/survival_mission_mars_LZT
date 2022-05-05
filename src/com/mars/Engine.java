@@ -23,7 +23,7 @@ public class Engine  {
 
     // method to actually run the application
     public void runApp() {
-        display.displayText("data/splash.txt");
+        display.displayText("text/splash.txt");
         //display.displaySplash();                        // Display welcome screen to user
         boolean isRunning = false;                      // establish & setting boolean to default off for game execution
         String answer = display.playGame();             // Ask if user wants to play a game
@@ -36,8 +36,8 @@ public class Engine  {
         }
 
         Location currentLocation = locationMap.get("Docking Station");          // setting game start location on Map
-        display.displayText("data/game_info.txt");                      // display of game information
-        display.displayText("data/game_menu.txt");                      // display of game menu
+        display.displayText("text/game_info.txt");                      // display of game information
+        display.displayText("text/game_menu.txt");                      // display of game menu
 
         // functions while game is running
         while (isRunning) {

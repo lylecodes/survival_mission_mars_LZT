@@ -5,7 +5,8 @@ public interface Puzzle {
 //any declared variables here would be constants (static final)
 
 //methods each challenge must implement
-    public void showInstructions();
+    public void showIntro();
     public void runPuzzle();
+    public boolean isSolved();
 
 }

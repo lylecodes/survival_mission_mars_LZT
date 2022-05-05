@@ -42,6 +42,7 @@ public class CommandProcessor {
             else if (command.get(1).equals("challenge") && currentLocation.getPuzzle()) {                                       //if user says "look challenge"
                 //currentLocation.createPuzzle();                                                                                //create the challenge/puzzle
                 currentLocation.startPuzzle();                                                                              //start or kick off the challenge for them to solve
+
             }
             else if(command.get(1).equals("inventory")) {
                 if(Inventory.getInstance().getInventory().size() > 0) {
