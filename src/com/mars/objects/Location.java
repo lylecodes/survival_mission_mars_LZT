@@ -139,7 +139,7 @@ public class Location {
 
             else if(this.getName().equals("Hydro")){
                 locationPuzzle = new HydroPuzzle();
-
+            }
             else if(this.getName().equals("Green House")){
                 locationPuzzle = new GhPuzzle();
 

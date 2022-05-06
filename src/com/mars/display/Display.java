@@ -18,19 +18,19 @@ public class Display {
 //    }
     //method to clear the screen/clear console of any text (does not work in IDE right now...)
     public void clearScreen(){
-        try {
-            String os = System.getProperty("os.name"); //determine operating system (windows vs linux)
-
-            if (os.contains("Windows")){
-                Runtime.getRuntime().exec("cls"); //clear windows console with "cls" command
-            }
-            else {
-                Runtime.getRuntime().exec("clear"); //clear linux console with "clear command"
-            }
-        }
-        catch (Exception e) {
-            System.out.println("Error clearing screen: " + e); //display any error clearing screen
-        }
+//        try {
+//            String os = System.getProperty("os.name"); //determine operating system (windows vs linux)
+//
+//            if (os.contains("Windows")){
+//                Runtime.getRuntime().exec("cls"); //clear windows console with "cls" command
+//            }
+//            else {
+//                Runtime.getRuntime().exec("clear"); //clear linux console with "clear command"
+//            }
+//        }
+//        catch (Exception e) {
+//            System.out.println("Error clearing screen: " + e); //display any error clearing screen
+//        }
     }
     public String playGame(){
         Scanner scanner = new Scanner(System.in);
@@ -82,7 +82,6 @@ public class Display {
 
     public void displayCurrentStatus(Location location){
         List<String> allItems = new ArrayList<>();
-
         System.out.println("-----------------------------------------");
         System.out.println("You are in " + location.getName());
         System.out.println("Description: " + location.getDescription());
