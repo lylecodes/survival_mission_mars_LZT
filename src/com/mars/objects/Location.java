@@ -136,13 +136,9 @@ public class Location {
                 locationPuzzle = new ReactorPuzzle();
             } else if (this.getName().equals("Hydro")) {
                 locationPuzzle = new HydroPuzzle();
-            }
-            else if (this.getName().equals("Green House")) {
-                    locationPuzzle = new GhPuzzle();
-
-                }
-                //Puzzle locPuzzle = new Puzzle(this.getName());
-            }
+            } else if (this.getName().equals("Green House")) {
+                locationPuzzle = new GhPuzzle();
+            }              
         }
 
 
