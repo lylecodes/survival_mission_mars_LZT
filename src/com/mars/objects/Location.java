@@ -1,5 +1,6 @@
 package com.mars.objects;
 
+import com.mars.puzzle.GhPuzzle;
 import com.mars.puzzle.Puzzle;
 import com.mars.puzzle.ReactorPuzzle;
 import com.mars.puzzle.SolarPuzzle;
@@ -133,6 +134,9 @@ public class Location {
             }
             else if(this.getName().equals("Reactor")){
                 locationPuzzle = new ReactorPuzzle();
+            }
+            else if(this.getName().equals("Green House")){
+                locationPuzzle = new GhPuzzle();
             }
             //Puzzle locPuzzle = new Puzzle(this.getName());
         }
