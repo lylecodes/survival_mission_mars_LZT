@@ -1,7 +1,6 @@
 package com.mars;
 
 import com.mars.display.Display;
-import com.mars.objects.Inventory;
 import com.mars.objects.Location;
 import com.mars.util.CommandProcessor;
 import com.mars.util.JSONHandler;
