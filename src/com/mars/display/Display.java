@@ -3,7 +3,7 @@ package com.mars.display;
 import com.mars.objects.Inventory;
 import com.mars.objects.Location;
 import com.mars.objects.Player;
-import com.mars.objects.Stats;
+import com.mars.stats.Stats;
 
 import java.io.*;
 
@@ -76,9 +76,27 @@ public class Display {
 //        }
     }
 
-    public void displayCurrentStatus(Location location, Stats stats, Player player){
-        System.out.println("Display player stats here"); //TODO
-    }
+        public void displayCurrentStatus(Location location, Stats playerStats){
+            //to display player health related stats
+            HashMap<String, Integer> stats = playerStats.getStats();
+            System.out.println("-----------------------------------------");
+            System.out.println("Current Player Stats: ");
+            System.out.println("Bone Density: " + (stats.get("Bone Density")).toString() + "%");
+            System.out.println("Health: " + (stats.get("Health")).toString() + "%");
+
+            //to display location related info
+            List<String> allItems = new ArrayList<>();
+
+            System.out.println("-----------------------------------------");
+            System.out.println("You are in " + location.getName());
+            System.out.println("Description: " + location.getDescription());
+
+            System.out.println("You see the following items in the room: " + location.getItemNames());
+
+            for(Map.Entry<String, String> entry: location.getDirections().entrySet()){
+                System.out.println("You see a door to the " + entry.getKey());
+            }
+        }
 
     public void displayCurrentStatus(Location location){
         List<String> allItems = new ArrayList<>();

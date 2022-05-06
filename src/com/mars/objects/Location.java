@@ -130,23 +130,17 @@ public class Location {
     //method to instantiate a puzzle, only if location has a puzzle, else do nothing
     public void createPuzzle() {
         if (getPuzzle()) {
-            if(this.getName().equals("Solar Plant")){
+            if (this.getName().equals("Solar Plant")) {
                 locationPuzzle = new SolarPuzzle();
-            }
-            else if(this.getName().equals("Reactor")){
+            } else if (this.getName().equals("Reactor")) {
                 locationPuzzle = new ReactorPuzzle();
-            }
-
-            else if(this.getName().equals("Hydro")){
+            } else if (this.getName().equals("Hydro")) {
                 locationPuzzle = new HydroPuzzle();
-            }
-            else if(this.getName().equals("Green House")){
+            } else if (this.getName().equals("Green House")) {
                 locationPuzzle = new GhPuzzle();
-
-            }
-            //Puzzle locPuzzle = new Puzzle(this.getName());
+            }              
         }
-    }
+
 
     //sets boolean value for if room has a puzzle
     private void setPuzzle(boolean puzzle){

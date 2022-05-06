@@ -2,6 +2,7 @@ package com.mars;
 
 import com.mars.display.Display;
 import com.mars.objects.Location;
+import com.mars.stats.Stats;
 import com.mars.util.CommandProcessor;
 import com.mars.util.JSONHandler;
 import com.mars.util.TextParser;
@@ -19,6 +20,7 @@ public class Engine  {
     private CommandProcessor processor = new CommandProcessor();
     private JSONHandler jsonhandler = new JSONHandler();
     private Map<String, Location> locationMap = jsonhandler.loadLocationMap();
+    private Stats playerStats = new Stats();
 
 
     // method to actually run the application
@@ -40,7 +42,7 @@ public class Engine  {
 
         // functions while game is running
         while (isRunning) {
-            display.displayCurrentStatus(currentLocation);                      // display of location
+            display.displayCurrentStatus(currentLocation, playerStats);                      // display of location
 
             Scanner scanner = new Scanner(System.in);
             System.out.print("Enter a command: \n>> ");                            // asking for input from user
