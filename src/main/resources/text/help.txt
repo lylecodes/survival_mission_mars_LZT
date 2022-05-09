@@ -1,0 +1,8 @@
+Commands can be single or dual word commands.
+
+Common single word commands:
+'QUIT'  --  quits the game
+'HELP'  --  brings up this help document
+
+Common dual word commands, start with action words:  'GO', 'GET', 'DROP', 'LOOK', 'USE'
+...and follow with nouns: 'INVENTORY', 'ROOM', 'OXYGEN', 'CHALLENGE', or an item in your inventory, such as 'KEY'
