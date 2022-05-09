@@ -80,8 +80,8 @@ public class Engine  {
             TimeCalc.findDifference(dieTime);
 
 
-            display.displayCurrentStatus(currentLocation);                      // display of location
 
+       
             display.displayCurrentStatus(currentLocation, playerStats);                      // display of location
 
 
