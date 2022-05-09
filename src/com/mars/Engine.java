@@ -2,19 +2,10 @@ package com.mars;
 
 import com.mars.display.Display;
 import com.mars.objects.Location;
+import com.mars.stats.Stats;
 import com.mars.util.*;
 
 import java.util.*;
-
-import com.mars.stats.Stats;
-import com.mars.util.CommandProcessor;
-import com.mars.util.JSONHandler;
-import com.mars.util.TextParser;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
 
 
 // main engine for execution of program
@@ -71,7 +62,7 @@ public class Engine  {
             TimeCalc.findDifference(dieTime);
 
 
-            display.displayCurrentStatus(currentLocation);                      // display of location
+//            display.displayCurrentStatus(currentLocation);                      // display of location
 
             display.displayCurrentStatus(currentLocation, playerStats);                      // display of location
 
