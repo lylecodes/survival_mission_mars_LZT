@@ -2,10 +2,23 @@ package com.mars;
 
 import com.mars.display.Display;
 import com.mars.objects.Location;
-import com.mars.stats.Stats;
+import com.mars.puzzle.GhPuzzle;
+import com.mars.puzzle.HydroPuzzle;
+import com.mars.puzzle.ReactorPuzzle;
+import com.mars.puzzle.SolarPuzzle;
 import com.mars.util.*;
 
 import java.util.*;
+
+import com.mars.stats.Stats;
+import com.mars.util.CommandProcessor;
+import com.mars.util.JSONHandler;
+import com.mars.util.TextParser;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 
 
 // main engine for execution of program
@@ -17,6 +30,11 @@ public class Engine  {
     private JSONHandler jsonhandler = new JSONHandler();
     private Map<String, Location> locationMap = jsonhandler.loadLocationMap();
     private Stats playerStats = new Stats();
+    private boolean isGhSolved = false;
+    private boolean isHydroSolved = false;
+    private boolean isReactorSolved = false;
+    private boolean isSolarSolved = false;
+
 
 
     // method to actually run the application
@@ -62,7 +80,7 @@ public class Engine  {
             TimeCalc.findDifference(dieTime);
 
 
-//            display.displayCurrentStatus(currentLocation);                      // display of location
+            display.displayCurrentStatus(currentLocation);                      // display of location
 
             display.displayCurrentStatus(currentLocation, playerStats);                      // display of location
 
@@ -72,9 +90,36 @@ public class Engine  {
             String userInput = scanner.nextLine();                              // getting input from user
             List<String> nextCommand = parser.getCommand(userInput);            // calling upon Parser to begin parse process
             currentLocation = locationMap.get(processor.processCommand(nextCommand, currentLocation, locationMap));    // setting location
+            checkPuzzles(currentLocation);
 
+            if(isHydroSolved && isGhSolved && isReactorSolved && isSolarSolved){
+                System.out.println("YOU win congratulations");
+                isRunning = false;
+            }
         }
 
 
     } //end method runApp
+    private void checkPuzzles(Location currentLocation){
+        if (currentLocation.getTypePuzzle() instanceof GhPuzzle){
+            if (currentLocation.isSolved()){
+                isGhSolved = currentLocation.isSolved();
+            }
+        }
+        else if(currentLocation.getTypePuzzle() instanceof HydroPuzzle){
+            if (currentLocation.isSolved()){
+                isHydroSolved = currentLocation.isSolved();
+            }
+        }
+        else if(currentLocation.getTypePuzzle() instanceof ReactorPuzzle){
+            if (currentLocation.isSolved()){
+                isReactorSolved = currentLocation.isSolved();
+            }
+        }
+        else if (currentLocation.getTypePuzzle() instanceof SolarPuzzle){
+            if (currentLocation.isSolved()){
+                isSolarSolved = currentLocation.isSolved();
+            }
+        }
+    }
 }//end class engine

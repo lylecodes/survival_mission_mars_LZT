@@ -23,7 +23,7 @@ public class SolarPuzzle implements Puzzle{
             showIntro();
             while(true) {
                 Scanner alignAttempt = new Scanner(System.in);
-                System.out.println("Would you like to try to align the panels?");
+                System.out.print("Would you like to try to align the panels? 'y' or 'n':\n>>");
                 String panelAnswer = alignAttempt.nextLine();
                 if(panelAnswer.equals("y")) {
                     Random rand = new Random();

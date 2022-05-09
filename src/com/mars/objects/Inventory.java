@@ -35,7 +35,7 @@ public class Inventory {
         return inventory.get(index).getDescription();
     }
 
-    // index'ing thru Items for K,V to move to inventory
+    // index'ing through Items for K,V to move to inventory
     private int getItemIndex(String itemName){
         int index = 0;
         int counter = 0;
