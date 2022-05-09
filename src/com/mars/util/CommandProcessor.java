@@ -4,6 +4,7 @@ import com.mars.display.Display;
 import com.mars.objects.Inventory;
 import com.mars.objects.Item;
 import com.mars.objects.Location;
+import com.mars.puzzle.GhPuzzle;
 
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ public class CommandProcessor {
     // method to resolve action command inputs from user
     public String processCommand(List<String> command, Location currentLocation, Map<String, Location> locationMap) {
         String nextLocation = currentLocation.getName();                                                                // getting name of currentLocation and assign to nextLocation
+        clearConsole();
         if(command.get(0).equals("go")) {                                                                               // checking if input command is 'go'
             if(currentLocation.getDirections().containsKey(command.get(1))) {                                           // checking if currentLocation has direction of movement provided by user input as an option
                 nextLocation = currentLocation.getDirections().get(command.get(1));                                     // moving to nextLocation
@@ -24,6 +26,11 @@ public class CommandProcessor {
         else if(command.get(0).equals("quit")) {                                                                        // checking if user inputs option to 'quit'
             System.out.println("Fine then! Bye!!");                                                                     // sends quit message
             System.exit(0);                                                                                      // exits game
+        }
+        else if(command.get(0).equals("help")) {
+            System.out.println(" ");
+            display.displayText("text/help.txt");
+//            System.out.println("help command");   // TODO: Fix this to show game menu
         }
         else if(command.get(0).equals("look")) {                                                                        // 'look' functionality enabled to allow user to examine items and surroundings
             if(currentLocation.getItemNames().contains(command.get(1))) {                                                       // checking if second parsed word is valid inside currentLocation
@@ -41,7 +48,7 @@ public class CommandProcessor {
             }
             else if (command.get(1).equals("challenge") && currentLocation.getPuzzle()) {                                       //if user says "look challenge"
                 //currentLocation.createPuzzle();                                                                                //create the challenge/puzzle
-                currentLocation.startPuzzle();                                                                              //start or kick off the challenge for them to solve
+                currentLocation.startPuzzle();                                                                             //start or kick off the challenge for them to solve
             }
             else if(command.get(1).equals("inventory")) {
                 if(Inventory.getInstance().getInventory().size() > 0) {
@@ -98,6 +105,26 @@ public class CommandProcessor {
             System.out.println("That is an invalid command. Please try again.");                                        // if user input is not 'go' or 'quit', informs user of invalid command input
         }
         return nextLocation;                                                                                            // returns new location if needed elsewhere
+    }
+
+
+    public static void clearConsole() {
+        try {
+            String operatingSystem = System.getProperty("os.name"); //Check the current operating system
+
+            if (operatingSystem.contains("Windows")) {
+                ProcessBuilder pb = new ProcessBuilder("cmd", "/c", "cls");
+                Process startProcess = pb.inheritIO().start();
+                startProcess.waitFor();
+            } else {
+                ProcessBuilder pb = new ProcessBuilder("clear");
+                Process startProcess = pb.inheritIO().start();
+
+                startProcess.waitFor();
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
 }

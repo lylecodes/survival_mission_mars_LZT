@@ -1,6 +1,9 @@
 package com.mars.objects;
 
+import com.mars.puzzle.HydroPuzzle;
+import com.mars.puzzle.GhPuzzle;
 import com.mars.puzzle.Puzzle;
+import com.mars.puzzle.ReactorPuzzle;
 import com.mars.puzzle.SolarPuzzle;
 
 import java.util.ArrayList;
@@ -124,13 +127,22 @@ public class Location {
         return this.puzzle;
     }
 
+    public Puzzle getTypePuzzle(){
+        return locationPuzzle;
+    }
+
     //method to instantiate a puzzle, only if location has a puzzle, else do nothing
     public void createPuzzle() {
         if (getPuzzle()) {
-            if(this.getName().equals("Solar Plant")){
+            if (this.getName().equals("Solar Plant")) {
                 locationPuzzle = new SolarPuzzle();
+            } else if (this.getName().equals("Reactor")) {
+                locationPuzzle = new ReactorPuzzle();
+            } else if (this.getName().equals("Hydro")) {
+                locationPuzzle = new HydroPuzzle();
+            } else if (this.getName().equals("Green House")) {
+                locationPuzzle = new GhPuzzle();
             }
-            //Puzzle locPuzzle = new Puzzle(this.getName());
         }
     }
 
@@ -142,5 +154,9 @@ public class Location {
     public void startPuzzle(){
         //logic to kick off/run the challenge for the user
         locationPuzzle.runPuzzle();
+    }
+
+    public boolean isSolved(){
+        return locationPuzzle.isSolved();
     }
 }

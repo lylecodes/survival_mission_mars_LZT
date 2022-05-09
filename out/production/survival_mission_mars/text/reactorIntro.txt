@@ -1,0 +1,9 @@
+Now that emergency lighting has been restored, you can better make out what lies in this room - a small, but
+powerful nuclear reactor.  Well, technically, it's a nuclear fission power system, and it's really just attached to
+four smaller self-sustaining nuclear reactors that are each about the size of a loaf of bread. Those are located
+outside the outpost for your safety.  I won't bore you with the details of molybdenum and highly enriched uranium
+surrounded by beryllium oxide reflectors and all that - just understand you are safe, well, safe from the reactors.
+
+The reactors are currently off-line, and you need to power them up.  Not just anyone can do this though. You will need
+a key.  Do you have that? If you don't have one with you - look around - it's probably somewhere here in the outpost.
+Those keys are specifically unique to each power system and cannot be reproduced.
