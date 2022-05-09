@@ -6,6 +6,17 @@ import com.mars.util.*;
 
 import java.util.*;
 
+import com.mars.stats.Stats;
+import com.mars.util.CommandProcessor;
+import com.mars.util.JSONHandler;
+import com.mars.util.TextParser;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+
+
 // main engine for execution of program
 public class Engine  {
     // instantiation of necessary variables required
@@ -14,6 +25,7 @@ public class Engine  {
     private CommandProcessor processor = new CommandProcessor();
     private JSONHandler jsonhandler = new JSONHandler();
     private Map<String, Location> locationMap = jsonhandler.loadLocationMap();
+    private Stats playerStats = new Stats();
 
 
     // method to actually run the application
@@ -29,7 +41,6 @@ public class Engine  {
             System.out.println("You chose to not play :(");     // message showing user their choice
             System.exit(0);                              // exiting game load
         }
-
         Location currentLocation = locationMap.get("Docking Station");          // setting game start location on Map
         display.displayText("text/game_info.txt");                      // display of game information
         display.displayText("text/game_menu.txt");                      // display of game menu
@@ -49,6 +60,7 @@ public class Engine  {
         // functions while game is running
         while (isRunning) {
 
+
             // game clock output
             System.out.println("-----------------------------------------");
             System.out.println("You have 14 mission days to complete the tasks. " +
@@ -61,12 +73,17 @@ public class Engine  {
 
             display.displayCurrentStatus(currentLocation);                      // display of location
 
+            display.displayCurrentStatus(currentLocation, playerStats);                      // display of location
+
+
             Scanner scanner = new Scanner(System.in);
             System.out.print("Enter a command: \n>> ");                            // asking for input from user
             String userInput = scanner.nextLine();                              // getting input from user
             List<String> nextCommand = parser.getCommand(userInput);            // calling upon Parser to begin parse process
             currentLocation = locationMap.get(processor.processCommand(nextCommand, currentLocation, locationMap));    // setting location
+
         }
+
 
     } //end method runApp
 }//end class engine
