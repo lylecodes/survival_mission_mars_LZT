@@ -6,11 +6,11 @@
         "east": "Green House",
         "south": "Hydro"
       },
-      "description":"Docking Station description",
+      "description":"Your space craft is docked and you see the remains of an old abandoned outpost.",
       "puzzle" : "false",
       "items" : {
         "mealkit": "single use emergency meal",
-        "r_key": "here for hardcoding"
+        "useless_tool": "a useless old rusty metal tool"
       },
       "oxygen": "false",
       "asciiArt": "url"
@@ -23,11 +23,11 @@
         "north": "Docking Station",
         "east": "Reactor"
       },
-      "description":"Hydro description",
+      "description":"It appears to be an old hydro station-an essential part of restoring water to the outpost.\n There appears to be a helpful placard on the tank.",
       "puzzle" : "true",
       "items" : {
-        "item1" : "hardcode for test",
-        "item2" : "hardcode for test"
+        "flashlight" : "a useful light source",
+        "batteries" : "a pack of AA batteries"
       },
       "oxygen": "true",
       "asciiArt": "url"
@@ -40,11 +40,11 @@
         "west": "Hydro",
         "south" : "Solar Plant"
       },
-      "description":"Reactor description",
+      "description":"A large room full of multiple screens, buttons and levers. The main power source for the outpost.",
       "puzzle" : "true",
       "items" : {
-        "item1" : "hardcode for test",
-        "item2" : "hardcode for test"
+        "seeds" : "a small packet of garden vegetable seeds",
+        "deck_of_cards" : " a box of playing cards"
       },
       "oxygen": "false",
       "asciiArt": "url"
@@ -56,12 +56,11 @@
       "directions": {
         "north": "Reactor"
       },
-      "description":"Solar Planet description",
+      "description":"a large field of solar panels still intact.",
       "puzzle" : "true",
       "items" : {
-        "item1" : "hardcode for test",
-        "item2" : "hardcode for test",
-        "item3" : "hardcode for test"
+        "calculator" : "a TI83 graphing calculator",
+        "compass" : "not the map kind the math kind"
       },
       "oxygen": "false",
       "asciiArt": "url"
@@ -74,11 +73,11 @@
         "west": "Docking Station",
         "east": "Kitchen"
       },
-      "description":"Green House description",
+      "description":"A warm, glass-enclosed room with row after row of grow lights. Soil bags sit in the corner awaiting use.",
       "puzzle" : "true",
       "items" : {
-        "item1" : "hardcode for test",
-        "item2" : "hardcode for test"
+        "water_level_probe" : "used for testing moisture levels",
+        "pH_meter" : "useful for water or soil pH"
       },
       "oxygen": "false",
       "asciiArt": "url"
@@ -91,11 +90,11 @@
         "west": "Green House",
         "south": "Gym"
       },
-      "description":"Kitchen description",
+      "description":"An uncomplicated room with a mini fridge and a center island for prep space. This is where the snacks happen!",
       "puzzle" : "false",
       "items" : {
-        "item1" : "hardcode for test",
-        "item2" : "hardcode for test"
+        "air_fryer" : "only the fanciest appliances for NASA's finest",
+        "freeze_dried_ice_cream" : "almost as good as the real thing"
       },
       "oxygen": "false",
       "asciiArt": "url"
@@ -108,11 +107,11 @@
         "north": "Kitchen",
         "east": "SQ"
       },
-      "description":"Gym description",
+      "description":"Where the gainz happen.",
       "puzzle" : "false",
       "items" : {
-        "item1" : "hardcode for test",
-        "item2" : "hardcode for test"
+        "chuck_taylors" : "classic all-American high tops",
+        "protein_powder" : "the most important macro nutrient"
       },
       "oxygen": "false",
       "asciiArt": "url"
@@ -124,11 +123,12 @@
       "directions": {
         "west": "Gym"
       },
-      "description":"SQ description",
+      "description":"A quiet, dark, enclosed room. Bunk beds line the walls.",
       "puzzle" : "false",
       "items" : {
-        "item1" : "hardcode for test",
-        "item2" : "hardcode for test"
+        "alarm_clock" : "simple time keeper to help kep you on track",
+        "sleeping_mask" : "for your beauty sleep",
+        "r_key": "a bit rusty but looks like it may fit in the reactor"
       },
       "oxygen": "false",
       "asciiArt": "url"

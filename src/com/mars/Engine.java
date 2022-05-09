@@ -6,19 +6,10 @@ import com.mars.puzzle.GhPuzzle;
 import com.mars.puzzle.HydroPuzzle;
 import com.mars.puzzle.ReactorPuzzle;
 import com.mars.puzzle.SolarPuzzle;
+import com.mars.stats.Stats;
 import com.mars.util.*;
 
 import java.util.*;
-
-import com.mars.stats.Stats;
-import com.mars.util.CommandProcessor;
-import com.mars.util.JSONHandler;
-import com.mars.util.TextParser;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
 
 
 // main engine for execution of program
@@ -93,7 +84,7 @@ public class Engine  {
             checkPuzzles(currentLocation);
 
             if(isHydroSolved && isGhSolved && isReactorSolved && isSolarSolved){
-                System.out.println("YOU win congratulations");
+                display.displayText("text/win.txt");
                 isRunning = false;
             }
         }
