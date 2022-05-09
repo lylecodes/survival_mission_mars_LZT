@@ -11,7 +11,7 @@ public class GhPuzzle implements Puzzle{
 
     @Override
     public void showIntro() {
-        display.displayText("text/greenHouseIntro.txt");
+        display.displayText("text/greenHouseIntro.txt"); //display the GH intro
     }
 
     @Override
@@ -20,18 +20,19 @@ public class GhPuzzle implements Puzzle{
     }
 
     @Override
-    public boolean isSolved() {
+    public boolean isSolved() { // is the challenge solved?
         return isSolved;
     }
     private void greenHousePuzzle(){
         //green house specific challenge to grow food
-//        Turn valve
-//        Water mister engages and moistens the soil
-//        Plant seeds
+        // Turn valve
+        // Water mister engages and moistens the soil
+        // Plant seeds
         if(!isSolved){
             showIntro();
-            System.out.print("You notice a valve in the corner of the room connected to " +
-                    "the water main. Do you turn it on? Enter 'y' or 'n'\n>> ");
+            System.out.print("You notice a valve in the corner of the room connected to " +  //challenge hard coded/very guided at this point
+                    "the water main. Do you turn it on? Enter 'y' or 'n'\n>> ");            //if user responds y, they progress, if n, exits challenge
+                                                                                            //TODO: input validation, add more options/variety
             Scanner scanner = new Scanner(System.in);
             String turnValve = scanner.nextLine();
             turnValve.toLowerCase();
