@@ -10,7 +10,7 @@
       "puzzle" : "false",
       "items" : {
         "mealkit": "single use emergency meal",
-        "r_key": "a bit rusty but looks like it may fit in the reactor"
+        "useless_tool": "a useless old rusty metal tool"
       },
       "oxygen": "false",
       "asciiArt": "url"
@@ -23,7 +23,7 @@
         "north": "Docking Station",
         "east": "Reactor"
       },
-      "description":"It appears to be an old hydro station-an essential part of restoring water to the outpost.\n There appears to be a helpful placard on the wall.",
+      "description":"It appears to be an old hydro station-an essential part of restoring water to the outpost.\n There appears to be a helpful placard on the tank.",
       "puzzle" : "true",
       "items" : {
         "flashlight" : "a useful light source",
@@ -44,7 +44,7 @@
       "puzzle" : "true",
       "items" : {
         "seeds" : "a small packet of garden vegetable seeds",
-        "deck of cards" : " a box of playing cards"
+        "deck_of_cards" : " a box of playing cards"
       },
       "oxygen": "false",
       "asciiArt": "url"
@@ -60,7 +60,7 @@
       "puzzle" : "true",
       "items" : {
         "calculator" : "a TI83 graphing calculator",
-        "compass" : "not the map kind, the math kind"
+        "compass" : "not the map kind the math kind"
       },
       "oxygen": "false",
       "asciiArt": "url"
@@ -76,8 +76,8 @@
       "description":"A warm, glass-enclosed room with row after row of grow lights. Soil bags sit in the corner awaiting use.",
       "puzzle" : "true",
       "items" : {
-        "water level probe" : "used for testing moisture levels",
-        "pH meter" : "useful for water or soil pH"
+        "water_level_probe" : "used for testing moisture levels",
+        "pH_meter" : "useful for water or soil pH"
       },
       "oxygen": "false",
       "asciiArt": "url"
@@ -93,8 +93,8 @@
       "description":"An uncomplicated room with a mini fridge and a center island for prep space. This is where the snacks happen!",
       "puzzle" : "false",
       "items" : {
-        "air fryer" : "only the fanciest appliances for NASA's finest",
-        "freeze dried ice cream" : "almost as good as the real thing"
+        "air_fryer" : "only the fanciest appliances for NASA's finest",
+        "freeze_dried_ice_cream" : "almost as good as the real thing"
       },
       "oxygen": "false",
       "asciiArt": "url"
@@ -110,8 +110,8 @@
       "description":"Where the gainz happen.",
       "puzzle" : "false",
       "items" : {
-        "chuck taylors" : "classic all-American high tops",
-        "protein powder" : "the most important macro nutrient"
+        "chuck_taylors" : "classic all-American high tops",
+        "protein_powder" : "the most important macro nutrient"
       },
       "oxygen": "false",
       "asciiArt": "url"
@@ -119,15 +119,16 @@
   },
   {
     "location": {
-      "name": "Sleeping Quarters",
+      "name": "SQ",
       "directions": {
         "west": "Gym"
       },
       "description":"A quiet, dark, enclosed room. Bunk beds line the walls.",
       "puzzle" : "false",
       "items" : {
-        "alarm clock" : "simple time keeper to help kep you on track",
-        "sleeping mask" : "for your beauty sleep"
+        "alarm_clock" : "simple time keeper to help kep you on track",
+        "sleeping_mask" : "for your beauty sleep",
+        "r_key": "a bit rusty but looks like it may fit in the reactor"
       },
       "oxygen": "false",
       "asciiArt": "url"
