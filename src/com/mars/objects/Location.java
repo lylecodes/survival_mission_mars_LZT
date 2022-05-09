@@ -140,7 +140,7 @@ public class Location {
                 locationPuzzle = new GhPuzzle();
             }              
         }
-
+    }
 
     //sets boolean value for if room has a puzzle
     private void setPuzzle(boolean puzzle){
