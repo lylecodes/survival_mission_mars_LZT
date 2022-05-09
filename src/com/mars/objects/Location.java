@@ -127,6 +127,10 @@ public class Location {
         return this.puzzle;
     }
 
+    public Puzzle getTypePuzzle(){
+        return locationPuzzle;
+    }
+
     //method to instantiate a puzzle, only if location has a puzzle, else do nothing
     public void createPuzzle() {
         if (getPuzzle()) {
@@ -138,7 +142,7 @@ public class Location {
                 locationPuzzle = new HydroPuzzle();
             } else if (this.getName().equals("Green House")) {
                 locationPuzzle = new GhPuzzle();
-            }              
+            }
         }
     }
 

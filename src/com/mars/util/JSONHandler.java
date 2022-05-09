@@ -28,7 +28,10 @@ public class JSONHandler {
     }
 
     private void populateLocations() throws FileNotFoundException {
+        // json simple JSON parser
         JSONParser jsonParser = new JSONParser();
+
+        // Hold location of json file
         String s = "json/rooms.json";
 
         InputStream inputJSON = getFileFromResourceAsStream(s);
@@ -36,6 +39,8 @@ public class JSONHandler {
        try(BufferedReader reader = new BufferedReader(new InputStreamReader(inputJSON,"UTF-8"))) {
            Object obj = jsonParser.parse(reader);
            JSONArray locationList = (JSONArray) obj;
+
+           // Iterate through locationList
            locationList.forEach(loc -> addLocation((JSONObject) loc));
        } catch (UnsupportedEncodingException e) {
            e.printStackTrace();
@@ -45,31 +50,19 @@ public class JSONHandler {
            e.printStackTrace();
        }
 
-//        // Read from json file
-//        try(FileReader reader = new FileReader("data/rooms.json")) {
-//            // Parse json file
-//            Object obj = jsonParser.parse(reader);
-//
-//            // Cast to JSONArray to make obj iterable
-//            JSONArray locationList = (JSONArray) obj;
-//
-//            // Iterate through each item in locationList and pass item to addLocation()
-//            locationList.forEach(loc -> addLocation((JSONObject) loc));
-//
-//        } catch (IOException | ParseException e) {
-//            e.printStackTrace();
-//        }
     }
 
     private void addLocation(JSONObject locations){
         // Get everything inside location
         JSONObject locationsObject = (JSONObject) locations.get("location");
 
+        // Get name from locationsObject
         String name = (String) locationsObject.get("name");
 
         // Map to hold directions
         Map<String,String> directions = new HashMap<>();
-//        Map<String,String> lookitems = new HashMap<>();
+
+        // List to hold items in current room
         List<Item> lookitems = new ArrayList<>();
 
         // Get directions from locationsObject
@@ -94,15 +87,12 @@ public class JSONHandler {
 
         // Get items and store them in String[]
         locArray = locationsObject.get("items");
-//        System.out.println(locArray);
+
         String[] itemsKVPair = locArray.toString().split(",");
         for (int i = 0; i <itemsKVPair.length; i++) {
             itemsKVPair[i] = itemsKVPair[i].replaceAll("[{}\"]","");
-//            System.out.println(itemsKVPair[i]);
             String[] holder = itemsKVPair[i].split(":");
-           // lookitems.put(holder[0], holder[1]);
             lookitems.add(new Item(holder[0],holder[1]));
-//            System.out.println(Arrays.toString(holder));
         }
 
         locArray = locationsObject.get("oxygen");
@@ -113,6 +103,7 @@ public class JSONHandler {
         locArray = locationsObject.get("asciiArt");
         String ascii = (String) locArray;
 
+        // Get puzzle boolean
         locArray = locationsObject.get("puzzle");
         String puzzleHolder = (String) locArray;
         boolean puzzle = puzzleHolder.equals("true");
@@ -131,6 +122,5 @@ public class JSONHandler {
             return inputStream;
         }
     }
-
 
 }
