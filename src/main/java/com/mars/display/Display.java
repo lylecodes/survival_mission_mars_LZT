@@ -76,7 +76,23 @@ public class Display {
 //            System.out.println("Sorry, file not found");
 //        }
     }
+    public void readMap(String filePath, String location){
+        InputStream textInput = getFileFromResourceAsStream(filePath);
+        try(BufferedReader reader = new BufferedReader(new InputStreamReader(textInput,"UTF-8"))){
+            String line;
+            while ((line = reader.readLine()) != null){
+                if (line.contains(location)){
+                    System.out.println(line.replace(location + "[ ]", location + "[X]"));
+                }
+                else {
+                    System.out.println(line);
+                }
 
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
         public void displayCurrentStatus(Location location, Stats playerStats){
             //to display player health related stats
             HashMap<String, Integer> stats = playerStats.getStats();
