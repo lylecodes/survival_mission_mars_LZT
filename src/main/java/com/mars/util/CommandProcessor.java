@@ -32,6 +32,9 @@ public class CommandProcessor {
             display.displayText("text/help.txt");
 //            System.out.println("help command");   // TODO: Fix this to show game menu
         }
+        else if(command.get(0).equals("map")) {
+            MapReader.read(currentLocation.getName());
+        }
         else if(command.get(0).equals("look")) {                                                                        // 'look' functionality enabled to allow user to examine items and surroundings
             if(currentLocation.getItemNames().contains(command.get(1))) {                                                       // checking if second parsed word is valid inside currentLocation
                 System.out.println("Upon examination you find " + currentLocation.getItemDescription(command.get(1)));          // output to user showing description of item, if valid in location
