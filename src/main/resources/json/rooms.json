@@ -77,7 +77,7 @@
       "puzzle" : "true",
       "items" : {
         "water_level_probe" : "used for testing moisture levels",
-        "pH_meter" : "useful for water or soil pH"
+        "ph_meter" : "useful for water or soil pH"
       },
       "oxygen": "false",
       "asciiArt": "url"
