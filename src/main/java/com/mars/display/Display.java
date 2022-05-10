@@ -95,7 +95,7 @@ public class Display {
             System.out.println("You see the following items in the room: " + location.getItemNames());
 
             for(Map.Entry<String, String> entry: location.getDirections().entrySet()){
-                System.out.println("You see a door to the " + entry.getKey());
+                System.out.println("You see a door to the " + entry.getKey() + ": " + entry.getValue());
             }
         }
 
