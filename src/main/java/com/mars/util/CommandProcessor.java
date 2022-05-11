@@ -34,7 +34,7 @@ public class CommandProcessor {
             System.out.println(command.get(0) + " requires a Noun. Please press help for additional info");
             return nextLocation;
         }
-        if(command.get(0).equals("go")) {                                                                               // checking if input command is 'go'
+            if(command.get(0).equals("go")) {                                                                               // checking if input command is 'go'
             if(currentLocation.getDirections().containsKey(command.get(1))) {                                           // checking if currentLocation has direction of movement provided by user input as an option
                 nextLocation = currentLocation.getDirections().get(command.get(1));                                     // moving to nextLocation
             } else {
