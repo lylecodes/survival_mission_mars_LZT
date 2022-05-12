@@ -4,7 +4,7 @@ import com.mars.Engine;
 
 class Main {
     public static void main(String[] args)  {
-        Engine engine = new Engine();
-        engine.runApp();
+//        Engine engine = new Engine();
+//        engine.runApp();
     }
 }
