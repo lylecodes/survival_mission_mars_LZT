@@ -1,10 +1,15 @@
 package com.mars.gui.alt;
 
+import com.mars.objects.Location;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-class GameFrame extends JFrame {
+import java.sql.Array;
+import java.util.Map;
+
+public class GameFrame extends JFrame {
     private static Container gameContainer;
     private static JPanel titleNamePanel, startButtonPanel, backGroundStoryButtonPanel, mainTextPanel, choiceButtonPanel, playerPanel, backGroundStoryPanel;
     private static JLabel titleNameLabel, playerPanelLabel, hpLabel, hpLabelNumber, inventoryLabel, inventoryLabelName;
@@ -18,6 +23,9 @@ class GameFrame extends JFrame {
     private static IntroScreenHandler introScreenHandler = new IntroScreenHandler();
     private static TitleScreenHandler titleScreenHandler = new TitleScreenHandler();
     private static ChoiceHandler choiceHandler = new ChoiceHandler();
+
+    private static JButton[] choiceButtons;
+
 
     public GameFrame(){
         setSize(800, 600);
@@ -112,6 +120,33 @@ class GameFrame extends JFrame {
         choiceButtonPanel.add(choiceButton2);
         choiceButtonPanel.add(choiceButton3);
         choiceButtonPanel.add(choiceButton4);
+    }
+
+    public void setLocationInfo(Location location) {
+        position = location.getName();
+        mainTextArea.setText(location.getDescription());
+        int buttonIdx = 0;
+
+        for (var directionPair : location.getDirections().entrySet()) {
+            String direction = directionPair.getKey();
+            String directionName = directionPair.getKey();
+
+            String str = "Go " + direction + "to " + directionName;
+            choiceButtons[buttonIdx].setText(str);
+            choiceButtons[buttonIdx].setVisible(true);
+            buttonIdx++;
+        }
+
+        while (buttonIdx < choiceButtons.length) {
+            choiceButtons[buttonIdx].setVisible(false);
+            buttonIdx++;
+        }
+    }
+
+    public void addDirectionChoiceButtonListeners(ActionListener listener) {
+        for (var button : choiceButtons) {
+            button.addActionListener(listener);
+        }
     }
 
     private static JButton newChoiceButton(String buttonName, String actionCommandName) {
