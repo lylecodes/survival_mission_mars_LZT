@@ -30,8 +30,6 @@ public class Engine  {
     private boolean isReactorSolved = false;
     private boolean isSolarSolved = false;
 
-
-
     // method to actually run the application
     public void runApp() {
         gui.go();
