@@ -1,5 +1,7 @@
 package com.mars.display;
 
+import com.mars.gui.GameGui;
+import com.mars.gui.MiddleMan;
 import com.mars.objects.Inventory;
 import com.mars.objects.Location;
 import com.mars.stats.Stats;
@@ -50,6 +52,28 @@ public class Display {
         }
         return userInput;
     }
+    public String playGameGUI(MiddleMan middle){
+//        Scanner scanner = new Scanner(System.in);
+//        System.out.print("Would you like to play a game? Enter y or n: \n>> ");
+        middle.updateGUI("Would you like to play a game? Enter y or n: \n");
+        boolean isValid = false;
+        String userInput = "";
+        while (!isValid){
+//            userInput = scanner.nextLine();
+            userInput = middle.listener();
+            userInput = userInput.toLowerCase();
+            if(userInput.matches("y|n")) { //only matching on y or n right now TODO: yes/no
+                isValid = true;
+            }
+            else{
+//                System.out.println("please enter 'y' or 'n': ");
+                middle.updateGUI("please enter 'y' or 'n': ");
+            }
+        }
+        System.out.println(4);
+        return userInput;
+    }
+
     public void displayText(String filePath){
 
         InputStream textInput = getFileFromResourceAsStream(filePath);
@@ -62,6 +86,7 @@ public class Display {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
 
         //read in the txt file and display lines
 //        try (BufferedReader reader =
@@ -76,7 +101,37 @@ public class Display {
 //            System.out.println("Sorry, file not found");
 //        }
     }
+    public String displayGUI(String filePath) {
 
+        InputStream textInput = getFileFromResourceAsStream(filePath);
+        String image ="";
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(textInput, "UTF-8"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                image =  image + line + "\n";
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return image;
+    }
+    public void readMap(String filePath, String location){
+        InputStream textInput = getFileFromResourceAsStream(filePath);
+        try(BufferedReader reader = new BufferedReader(new InputStreamReader(textInput,"UTF-8"))){
+            String line;
+            while ((line = reader.readLine()) != null){
+                if (line.contains(location)){
+                    System.out.println(line.replace(location + "[ ]", location + "[X]"));
+                }
+                else {
+                    System.out.println(line);
+                }
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
         public void displayCurrentStatus(Location location, Stats playerStats){
             //to display player health related stats
             HashMap<String, Integer> stats = playerStats.getStats();
@@ -95,9 +150,39 @@ public class Display {
             System.out.println("You see the following items in the room: " + location.getItemNames());
 
             for(Map.Entry<String, String> entry: location.getDirections().entrySet()){
-                System.out.println("You see a door to the " + entry.getKey());
+                System.out.println("You see a door to the " + entry.getKey() + ": " + entry.getValue());
             }
         }
+    public void displayCurrentStatusGUI(Location location, Stats playerStats, GameGui gui){
+        //to display player health related stats
+        HashMap<String, Integer> stats = playerStats.getStats();
+//        System.out.println("-----------------------------------------");
+//        System.out.println("Current Player Stats: ");
+//        System.out.println("Bone Density: " + (stats.get("Bone Density")).toString() + "%");
+//        System.out.println("Health: " + (stats.get("Health")).toString() + "%");
+        gui.updateStory("-----------------------------------------\n" +
+                "Current Player Stats: " +
+                "Bone Density: " +  (stats.get("Bone Density")).toString() + "% \n" +
+                "Health: " + (stats.get("Health")).toString() + "% \n");
+
+        //to display location related info
+        List<String> allItems = new ArrayList<>();
+
+//        System.out.println("-----------------------------------------");
+//        System.out.println("You are in " + location.getName());
+//        System.out.println("Description: " + location.getDescription());
+        gui.updateStory("-----------------------------------------\n" +
+                "\"You are in " +  location.getName() + "\n" +
+                "Description: " + location.getDescription());
+
+//        System.out.println("You see the following items in the room: " + location.getItemNames());
+        gui.updateStory("You see the following items in the room: " + location.getItemNames() + "\n");
+        for(Map.Entry<String, String> entry: location.getDirections().entrySet()){
+//            System.out.println("You see a door to the " + entry.getKey() + ": " + entry.getValue());
+            gui.updateStory("You see a door to the " + entry.getKey() + ": " + entry.getValue()+ "\n");
+        }
+    }
+
 
     public void displayCurrentStatus(Location location){
         List<String> allItems = new ArrayList<>();

@@ -16,14 +16,8 @@ public class CommandProcessor {
     public String processCommand(List<String> command, Location currentLocation, Map<String, Location> locationMap) {
         String nextLocation = currentLocation.getName();                                                                // getting name of currentLocation and assign to nextLocation
         clearConsole();
-        if(command.get(0).equals("go")) {                                                                               // checking if input command is 'go'
-            if(currentLocation.getDirections().containsKey(command.get(1))) {                                           // checking if currentLocation has direction of movement provided by user input as an option
-                nextLocation = currentLocation.getDirections().get(command.get(1));                                     // moving to nextLocation
-            } else {
-                System.out.println("C'mon, get right, you can't go that way!");                                         // otherwise informing user that pathway is not accessible
-            }
-        }
-        else if(command.get(0).equals("quit")) {                                                                        // checking if user inputs option to 'quit'
+
+        if(command.get(0).equals("quit")) {                                                                        // checking if user inputs option to 'quit'
             System.out.println("Fine then! Bye!!");                                                                     // sends quit message
             System.exit(0);                                                                                      // exits game
         }
@@ -31,6 +25,21 @@ public class CommandProcessor {
             System.out.println(" ");
             display.displayText("text/help.txt");
 //            System.out.println("help command");   // TODO: Fix this to show game menu
+        }
+        else if(command.get(0).equals("map")) {
+            MapReader.read(currentLocation.getName());
+        }
+//        all commands below use two words, lets stop game from crashing.
+        else if (command.size() < 2){
+            System.out.println(command.get(0) + " requires a Noun. Please press help for additional info");
+            return nextLocation;
+        }
+            if(command.get(0).equals("go")) {                                                                               // checking if input command is 'go'
+            if(currentLocation.getDirections().containsKey(command.get(1))) {                                           // checking if currentLocation has direction of movement provided by user input as an option
+                nextLocation = currentLocation.getDirections().get(command.get(1));                                     // moving to nextLocation
+            } else {
+                System.out.println("C'mon, get right, you can't go that way!");                                         // otherwise informing user that pathway is not accessible
+            }
         }
         else if(command.get(0).equals("look")) {                                                                        // 'look' functionality enabled to allow user to examine items and surroundings
             if(currentLocation.getItemNames().contains(command.get(1))) {                                                       // checking if second parsed word is valid inside currentLocation
