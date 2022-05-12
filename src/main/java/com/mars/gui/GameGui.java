@@ -13,6 +13,7 @@ public class GameGui {
     JTextArea textMap;
     JFrame frame;
     JTextField field;
+    String userResponse="";
 
     private GameGui(){
     }
@@ -47,6 +48,8 @@ public class GameGui {
 
         text = new JTextArea(10,50);
         text.setLineWrap(true);
+//        set text whenn the game starts to the splash screen and what ever else they have
+        text.setText("STORY GOES HERE");
         JScrollPane scroller = new JScrollPane(text);
         scroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -54,6 +57,7 @@ public class GameGui {
 
         textMap = new JTextArea(10,50);
         textMap.setLineWrap(true);
+        text.setText("PLAYER MAP STUFF HERE");
         JScrollPane scrollerMap = new JScrollPane(textMap);
         scrollerMap.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollerMap.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -70,20 +74,42 @@ public class GameGui {
         frame.setSize(1000,1000);
         frame.setVisible(true);
     }
+    public void updateStory(String updateString){
+//        text.setText("");
+        text.append(updateString);
+    }
+    public void newStory(String updateString){
+        text.setText("");
+        text.setText(updateString);
+    }
+    public void updateHUB(String map){
+        textMap.setText("");
+        textMap.setText(map);
+    }
+    public String getUserResponse() {
+        return userResponse;
+    }
+
+    public void setUserResponse(String userResponse) {
+        this.userResponse = userResponse;
+    }
     //    Action Listener Interface for "actionPerformed"
 //    Event Handling method
     class UserInputListner implements ActionListener {
         public void actionPerformed(ActionEvent event){
 //                takes in user input
             String userInput = field.getText();
-            System.out.println(userInput);
             field.setText("");
-//                Update text area with current user input
-            text.setText("");
-            text.append("button clicked user inputed \n" + userInput);
-//                Map and inventory
-            textMap.setText("");
-            textMap.setText("map, inventory, oxygen, health");
+            setUserResponse(userInput);
+//            GO TO TRANSLATOR
+//            System.out.println(userInput);
+//            field.setText("");
+////                Update text area with current user input
+//            text.setText("");
+//            text.append("button clicked user inputed \n" + userInput);
+////                Map and inventory
+//            textMap.setText("");
+//            textMap.setText("map, inventory, oxygen, health");
 
         }
 

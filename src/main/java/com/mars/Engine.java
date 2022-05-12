@@ -1,6 +1,8 @@
 package com.mars;
 
 import com.mars.display.Display;
+import com.mars.gui.GameGui;
+import com.mars.gui.MiddleMan;
 import com.mars.objects.Location;
 import com.mars.puzzle.GhPuzzle;
 import com.mars.puzzle.HydroPuzzle;
@@ -21,6 +23,8 @@ public class Engine  {
     private JSONHandler jsonhandler = new JSONHandler();
     private Map<String, Location> locationMap = jsonhandler.loadLocationMap();
     private Stats playerStats = new Stats();
+    GameGui gui = GameGui.getINSTANCE();
+    MiddleMan middle = new MiddleMan(gui);
     private boolean isGhSolved = false;
     private boolean isHydroSolved = false;
     private boolean isReactorSolved = false;
@@ -30,21 +34,33 @@ public class Engine  {
 
     // method to actually run the application
     public void runApp() {
+        gui.go();
         display.displayText("text/splash.txt");
+
+        String storySplash = display.displayGUI("text/splash.txt"); // GUI splash
+        gui.updateStory(storySplash); // GUI update story
+
         //display.displaySplash();                        // Display welcome screen to user
         boolean isRunning = false;                      // establish & setting boolean to default off for game execution
-        String answer = display.playGame();             // Ask if user wants to play a game
+//        String answer = display.playGame();             // Ask if user wants to play a game
+
+        String answer = display.playGameGUI(middle);
+
         if(answer.equals("y")){
             isRunning = true;                           // setting boolean on for game execution
         }
         else{
-            System.out.println("You chose to not play :(");     // message showing user their choice
+//            System.out.println("You chose to not play :(");     // message showing user their choice
+            gui.updateStory("You chose to not play :("); //GUI
             System.exit(0);                              // exiting game load
         }
         Location currentLocation = locationMap.get("Docking Station");          // setting game start location on Map
-        display.displayText("text/game_info.txt");                      // display of game information
-        display.displayText("text/game_menu.txt");                      // display of game menu
-
+        //display.displayText("text/game_info.txt");                      // display of game information
+        //display.displayText("text/game_menu.txt");                      // display of game menu
+        String gameInfo = display.displayGUI("text/game_info.txt"); // GUI splash
+        gui.newStory(gameInfo); // GUI update story
+        String gameMenu = display.displayGUI("text/game_menu.txt"); // GUI splash
+        gui.updateStory(gameInfo); // GUI update story
         // this is the game clock / countdown timer logic
         Timer timer = new Timer();                          // create a timer
         TimerTask task = new Task();                        // create a task -- task.java executes shutdown
@@ -62,29 +78,37 @@ public class Engine  {
 
 
             // game clock output
-            System.out.println("-----------------------------------------");
-            System.out.println("You have 14 mission days to complete the tasks. " +
-                    "1 minute of elapsed real time is equal 1 hour of elapsed game time within the Martian Outpost.");
-
-            System.out.println("Start Time: " + currentTime);
-            System.out.println("Time Until Death: " + dieTime);
+//            System.out.println("-----------------------------------------");
+//            System.out.println("You have 14 mission days to complete the tasks. " +
+//                    "1 minute of elapsed real time is equal 1 hour of elapsed game time within the Martian Outpost.");
+//
+//            System.out.println("Start Time: " + currentTime);
+//            System.out.println("Time Until Death: " + dieTime);
             TimeCalc.findDifference(dieTime);
+            gui.updateStory("-----------------------------------------\n" +
+                    "You have 14 mission days to complete the tasks. " +
+                    "1 minute of elapsed real time is equal 1 hour of elapsed game time within the Martian Outpost." +
+                    "Start Time: " + currentTime + "\n" +
+                    "Time Until Death: "  + dieTime + "\n" +
+                    "-----------------------------------------\n");
 
 
 
        
-            display.displayCurrentStatus(currentLocation, playerStats);                      // display of location
+//            display.displayCurrentStatus(currentLocation, playerStats);                      // display of location
+            display.displayCurrentStatusGUI(currentLocation,playerStats,gui);
 
-
-            Scanner scanner = new Scanner(System.in);
-            System.out.print("Enter a command: \n>> ");                            // asking for input from user
-            String userInput = scanner.nextLine();                              // getting input from user
+//            Scanner scanner = new Scanner(System.in);
+//            System.out.print("Enter a command: \n>> ");                            // asking for input from user
+//            String userInput = scanner.nextLine();                              // getting input from user
+            String userInput = middle.listener();
             List<String> nextCommand = parser.getCommand(userInput);            // calling upon Parser to begin parse process
             currentLocation = locationMap.get(processor.processCommand(nextCommand, currentLocation, locationMap));    // setting location
             checkPuzzles(currentLocation);
 
             if(isHydroSolved && isGhSolved && isReactorSolved && isSolarSolved){
-                display.displayText("text/win.txt");
+//                display.displayText("text/win.txt");
+                display.displayGUI("text/win.txt");
                 isRunning = false;
             }
         }
