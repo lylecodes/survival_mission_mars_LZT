@@ -35,6 +35,7 @@ public class GameController {
         gui.setTitleScreenHandler(new TitleScreenHandler());
     }
 
+    // Title Screen stuff
     class TitleScreenHandler implements ActionListener {
         public void actionPerformed(ActionEvent event) {
             gui.createIntroScreen();
@@ -42,6 +43,7 @@ public class GameController {
         }
     }
 
+    // Intro Screen stuff
     class IntroScreenHandler implements ActionListener {
         public void actionPerformed(ActionEvent event){
             gui.createGameScreen();
@@ -50,6 +52,7 @@ public class GameController {
         }
     }
 
+    // Game Screen stuff
     class GameScreenHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             allPuzzlesCompleted();

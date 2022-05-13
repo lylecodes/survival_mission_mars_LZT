@@ -6,14 +6,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Array;
-import java.util.Map;
 
 public class GameFrame extends JFrame {
     private  Container gameContainer;
     private  JPanel titleNamePanel, startButtonPanel, backGroundStoryButtonPanel, mainTextPanel, choiceButtonPanel, playerPanel, backGroundStoryPanel;
-    private  JLabel titleNameLabel, playerPanelLabel, hpLabel, hpLabelNumber, inventoryLabel, inventoryLabelName;
+    private  JLabel titleNameLabel, playerPanelLabel, hpLabel, hpLabelNumber, inventoryLabel, inventoryLabelName, locationNameLabel;
     private  Font titleFont = new Font("Times New Roman", Font.PLAIN, 90);
+    private Font locationNameFont = new Font("Dialog", Font.BOLD, 20);
     private  Font normalFont = new Font("Times New Roman", Font.PLAIN, 28);
     private  JButton startButton, backGroundStoryButton, choiceButton, choiceButton1, choiceButton2, choiceButton3, choiceButton4;
     private  JTextArea mainTextArea, backGroundTextArea;
@@ -42,26 +41,25 @@ public class GameFrame extends JFrame {
         gameContainer.add(startButtonPanel);
     }
 
-    private  void createTitleNamePanel() {
+    private void createTitleNamePanel() {
         titleNamePanel = new JPanel();
         titleNamePanel.setBounds(100, 100, 600, 150);
         titleNamePanel.setBackground(Color.red);
     }
 
-    private  JLabel createTitleNameLabel() {
+    private void createTitleNameLabel() {
         titleNameLabel = new JLabel("Survival Mars");
         titleNameLabel.setForeground(Color.white);
         titleNameLabel.setFont(titleFont);
-        return titleNameLabel;
     }
 
-    private  void createStartButtonPanel() {
+    private void createStartButtonPanel() {
         startButtonPanel = new JPanel();
         startButtonPanel.setBounds(300, 400, 200, 100);
         startButtonPanel.setBackground(Color.black);
     }
 
-    private  void createStartButton() {
+    private void createStartButton() {
         startButton = new JButton("START");
         startButton.setBackground(Color.black);
         startButton.setForeground(Color.RED);
@@ -69,11 +67,11 @@ public class GameFrame extends JFrame {
 //        startButton.addActionListener(titleScreenHandler);
     }
     
-    public  void setTitleScreenHandler(ActionListener l) {
+    public void setTitleScreenHandler(ActionListener l) {
         startButton.addActionListener(l);
     }
 
-    public  void createGameScreen() {
+    public void createGameScreen() {
         backGroundStoryPanel.setVisible(false);
         backGroundStoryButtonPanel.setVisible(false);
 
@@ -87,16 +85,18 @@ public class GameFrame extends JFrame {
         
     }
 
-    private  void createMainTextPanel(){
+    private void createMainTextPanel(){
         mainTextPanel = new JPanel();
         mainTextPanel.setBounds(100, 100, 600, 250);
         mainTextPanel.setBackground(Color.BLACK);
         gameContainer.add(mainTextPanel);
 
+        createLocationNameLabel();
         createMainTextArea();
     }
 
-    private  void createMainTextArea(){
+    private void createMainTextArea(){
+        createLocationNameLabel();
         mainTextArea = new JTextArea("");
         mainTextArea.setBounds(100, 100, 600, 250);
         mainTextArea.setBackground(Color.black);
@@ -106,7 +106,13 @@ public class GameFrame extends JFrame {
         mainTextPanel.add(mainTextArea);
     }
 
-    private  void createButtonPanel(){
+    private void createLocationNameLabel() {
+        locationNameLabel = new JLabel();
+        locationNameLabel.setFont(locationNameFont);
+        mainTextPanel.add(locationNameLabel);
+    }
+
+    private void createButtonPanel(){
         choiceButtonPanel = new JPanel();
         choiceButtonPanel.setBounds(250, 350, 300, 150);
         choiceButtonPanel.setBackground(Color.BLACK);
@@ -127,7 +133,7 @@ public class GameFrame extends JFrame {
     }
 
     public void setLocationInfo(Location location) {
-        position = location.getName();
+        locationNameLabel.setText(location.getName());
         mainTextArea.setText(location.getDescription());
         int buttonIdx = 0;
 
