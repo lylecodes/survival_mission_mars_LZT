@@ -12,8 +12,8 @@ import java.util.Collection;
 public class GameFrame extends JFrame {
 
     private  Container gameContainer;
-    private  JPanel titleNamePanel, startButtonPanel, backGroundStoryButtonPanel, mainTextPanel, choiceButtonPanel, playerPanel, backGroundStoryPanel, playerStats itemPanel, choiceButtonPanel;
-    private  JLabel titleNameLabel, playerPanelLabel, hpLabel, hpLabelNumber, inventoryLabel, inventoryLabelName, itemLabel, locationNameLabel;
+    private  JPanel titleNamePanel, startButtonPanel, backGroundStoryButtonPanel, mainTextPanel, choiceButtonPanel, playerPanel, backGroundStoryPanel, playerStats, itemPanel, itemButtonPanel;
+    private  JLabel titleNameLabel, playerPanelLabel, hpLabel, hpLabelNumber, inventoryLabel, inventoryLabelName, itemPanelLabel, locationNameLabel;
     private  JProgressBar progressBar, progressBarHealth, progressBarOxygen;
     private  Font titleFont = new Font("Times New Roman", Font.PLAIN, 90);
     private Font menuLabelFont = new Font("Dialog", Font.BOLD, 20);
@@ -87,6 +87,8 @@ public class GameFrame extends JFrame {
         createButtonPanel();
 
         createPlayerPanel();
+
+        createItemPanel();
 
 //        createPlayerStats();
 
