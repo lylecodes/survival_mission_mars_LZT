@@ -6,15 +6,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Collection;
 
 public class GameFrame extends JFrame {
     private  Container gameContainer;
-    private  JPanel titleNamePanel, startButtonPanel, backGroundStoryButtonPanel, mainTextPanel, itemPanel, choiceButtonPanel, playerPanel, backGroundStoryPanel;
+    private  JPanel titleNamePanel, startButtonPanel, backGroundStoryButtonPanel, mainTextPanel, itemPanel, itemButtonPanel, choiceButtonPanel, playerPanel, backGroundStoryPanel;
     private  JLabel titleNameLabel, playerPanelLabel, hpLabel, hpLabelNumber, itemPanelLabel, inventoryLabel, inventoryLabelName, locationNameLabel;
     private  Font titleFont = new Font("Times New Roman", Font.PLAIN, 90);
     private Font menuLabelFont = new Font("Dialog", Font.BOLD, 20);
     private  Font normalFont = new Font("Times New Roman", Font.PLAIN, 28);
-    private  JButton startButton, backGroundStoryButton, choiceButton, choiceButton1, choiceButton2, choiceButton3, choiceButton4;
+    private Font itemButtonFont = new Font("Times New Roman", Font.PLAIN, 18);
+    private  JButton startButton, backGroundStoryButton, choiceButton, choiceButton1, choiceButton2, choiceButton3, choiceButton4, itemButton, itemButton1, itemButton2, itemButton3, itemButton4;
     private  JTextArea mainTextArea, backGroundTextArea;
     private  int playerHP, airdamageHP, silverRing;
     private  String inventory, position;
@@ -22,6 +24,7 @@ public class GameFrame extends JFrame {
     private  ChoiceHandler choiceHandler = new ChoiceHandler();
 
     private JButton[] choiceButtons;
+    private JButton[] itemButtons;
 
     public GameFrame(){
         // added 200 to width and height
@@ -99,7 +102,6 @@ public class GameFrame extends JFrame {
     }
 
     private void createMainTextArea(){
-        createLocationNameLabel();
         mainTextArea = new JTextArea("");
         mainTextArea.setBounds(100, 100, 600, 250);
         mainTextArea.setBackground(Color.black);
@@ -155,10 +157,12 @@ public class GameFrame extends JFrame {
             choiceButtons[buttonIdx].setVisible(false);
             buttonIdx++;
         }
+
+        setItemInfo(location.getItemNames());
     }
 
-    public void addDirectionChoiceButtonListeners(ActionListener listener) {
-        for (var button : choiceButtons) {
+    public void setDirectionChoiceButtonListeners(ActionListener listener) {
+        for (JButton button : choiceButtons) {
             button.addActionListener(listener);
         }
     }
@@ -171,6 +175,14 @@ public class GameFrame extends JFrame {
         choiceButton.addActionListener(choiceHandler);
         choiceButton.setActionCommand(actionCommandName);
         return choiceButton;
+    }
+
+    private JButton newItemButton() {
+        itemButton = new JButton();
+        itemButton.setFont(itemButtonFont);
+        itemButton.setFocusPainted(false);
+        itemButton.setPreferredSize(new Dimension(175, 30));
+        return itemButton;
     }
 
     private void createPlayerPanel() {
@@ -196,14 +208,58 @@ public class GameFrame extends JFrame {
     private void createItemPanel() {
         itemPanel = new JPanel();
         itemPanel.setBackground(Color.RED);
-        itemPanel.setBounds(25, 175, 150, 300);
-        itemPanel.setLayout(new GridLayout(4, 1));
+        itemPanel.setBounds(12, 200, 175, 150);
         itemPanelLabel = new JLabel("Items seen:");
         itemPanelLabel.setFont(menuLabelFont);
         itemPanelLabel.setHorizontalAlignment(JLabel.CENTER);
-
+//        itemPanelLabel.setSize(100, 10);
         itemPanel.add(itemPanelLabel);
+
+        createItemButtonPanel();
+
         gameContainer.add(itemPanel);
+    }
+
+    private void createItemButtonPanel(){
+        itemButtonPanel = new JPanel();
+        itemButtonPanel.setBounds(350, 450, 300, 300);
+        itemButtonPanel.setBackground(Color.MAGENTA);
+        itemButtonPanel.setLayout(new GridLayout(4, 1));
+
+        itemButton1 = newItemButton();
+        itemButton2 = newItemButton();
+        itemButton3 = newItemButton();
+        itemButton4 = newItemButton();
+
+        itemButtonPanel.add(itemButton1);
+        itemButtonPanel.add(itemButton2);
+        itemButtonPanel.add(itemButton3);
+        itemButtonPanel.add(itemButton4);
+
+        itemPanel.add(itemButtonPanel);
+
+        itemButtons = new JButton[] {itemButton1, itemButton2, itemButton3, itemButton4};
+    }
+
+    private void setItemInfo(Collection<String> itemNames) {
+        int buttonIdx = 0;
+
+        for (String itemName : itemNames) {
+            itemButtons[buttonIdx].setText(itemName);
+            itemButtons[buttonIdx].setVisible(true);
+            buttonIdx++;
+        }
+
+        while (buttonIdx < itemButtons.length) {
+            itemButtons[buttonIdx].setVisible(false);
+            buttonIdx++;
+        }
+    }
+
+    public void setItemButtonListeners(ActionListener l) {
+        for (JButton button : itemButtons) {
+            button.addActionListener(l);
+        }
     }
 
     private JLabel newPlayerPanelLabels(String labelName){
