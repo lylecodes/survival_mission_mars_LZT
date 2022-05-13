@@ -10,9 +10,9 @@ import java.awt.event.ActionListener;
 public class GameFrame extends JFrame {
     private  Container gameContainer;
     private  JPanel titleNamePanel, startButtonPanel, backGroundStoryButtonPanel, mainTextPanel, itemPanel, choiceButtonPanel, playerPanel, backGroundStoryPanel;
-    private  JLabel titleNameLabel, playerPanelLabel, hpLabel, hpLabelNumber, itemLabel, inventoryLabel, inventoryLabelName, locationNameLabel;
+    private  JLabel titleNameLabel, playerPanelLabel, hpLabel, hpLabelNumber, itemPanelLabel, inventoryLabel, inventoryLabelName, locationNameLabel;
     private  Font titleFont = new Font("Times New Roman", Font.PLAIN, 90);
-    private Font locationNameFont = new Font("Dialog", Font.BOLD, 20);
+    private Font menuLabelFont = new Font("Dialog", Font.BOLD, 20);
     private  Font normalFont = new Font("Times New Roman", Font.PLAIN, 28);
     private  JButton startButton, backGroundStoryButton, choiceButton, choiceButton1, choiceButton2, choiceButton3, choiceButton4;
     private  JTextArea mainTextArea, backGroundTextArea;
@@ -89,7 +89,8 @@ public class GameFrame extends JFrame {
 
     private void createMainTextPanel(){
         mainTextPanel = new JPanel();
-        mainTextPanel.setBounds(100, 100, 600, 250);
+        // added 100 to x and y
+        mainTextPanel.setBounds(200, 200, 600, 250);
         mainTextPanel.setBackground(Color.GREEN);
         gameContainer.add(mainTextPanel);
 
@@ -110,13 +111,14 @@ public class GameFrame extends JFrame {
 
     private void createLocationNameLabel() {
         locationNameLabel = new JLabel();
-        locationNameLabel.setFont(locationNameFont);
+        locationNameLabel.setFont(menuLabelFont);
         mainTextPanel.add(locationNameLabel);
     }
 
     private void createButtonPanel(){
         choiceButtonPanel = new JPanel();
-        choiceButtonPanel.setBounds(250, 350, 300, 150);
+        // added 100 to x and y
+        choiceButtonPanel.setBounds(350, 450, 300, 150);
         choiceButtonPanel.setBackground(Color.BLACK);
         choiceButtonPanel.setLayout(new GridLayout(4, 1));
         gameContainer.add(choiceButtonPanel);
@@ -194,10 +196,13 @@ public class GameFrame extends JFrame {
     private void createItemPanel() {
         itemPanel = new JPanel();
         itemPanel.setBackground(Color.RED);
-        itemPanel.setBounds(0, 350, 300, 150);
+        itemPanel.setBounds(25, 175, 150, 300);
         itemPanel.setLayout(new GridLayout(4, 1));
-        itemLabel = new JLabel("Items seen:");
+        itemPanelLabel = new JLabel("Items seen:");
+        itemPanelLabel.setFont(menuLabelFont);
+        itemPanelLabel.setHorizontalAlignment(JLabel.CENTER);
 
+        itemPanel.add(itemPanelLabel);
         gameContainer.add(itemPanel);
     }
 
