@@ -9,8 +9,8 @@ import java.awt.event.ActionListener;
 
 public class GameFrame extends JFrame {
     private  Container gameContainer;
-    private  JPanel titleNamePanel, startButtonPanel, backGroundStoryButtonPanel, mainTextPanel, choiceButtonPanel, playerPanel, backGroundStoryPanel;
-    private  JLabel titleNameLabel, playerPanelLabel, hpLabel, hpLabelNumber, inventoryLabel, inventoryLabelName, locationNameLabel;
+    private  JPanel titleNamePanel, startButtonPanel, backGroundStoryButtonPanel, mainTextPanel, itemPanel, choiceButtonPanel, playerPanel, backGroundStoryPanel;
+    private  JLabel titleNameLabel, playerPanelLabel, hpLabel, hpLabelNumber, itemLabel, inventoryLabel, inventoryLabelName, locationNameLabel;
     private  Font titleFont = new Font("Times New Roman", Font.PLAIN, 90);
     private Font locationNameFont = new Font("Dialog", Font.BOLD, 20);
     private  Font normalFont = new Font("Times New Roman", Font.PLAIN, 28);
@@ -24,7 +24,8 @@ public class GameFrame extends JFrame {
     private JButton[] choiceButtons;
 
     public GameFrame(){
-        setSize(800, 600);
+        // added 200 to width and height
+        setSize(1000, 800);
         getContentPane().setBackground(Color.BLACK);
         setLayout(null);
 
@@ -81,14 +82,15 @@ public class GameFrame extends JFrame {
 
         createPlayerPanel();
 
+        createItemPanel();
+
         playerSetup();
-        
     }
 
     private void createMainTextPanel(){
         mainTextPanel = new JPanel();
         mainTextPanel.setBounds(100, 100, 600, 250);
-        mainTextPanel.setBackground(Color.BLACK);
+        mainTextPanel.setBackground(Color.GREEN);
         gameContainer.add(mainTextPanel);
 
         createLocationNameLabel();
@@ -187,6 +189,16 @@ public class GameFrame extends JFrame {
         playerPanel.add(hpLabelNumber);
         playerPanel.add(inventoryLabel);
         playerPanel.add(inventoryLabelName);
+    }
+
+    private void createItemPanel() {
+        itemPanel = new JPanel();
+        itemPanel.setBackground(Color.RED);
+        itemPanel.setBounds(0, 350, 300, 150);
+        itemPanel.setLayout(new GridLayout(4, 1));
+        itemLabel = new JLabel("Items seen:");
+
+        gameContainer.add(itemPanel);
     }
 
     private JLabel newPlayerPanelLabels(String labelName){
