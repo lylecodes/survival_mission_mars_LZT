@@ -1,5 +1,6 @@
 package com.mars.gui.alt;
 
+import com.mars.objects.Inventory;
 import com.mars.objects.Location;
 
 import javax.swing.*;
@@ -8,9 +9,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GameFrame extends JFrame {
+
     private  Container gameContainer;
-    private  JPanel titleNamePanel, startButtonPanel, backGroundStoryButtonPanel, mainTextPanel, itemPanel, choiceButtonPanel, playerPanel, backGroundStoryPanel;
-    private  JLabel titleNameLabel, playerPanelLabel, hpLabel, hpLabelNumber, itemLabel, inventoryLabel, inventoryLabelName, locationNameLabel;
+    private  JPanel titleNamePanel, startButtonPanel, backGroundStoryButtonPanel, mainTextPanel, choiceButtonPanel, playerPanel, backGroundStoryPanel, playerStats itemPanel, choiceButtonPanel;
+    private  JLabel titleNameLabel, playerPanelLabel, hpLabel, hpLabelNumber, inventoryLabel, inventoryLabelName, itemLabel, locationNameLabel;
+    private  JProgressBar progressBar, progressBarHealth, progressBarOxygen;
     private  Font titleFont = new Font("Times New Roman", Font.PLAIN, 90);
     private Font locationNameFont = new Font("Dialog", Font.BOLD, 20);
     private  Font normalFont = new Font("Times New Roman", Font.PLAIN, 28);
@@ -82,9 +85,10 @@ public class GameFrame extends JFrame {
 
         createPlayerPanel();
 
-        createItemPanel();
+//        createPlayerStats();
 
-        playerSetup();
+//        playerSetup();
+        
     }
 
     private void createMainTextPanel(){
@@ -172,23 +176,33 @@ public class GameFrame extends JFrame {
     }
 
     private void createPlayerPanel() {
+        // Colors the progress bar green
+        UIManager.put("ProgressBar.selectionForeground", Color.GREEN);
+
         playerPanel = new JPanel();
-        playerPanel.setBounds(100, 15, 600, 50);
+        playerPanel.setBounds(100, 15, 700, 70);
         playerPanel.setBackground(Color.BLACK);
-        playerPanel.setLayout(new GridLayout(1, 4));
+        playerPanel.setLayout(new GridLayout(3, 2));
         gameContainer.add(playerPanel);
 
         hpLabel = newPlayerPanelLabels("HP: ");
-        hpLabelNumber = newPlayerPanelLabels("");
+        progressBarHealth = newJProgressBar(0,100, 100);
         inventoryLabel = newPlayerPanelLabels("Inventory: ");
-        inventoryLabelName = newPlayerPanelLabels("");
-        JLabel timeLabel = newPlayerPanelLabels("Time: ");
-        JLabel timeLabelName = newPlayerPanelLabels("");
+        inventoryLabelName = newPlayerPanelLabels(" ");
+        JLabel timeLabel = newPlayerPanelLabels("Time: 5:00");
+        JLabel oxygenLabel = newPlayerPanelLabels("Oxygen: ");
+        progressBarOxygen = newJProgressBar(0,100, 100);
 
+//        Labels
         playerPanel.add(hpLabel);
-        playerPanel.add(hpLabelNumber);
+        playerPanel.add(oxygenLabel);
+
+        playerPanel.add(progressBarHealth);
+        playerPanel.add(progressBarOxygen);
+
+        playerPanel.add(timeLabel);
         playerPanel.add(inventoryLabel);
-        playerPanel.add(inventoryLabelName);
+
     }
 
     private void createItemPanel() {
@@ -209,13 +223,21 @@ public class GameFrame extends JFrame {
         return playerPanelLabel;
     }
 
-    private void playerSetup() {
-        playerHP = 100;
-        airdamageHP = 20;
-        inventory = "key";
+    private JProgressBar newJProgressBar(int min, int max, int currentHealth){
+        progressBar = new JProgressBar(min, max);
+        progressBar.setStringPainted(true);
+        progressBar.setValue(currentHealth);
+        return progressBar;
+    }
+
+
+
+    public void playerSetup(Integer hp, Integer oxygen, String inventory) {
         inventoryLabelName.setText(inventory);
-        hpLabelNumber.setText("" + playerHP);
-        solarPanel();
+        progressBarHealth.setValue(hp);
+        progressBarOxygen.setValue(oxygen);
+
+//        solarPanel();
     }
 
     public void createIntroScreen(){
