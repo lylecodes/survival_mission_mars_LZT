@@ -1,0 +1,137 @@
+[
+  {
+    "location": {
+      "name": "Docking Station",
+      "directions": {
+        "east": "Green House",
+        "south": "Hydro"
+      },
+      "description":"Your space craft is docked and you see the remains of an old abandoned outpost.",
+      "puzzle" : "false",
+      "items" : {
+        "mealkit": "single use emergency meal",
+        "useless_tool": "a useless old rusty metal tool"
+      },
+      "oxygen": "false",
+      "asciiArt": "url"
+    }
+  },
+  {
+    "location": {
+      "name": "Hydro",
+      "directions": {
+        "north": "Docking Station",
+        "east": "Reactor"
+      },
+      "description":"It appears to be an old hydro station-an essential part of restoring water to the outpost.\n There appears to be a helpful placard on the tank.",
+      "puzzle" : "true",
+      "items" : {
+        "flashlight" : "a useful light source",
+        "batteries" : "a pack of AA batteries"
+      },
+      "oxygen": "true",
+      "asciiArt": "url"
+    }
+  },
+  {
+    "location": {
+      "name": "Reactor",
+      "directions": {
+        "west": "Hydro",
+        "south" : "Solar Plant"
+      },
+      "description":"A large room full of multiple screens, buttons and levers. The main power source for the outpost.",
+      "puzzle" : "true",
+      "items" : {
+        "seeds" : "a small packet of garden vegetable seeds",
+        "deck_of_cards" : " a box of playing cards"
+      },
+      "oxygen": "false",
+      "asciiArt": "url"
+    }
+  },
+  {
+    "location": {
+      "name": "Solar Plant",
+      "directions": {
+        "north": "Reactor"
+      },
+      "description":"a large field of solar panels still intact.",
+      "puzzle" : "true",
+      "items" : {
+        "calculator" : "a TI83 graphing calculator",
+        "compass" : "not the map kind the math kind"
+      },
+      "oxygen": "false",
+      "asciiArt": "url"
+    }
+  },
+  {
+    "location": {
+      "name": "Green House",
+      "directions": {
+        "west": "Docking Station",
+        "east": "Kitchen"
+      },
+      "description":"A warm, glass-enclosed room with row after row of grow lights. Soil bags sit in the corner awaiting use.",
+      "puzzle" : "true",
+      "items" : {
+        "water_level_probe" : "used for testing moisture levels",
+        "ph_meter" : "useful for water or soil pH"
+      },
+      "oxygen": "false",
+      "asciiArt": "url"
+    }
+  },
+  {
+    "location": {
+      "name": "Kitchen",
+      "directions": {
+        "west": "Green House",
+        "south": "Gym"
+      },
+      "description":"An uncomplicated room with a mini fridge and a center island for prep space. This is where the snacks happen!",
+      "puzzle" : "false",
+      "items" : {
+        "air_fryer" : "only the fanciest appliances for NASA's finest",
+        "freeze_dried_ice_cream" : "almost as good as the real thing"
+      },
+      "oxygen": "false",
+      "asciiArt": "url"
+    }
+  },
+  {
+    "location": {
+      "name": "Gym",
+      "directions":{
+        "north": "Kitchen",
+        "east": "SQ"
+      },
+      "description":"Where the gainz happen.",
+      "puzzle" : "false",
+      "items" : {
+        "chuck_taylors" : "classic all-American high tops",
+        "protein_powder" : "the most important macro nutrient"
+      },
+      "oxygen": "false",
+      "asciiArt": "url"
+    }
+  },
+  {
+    "location": {
+      "name": "SQ",
+      "directions": {
+        "west": "Gym"
+      },
+      "description":"A quiet, dark, enclosed room. Bunk beds line the walls.",
+      "puzzle" : "false",
+      "items" : {
+        "alarm_clock" : "simple time keeper to help kep you on track",
+        "sleeping_mask" : "for your beauty sleep",
+        "r_key": "a bit rusty but looks like it may fit in the reactor"
+      },
+      "oxygen": "false",
+      "asciiArt": "url"
+    }
+  }
+]
