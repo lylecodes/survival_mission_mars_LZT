@@ -35,14 +35,14 @@ public class GameController {
         gui.setTitleScreenHandler(new TitleScreenHandler());
     }
 
-    public class TitleScreenHandler implements ActionListener {
+    class TitleScreenHandler implements ActionListener {
         public void actionPerformed(ActionEvent event) {
             gui.createIntroScreen();
             gui.setIntroScreenHandler(new IntroScreenHandler());
         }
     }
 
-    public class IntroScreenHandler implements ActionListener {
+    class IntroScreenHandler implements ActionListener {
         public void actionPerformed(ActionEvent event){
             gui.createGameScreen();
             gui.addDirectionChoiceButtonListeners(new GameScreenHandler());
@@ -50,7 +50,7 @@ public class GameController {
         }
     }
 
-    public class GameScreenHandler implements ActionListener {
+    class GameScreenHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             allPuzzlesCompleted();
             // get text input from field
@@ -63,7 +63,7 @@ public class GameController {
         }
     }
 
-    public boolean allPuzzlesCompleted() {
+    boolean allPuzzlesCompleted() {
         return true;
     }
 }
