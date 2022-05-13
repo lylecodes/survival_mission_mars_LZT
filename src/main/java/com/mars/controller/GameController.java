@@ -1,12 +1,14 @@
 package com.mars.controller;
 
 import com.mars.gui.GameGui;
+import com.mars.gui.alt.GameFrame;
 import com.mars.objects.Location;
 import com.mars.stats.Stats;
 import com.mars.util.CommandProcessor;
 import com.mars.util.JSONHandler;
 import com.mars.util.TextParser;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
@@ -17,25 +19,51 @@ public class GameController {
     private final JSONHandler jsonhandler = new JSONHandler();
     private final Map<String, Location> locationMap = jsonhandler.loadLocationMap();
     private final Stats playerStats = new Stats();
-    private final GameGui gui = GameGui.getINSTANCE();
+    private final GameFrame gui;
+    private Location currentLocation;
+
+    // Puzzles
     private boolean isGhSolved = false;
     private boolean isHydroSolved = false;
     private boolean isReactorSolved = false;
     private boolean isSolarSolved = false;
-    Location currentLocation;          // setting game start location on Map
 
-    public GameController() {
+    public GameController(GameFrame gui) {
+        System.out.println("hello");
+        this.gui = gui;
         this.currentLocation = locationMap.get("Docking Station");
-        // add initial listeners to view
-        // load current location
+        gui.setTitleScreenHandler(new TitleScreenHandler());
     }
 
-    class GameInputListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            // get text input from field
-            // send to command parser, which returns next room str
-            // get next location from location map
-            // pass room info to view and trigger update
+    public class TitleScreenHandler implements ActionListener {
+        public void actionPerformed(ActionEvent event) {
+            gui.createIntroScreen();
+            gui.setIntroScreenHandler(new IntroScreenHandler());
         }
+    }
+
+    public class IntroScreenHandler implements ActionListener {
+        public void actionPerformed(ActionEvent event){
+            gui.createGameScreen();
+            gui.addDirectionChoiceButtonListeners(new GameScreenHandler());
+            gui.setLocationInfo(currentLocation);
+        }
+    }
+
+    public class GameScreenHandler implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            allPuzzlesCompleted();
+            // get text input from field
+            String choice = ((JButton) e.getSource()).getText();
+            String direction = choice.split(" ")[1];
+            String nextRoomName = currentLocation.getDirections().get(direction);
+            currentLocation = locationMap.get(nextRoomName);
+            // use command parser?
+            gui.setLocationInfo(currentLocation);
+        }
+    }
+
+    public boolean allPuzzlesCompleted() {
+        return true;
     }
 }
