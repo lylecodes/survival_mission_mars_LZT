@@ -31,7 +31,6 @@ public class GameController {
     private boolean isSolarSolved = false;
 
     public GameController(GameFrame gui) {
-        System.out.println("hello");
         this.gui = gui;
         this.currentLocation = locationMap.get("Docking Station");
         gui.setTitleScreenHandler(new TitleScreenHandler());
@@ -51,7 +50,8 @@ public class GameController {
         public void actionPerformed(ActionEvent event){
             System.out.println("hello2");
             gui.createGameScreen();
-            gui.addDirectionChoiceButtonListeners(new GameScreenHandler());
+            gui.setDirectionChoiceButtonListeners(new GameScreenHandler());
+            gui.setItemButtonListeners(new ItemButtonHandler());
             gui.setLocationInfo(currentLocation);
 
         }
@@ -75,6 +75,13 @@ public class GameController {
 //            gui.playerSetup(playerStats.getStats().get("Health"));
 
 
+        }
+    }
+
+    class ItemButtonHandler implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            String itemName = ((JButton) e.getSource()).getText();
+            System.out.println(itemName + " added to inventory");
         }
     }
 
