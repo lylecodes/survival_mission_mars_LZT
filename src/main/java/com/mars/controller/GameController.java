@@ -37,6 +37,7 @@ public class GameController {
         gui.setTitleScreenHandler(new TitleScreenHandler());
     }
 
+    // Title Screen stuff
     class TitleScreenHandler implements ActionListener {
         public void actionPerformed(ActionEvent event) {
             System.out.println("hello1");
@@ -45,6 +46,7 @@ public class GameController {
         }
     }
 
+    // Intro Screen stuff
     class IntroScreenHandler implements ActionListener {
         public void actionPerformed(ActionEvent event){
             System.out.println("hello2");
@@ -55,6 +57,7 @@ public class GameController {
         }
     }
 
+    // Game Screen stuff
     class GameScreenHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             System.out.println("hello3");
