@@ -2,6 +2,7 @@ package com.mars.controller;
 
 import com.mars.gui.GameGui;
 import com.mars.gui.alt.GameFrame;
+import com.mars.objects.Inventory;
 import com.mars.objects.Location;
 import com.mars.stats.Stats;
 import com.mars.util.CommandProcessor;
@@ -21,6 +22,7 @@ public class GameController {
     private final Stats playerStats = new Stats();
     private final GameFrame gui;
     private Location currentLocation;
+    private Inventory inventory = Inventory.getInstance();
 
     // Puzzles
     private boolean isGhSolved = false;
@@ -37,6 +39,7 @@ public class GameController {
 
     class TitleScreenHandler implements ActionListener {
         public void actionPerformed(ActionEvent event) {
+            System.out.println("hello1");
             gui.createIntroScreen();
             gui.setIntroScreenHandler(new IntroScreenHandler());
         }
@@ -44,14 +47,17 @@ public class GameController {
 
     class IntroScreenHandler implements ActionListener {
         public void actionPerformed(ActionEvent event){
+            System.out.println("hello2");
             gui.createGameScreen();
             gui.addDirectionChoiceButtonListeners(new GameScreenHandler());
             gui.setLocationInfo(currentLocation);
+
         }
     }
 
     class GameScreenHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
+            System.out.println("hello3");
             allPuzzlesCompleted();
             // get text input from field
             String choice = ((JButton) e.getSource()).getText();
@@ -60,6 +66,12 @@ public class GameController {
             currentLocation = locationMap.get(nextRoomName);
             // use command parser?
             gui.setLocationInfo(currentLocation);
+
+            //add User Stats
+            gui.playerSetup(playerStats.getStats().get("Health"),90,inventory.getInventory().toString());
+//            gui.playerSetup(playerStats.getStats().get("Health"));
+
+
         }
     }
 
