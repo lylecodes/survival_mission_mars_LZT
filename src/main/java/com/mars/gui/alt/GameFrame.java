@@ -2,17 +2,19 @@ package com.mars.gui.alt;
 
 import com.mars.objects.Inventory;
 import com.mars.objects.Location;
+import com.mars.util.ResourceUtils;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.util.Collection;
 
 public class GameFrame extends JFrame {
 
     private  Container gameContainer;
-    private  JPanel titleNamePanel, startButtonPanel, backGroundStoryButtonPanel, mainTextPanel, choiceButtonPanel, playerPanel, backGroundStoryPanel, playerStats, itemPanel, itemButtonPanel;
+    private  JPanel titleNamePanel, startButtonPanel, backGroundStoryButtonPanel, mainTextPanel, choiceButtonPanel, playerPanel, backGroundStoryPanel, playerStats, itemPanel, itemButtonPanel, inventoryLogoPanel;
     private  JLabel titleNameLabel, playerPanelLabel, hpLabel, hpLabelNumber, inventoryLabel, inventoryLabelName, itemPanelLabel, locationNameLabel;
     private  JProgressBar progressBar, progressBarHealth, progressBarOxygen;
     private  Font titleFont = new Font("Times New Roman", Font.PLAIN, 90);
@@ -89,6 +91,8 @@ public class GameFrame extends JFrame {
         createPlayerPanel();
 
         createItemPanel();
+
+        createInventoryLogoPanel();
 
 //        createPlayerStats();
 
@@ -178,7 +182,7 @@ public class GameFrame extends JFrame {
         choiceButton.setForeground(Color.BLACK);
         choiceButton.setFont(normalFont);
         choiceButton.setFocusPainted(false);
-        choiceButton.addActionListener(choiceHandler);
+//        choiceButton.addActionListener(choiceHandler);
         choiceButton.setActionCommand(actionCommandName);
         return choiceButton;
     }
@@ -189,36 +193,6 @@ public class GameFrame extends JFrame {
         itemButton.setFocusPainted(false);
         itemButton.setPreferredSize(new Dimension(175, 30));
         return itemButton;
-    }
-
-    private void createPlayerPanel() {
-        // Colors the progress bar green
-        UIManager.put("ProgressBar.selectionForeground", Color.GREEN);
-
-        playerPanel = new JPanel();
-        playerPanel.setBounds(100, 15, 700, 70);
-        playerPanel.setBackground(Color.BLACK);
-        playerPanel.setLayout(new GridLayout(3, 2));
-        gameContainer.add(playerPanel);
-
-        hpLabel = newPlayerPanelLabels("HP: ");
-        progressBarHealth = newJProgressBar(0,100, 100);
-        inventoryLabel = newPlayerPanelLabels("Inventory: ");
-        inventoryLabelName = newPlayerPanelLabels(" ");
-        JLabel timeLabel = newPlayerPanelLabels("Time: 5:00");
-        JLabel oxygenLabel = newPlayerPanelLabels("Oxygen: ");
-        progressBarOxygen = newJProgressBar(0,100, 100);
-
-//        Labels
-        playerPanel.add(hpLabel);
-        playerPanel.add(oxygenLabel);
-
-        playerPanel.add(progressBarHealth);
-        playerPanel.add(progressBarOxygen);
-
-        playerPanel.add(timeLabel);
-        playerPanel.add(inventoryLabel);
-
     }
 
     private void createItemPanel() {
@@ -278,6 +252,36 @@ public class GameFrame extends JFrame {
         }
     }
 
+    private void createPlayerPanel() {
+        // Colors the progress bar green
+        UIManager.put("ProgressBar.selectionForeground", Color.GREEN);
+
+        playerPanel = new JPanel();
+        playerPanel.setBounds(100, 15, 700, 70);
+        playerPanel.setBackground(Color.BLACK);
+        playerPanel.setLayout(new GridLayout(3, 2));
+        gameContainer.add(playerPanel);
+
+        hpLabel = newPlayerPanelLabels("HP: ");
+        progressBarHealth = newJProgressBar(0,100, 100);
+        inventoryLabel = newPlayerPanelLabels("Inventory: ");
+        inventoryLabelName = newPlayerPanelLabels(" ");
+        JLabel timeLabel = newPlayerPanelLabels("Time: 5:00");
+        JLabel oxygenLabel = newPlayerPanelLabels("Oxygen: ");
+        progressBarOxygen = newJProgressBar(0,100, 100);
+
+//        Labels
+        playerPanel.add(hpLabel);
+        playerPanel.add(oxygenLabel);
+
+        playerPanel.add(progressBarHealth);
+        playerPanel.add(progressBarOxygen);
+
+        playerPanel.add(timeLabel);
+        playerPanel.add(inventoryLabel);
+
+    }
+
     private JLabel newPlayerPanelLabels(String labelName){
         playerPanelLabel = new JLabel(labelName);
         playerPanelLabel.setText(labelName);
@@ -301,6 +305,21 @@ public class GameFrame extends JFrame {
         progressBarOxygen.setValue(oxygen);
 
 //        solarPanel();
+    }
+
+    private void createInventoryLogoPanel() {
+//        inventoryLogoPanel = new JPanel() {{
+//            setBackground(Color.blue);
+//            setSize(10, 10);
+//        }};
+        JLabel inventoryLogoLabel = new JLabel() {{
+            setSize(50, 50);
+        }};
+        ImageIcon imageIcon =
+                ResourceUtils.getImageIconScaledToLabelSize("images/backpack.png", inventoryLogoLabel);
+        inventoryLogoLabel.setIcon(imageIcon);
+        inventoryLogoLabel.setBackground(Color.ORANGE);
+//        mainTextPanel.add(inventoryLogoLabel);
     }
 
     public void createIntroScreen(){
