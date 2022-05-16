@@ -92,7 +92,7 @@ public class GameFrame extends JFrame {
 
         createItemPanel();
 
-        createInventoryLogoPanel();
+        createInventoryLogoLabel();
 
 //        createPlayerStats();
 
@@ -307,7 +307,7 @@ public class GameFrame extends JFrame {
 //        solarPanel();
     }
 
-    private void createInventoryLogoPanel() {
+    private void createInventoryLogoLabel() {
 //        inventoryLogoPanel = new JPanel() {{
 //            setBackground(Color.blue);
 //            setSize(10, 10);
