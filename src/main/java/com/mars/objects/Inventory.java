@@ -9,12 +9,14 @@ public class Inventory {
     private Inventory(){
         inventory = new ArrayList<>();
     }
+
     public static Inventory getInstance(){
         if(single_instance == null){
             single_instance = new Inventory();
         }
         return single_instance;
     }
+
     public void add(Item item){
         inventory.add(item);
     }
