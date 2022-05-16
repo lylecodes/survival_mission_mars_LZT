@@ -4,6 +4,7 @@ import com.mars.gui.alt.GameFrame;
 import com.mars.objects.Inventory;
 import com.mars.objects.Item;
 import com.mars.objects.Location;
+import com.mars.puzzle.Puzzle;
 import com.mars.stats.Stats;
 import com.mars.util.CommandProcessor;
 import com.mars.util.JSONHandler;
@@ -60,6 +61,7 @@ public class GameController {
                     inventory.getInventory().toString()
             );
             gui.setDirectionChoiceButtonListeners(new GameScreenHandler());
+            gui.setChallengeButtonListeners(new PuzzleButtonHandler());
             gui.setItemButtonListeners(new ItemButtonHandler());
             gui.setInventoryListener(new InventoryButtonHandler());
 
@@ -111,6 +113,16 @@ public class GameController {
         public void actionPerformed(ActionEvent e) {
             String inventoryName = ((JButton) e.getSource()).getText();
             System.out.println(inventoryName + " trying to use item");
+        }
+    }
+
+    class PuzzleButtonHandler implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            Puzzle puzzle = currentLocation.getTypePuzzle();
+
+
+
+            System.out.println("Puzzle button clicked!");
         }
     }
 

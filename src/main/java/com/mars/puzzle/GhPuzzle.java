@@ -1,17 +1,19 @@
 package com.mars.puzzle;
 
 import com.mars.display.Display;
+import com.mars.util.JSONHandler;
 
 import java.util.Scanner;
 
 public class GhPuzzle implements Puzzle{
     //fields
+    String name = "GhPuzzle";
     boolean isSolved = false;
     Display display = new Display();
 
     @Override
-    public void showIntro() {
-        display.displayText("text/greenHouseIntro.txt"); //display the GH intro
+    public String showIntro() {
+        return JSONHandler.getFileContentAsString("text/greenHouseIntro.txt"); //display the GH intro
     }
 
     @Override
@@ -23,6 +25,12 @@ public class GhPuzzle implements Puzzle{
     public boolean isSolved() { // is the challenge solved?
         return isSolved;
     }
+
+    @Override
+    public String getName() {
+        return this.name;
+    }
+
     private void greenHousePuzzle(){
         //green house specific challenge to grow food
         // Turn valve

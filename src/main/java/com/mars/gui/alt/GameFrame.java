@@ -2,14 +2,13 @@ package com.mars.gui.alt;
 
 import com.mars.objects.Inventory;
 import com.mars.objects.Location;
+import com.mars.puzzle.Puzzle;
 import com.mars.util.ResourceUtils;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.awt.image.BufferedImage;
 import java.util.Collection;
 
 public class GameFrame extends JFrame {
@@ -24,19 +23,15 @@ public class GameFrame extends JFrame {
     private Font menuLabelFont = new Font("Dialog", Font.BOLD, 20);
     private Font normalFont = new Font("Times New Roman", Font.PLAIN, 28);
     private Font itemButtonFont = new Font("Times New Roman", Font.PLAIN, 18);
-    private JButton startButton, backGroundStoryButton, choiceButton, choiceButton1, choiceButton2, choiceButton3, choiceButton4, itemButton, itemButton1, itemButton2, itemButton3, itemButton4, inventoryButton, inventoryButton1, inventoryButton2;
+    private  JButton startButton, backGroundStoryButton, choiceButton, choiceButton1, choiceButton2, choiceButton3, choiceButton4, challengeButton, itemButton, itemButton1, itemButton2, itemButton3, itemButton4, inventoryButton, inventoryButton1, inventoryButton2;
     private JTextArea mainTextArea, backGroundTextArea;
     private int playerHP, airdamageHP, silverRing;
     private String inventoryGame, position;
     private Inventory inventory = Inventory.getInstance();
-
-//    private  ChoiceHandler choiceHandler = new ChoiceHandler();
-
     private JButton[] choiceButtons;
     private JButton[] itemButtons, inventoryButtons;
 
     public GameFrame() {
-        // added 200 to width and height
         setSize(1000, 800);
         getContentPane().setBackground(Color.BLACK);
         setLayout(null);
@@ -139,18 +134,22 @@ public class GameFrame extends JFrame {
         // added 100 to x and y
         choiceButtonPanel.setBounds(350, 450, 300, 150);
         choiceButtonPanel.setBackground(Color.BLACK);
-        choiceButtonPanel.setLayout(new GridLayout(4, 1));
+        choiceButtonPanel.setLayout(new GridLayout(5, 1));
         gameContainer.add(choiceButtonPanel);
 
         choiceButton1 = newChoiceButton("Choice 1", "c1");
         choiceButton2 = newChoiceButton("Choice 2", "c2");
         choiceButton3 = newChoiceButton("Choice 3", "c3");
         choiceButton4 = newChoiceButton("Choice 4", "c4");
+        challengeButton = newChoiceButton("", "");
+        challengeButton.setFont(normalFont);
 
         choiceButtonPanel.add(choiceButton1);
         choiceButtonPanel.add(choiceButton2);
         choiceButtonPanel.add(choiceButton3);
         choiceButtonPanel.add(choiceButton4);
+        choiceButtonPanel.add(challengeButton);
+
 
         choiceButtons = new JButton[]{choiceButton1, choiceButton2, choiceButton3, choiceButton4};
     }
@@ -170,6 +169,14 @@ public class GameFrame extends JFrame {
             buttonIdx++;
         }
 
+        // add challenge button
+        if (location.getPuzzle()) {
+            challengeButton.setText("Do " + location.getTypePuzzle().getName());
+            challengeButton.setVisible(true);
+        } else {
+            challengeButton.setVisible(false);
+        }
+
         while (buttonIdx < choiceButtons.length) {
             choiceButtons[buttonIdx].setVisible(false);
             buttonIdx++;
@@ -185,12 +192,15 @@ public class GameFrame extends JFrame {
         }
     }
 
+    public void setChallengeButtonListeners(ActionListener listener) {
+        challengeButton.addActionListener(listener);
+    }
+
     private JButton newChoiceButton(String buttonName, String actionCommandName) {
         choiceButton = new JButton(buttonName);
         choiceButton.setForeground(Color.BLACK);
         choiceButton.setFont(normalFont);
         choiceButton.setFocusPainted(false);
-//        choiceButton.addActionListener(choiceHandler);
         choiceButton.setActionCommand(actionCommandName);
         return choiceButton;
     }
