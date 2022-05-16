@@ -10,6 +10,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collection;
+import javax.swing.JOptionPane;
+
 
 public class GameFrame extends JFrame {
 
@@ -17,6 +19,7 @@ public class GameFrame extends JFrame {
 
     private JPanel titleNamePanel, startButtonPanel, backGroundStoryButtonPanel, mainTextPanel, choiceButtonPanel, playerPanel, backGroundStoryPanel, playerStats, itemPanel, itemButtonPanel, invetoryPanel, inventoryButtonPanel;
     private JLabel titleNameLabel, playerPanelLabel, hpLabel, hpLabelNumber, inventoryLabel, inventoryLabelName, itemPanelLabel, locationNameLabel, invetoryPanelLabel;
+
 
     private JProgressBar progressBar, progressBarHealth, progressBarOxygen;
     private Font titleFont = new Font("Times New Roman", Font.PLAIN, 90);
@@ -349,6 +352,11 @@ public class GameFrame extends JFrame {
         }
     }
 
+    public void popUp(String errorMessage){
+        JOptionPane.showMessageDialog(gameContainer,
+                errorMessage);
+    }
+
     public void setItemButtonListeners(ActionListener l) {
         for (JButton button : itemButtons) {
             button.addActionListener(l);
@@ -361,36 +369,6 @@ public class GameFrame extends JFrame {
             button.addActionListener(k);
         }
     }
-
-//    private void createPlayerPanel() {
-//        // Colors the progress bar green
-//        UIManager.put("ProgressBar.selectionForeground", Color.GREEN);
-//
-//        playerPanel = new JPanel();
-//        playerPanel.setBounds(100, 15, 700, 70);
-//        playerPanel.setBackground(Color.BLACK);
-//        playerPanel.setLayout(new GridLayout(3, 2));
-//        gameContainer.add(playerPanel);
-//
-//        hpLabel = newPlayerPanelLabels("HP: ");
-//        progressBarHealth = newJProgressBar(0,100, 100);
-//        inventoryLabel = newPlayerPanelLabels("Inventory: ");
-//        inventoryLabelName = newPlayerPanelLabels(" ");
-//        JLabel timeLabel = newPlayerPanelLabels("Time: 5:00");
-//        JLabel oxygenLabel = newPlayerPanelLabels("Oxygen: ");
-//        progressBarOxygen = newJProgressBar(0,100, 100);
-//
-////        Labels
-//        playerPanel.add(hpLabel);
-//        playerPanel.add(oxygenLabel);
-//
-//        playerPanel.add(progressBarHealth);
-//        playerPanel.add(progressBarOxygen);
-//
-//        playerPanel.add(timeLabel);
-//        playerPanel.add(inventoryLabel);
-//
-//    }
 
     private JLabel newPlayerPanelLabels(String labelName) {
         playerPanelLabel = new JLabel(labelName);

@@ -38,8 +38,8 @@ public class GameController {
         gui.setTitleScreenHandler(new TitleScreenHandler());
 
 //        DELETE ME
-        Item key = new Item("key", "Opens Stuff");
-        inventory.add(key);
+//        Item key = new Item("key", "Opens Stuff");
+//        inventory.add(key);
     }
 
     // Title Screen stuff
@@ -92,6 +92,7 @@ public class GameController {
                     playerStats.getStats().get("Bone Density"),
                     inventory.getInventory().toString()
             );
+//            System.out.println(inventory.getInventory().size());
 //            gui.showInventoryItems((ArrayList<String>) inventory.getInventory());
         }
     }
@@ -101,12 +102,21 @@ public class GameController {
             // get item name from button click
             String itemName = ((JButton) e.getSource()).getText();
             // remove item from current location and get reference
-            Item removedItem = currentLocation.removeItem(itemName);
-            // add item to inventory
-            inventory.add(removedItem);
-            // reload location to show item is gone
-            gui.setLocationInfo(currentLocation);
-            System.out.println("Inventory: " + inventory.getInventory());
+            if (inventory.getInventory().size() <= 1){
+                System.out.println(inventory.getInventory().size());
+                Item removedItem = currentLocation.removeItem(itemName);
+                // add item to inventory
+                inventory.add(removedItem);
+                // reload location to show item is gone
+                gui.setLocationInfo(currentLocation);
+                System.out.println("Inventory: " + inventory.getInventory());
+            }
+            else {
+                System.out.println("Inventory full");
+                gui.popUp("You inventory is full");
+                gui.setLocationInfo(currentLocation);
+            }
+
         }
     }
     class InventoryButtonHandler implements ActionListener {
