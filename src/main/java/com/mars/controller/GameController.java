@@ -1,6 +1,5 @@
 package com.mars.controller;
 
-import com.mars.gui.GameGui;
 import com.mars.gui.alt.GameFrame;
 import com.mars.objects.Inventory;
 import com.mars.objects.Item;
@@ -76,10 +75,13 @@ public class GameController {
             allPuzzlesCompleted();
             // get text input from field
             String choice = ((JButton) e.getSource()).getText();
+            // get direction from input
             String direction = choice.split(" ")[1];
+            // get next location name
             String nextRoomName = currentLocation.getDirections().get(direction);
+            // set current location to next location
             currentLocation = locationMap.get(nextRoomName);
-            // use command parser?
+            // update gui with new location info
             gui.setLocationInfo(currentLocation);
 
             //add User Stats
@@ -94,8 +96,15 @@ public class GameController {
 
     class ItemButtonHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
+            // get item name from button click
             String itemName = ((JButton) e.getSource()).getText();
-            System.out.println(itemName + " added to inventory");
+            // remove item from current location and get reference
+            Item removedItem = currentLocation.removeItem(itemName);
+            // add item to inventory
+            inventory.add(removedItem);
+            // reload location to show item is gone
+            gui.setLocationInfo(currentLocation);
+            System.out.println("Inventory: " + inventory.getInventory());
         }
     }
     class InventoryButtonHandler implements ActionListener {

@@ -83,7 +83,7 @@ public class Location {
     }
 
     private int getItemIndex(String itemName){
-        int index = 0;
+        int index = -1;
         int counter = 0;
         for(Item item: items){
             if (item.getName().equals(itemName)){
