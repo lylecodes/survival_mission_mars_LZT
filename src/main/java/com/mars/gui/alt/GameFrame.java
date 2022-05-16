@@ -7,27 +7,29 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class GameFrame extends JFrame {
 
     private  Container gameContainer;
-    private  JPanel titleNamePanel, startButtonPanel, backGroundStoryButtonPanel, mainTextPanel, choiceButtonPanel, playerPanel, backGroundStoryPanel, playerStats, itemPanel, itemButtonPanel;
-    private  JLabel titleNameLabel, playerPanelLabel, hpLabel, hpLabelNumber, inventoryLabel, inventoryLabelName, itemPanelLabel, locationNameLabel;
+    private  JPanel titleNamePanel, startButtonPanel, backGroundStoryButtonPanel, mainTextPanel, choiceButtonPanel, playerPanel, backGroundStoryPanel, playerStats, itemPanel, itemButtonPanel, invetoryPanel ,inventoryButtonPanel;
+    private  JLabel titleNameLabel, playerPanelLabel, hpLabel, hpLabelNumber, inventoryLabel, inventoryLabelName, itemPanelLabel, locationNameLabel, invetoryPanelLabel;
     private  JProgressBar progressBar, progressBarHealth, progressBarOxygen;
     private  Font titleFont = new Font("Times New Roman", Font.PLAIN, 90);
     private Font menuLabelFont = new Font("Dialog", Font.BOLD, 20);
     private  Font normalFont = new Font("Times New Roman", Font.PLAIN, 28);
     private Font itemButtonFont = new Font("Times New Roman", Font.PLAIN, 18);
-    private  JButton startButton, backGroundStoryButton, choiceButton, choiceButton1, choiceButton2, choiceButton3, choiceButton4, itemButton, itemButton1, itemButton2, itemButton3, itemButton4;
+    private  JButton startButton, backGroundStoryButton, choiceButton, choiceButton1, choiceButton2, choiceButton3, choiceButton4, itemButton, itemButton1, itemButton2, itemButton3, itemButton4, inventoryButton, inventoryButton1, inventoryButton2;
     private  JTextArea mainTextArea, backGroundTextArea;
     private  int playerHP, airdamageHP, silverRing;
-    private  String inventory, position;
+    private  String inventoryGame, position;
+    private Inventory inventory = Inventory.getInstance();
     
     private  ChoiceHandler choiceHandler = new ChoiceHandler();
 
     private JButton[] choiceButtons;
-    private JButton[] itemButtons;
+    private JButton[] itemButtons, inventoryButtons;
 
     public GameFrame(){
         // added 200 to width and height
@@ -78,7 +80,7 @@ public class GameFrame extends JFrame {
         startButton.addActionListener(l);
     }
 
-    public void createGameScreen() {
+    public void createGameScreen(Integer hp, Integer oxygen, String inventory) {
         backGroundStoryPanel.setVisible(false);
         backGroundStoryButtonPanel.setVisible(false);
 
@@ -90,10 +92,12 @@ public class GameFrame extends JFrame {
 
         createItemPanel();
 
+        createInventoryPanel();
+
 //        createPlayerStats();
 
-//        playerSetup();
-        
+        playerSetup(hp, oxygen, inventory);
+
     }
 
     private void createMainTextPanel(){
@@ -165,6 +169,7 @@ public class GameFrame extends JFrame {
         }
 
         setItemInfo(location.getItemNames());
+        showInventoryItems((ArrayList<String>) inventory.getInventory());
     }
 
     public void setDirectionChoiceButtonListeners(ActionListener listener) {
@@ -191,12 +196,20 @@ public class GameFrame extends JFrame {
         return itemButton;
     }
 
+    private JButton newInventoryButton(){
+        inventoryButton = new JButton();
+        inventoryButton.setFont(itemButtonFont);
+        inventoryButton.setFocusPainted(false);
+        inventoryButton.setPreferredSize(new Dimension(175, 30));
+        return inventoryButton;
+    }
+
     private void createPlayerPanel() {
         // Colors the progress bar green
         UIManager.put("ProgressBar.selectionForeground", Color.GREEN);
 
         playerPanel = new JPanel();
-        playerPanel.setBounds(100, 15, 700, 70);
+        playerPanel.setBounds(20, 15, 600, 100);
         playerPanel.setBackground(Color.BLACK);
         playerPanel.setLayout(new GridLayout(3, 2));
         gameContainer.add(playerPanel);
@@ -204,7 +217,6 @@ public class GameFrame extends JFrame {
         hpLabel = newPlayerPanelLabels("HP: ");
         progressBarHealth = newJProgressBar(0,100, 100);
         inventoryLabel = newPlayerPanelLabels("Inventory: ");
-        inventoryLabelName = newPlayerPanelLabels(" ");
         JLabel timeLabel = newPlayerPanelLabels("Time: 5:00");
         JLabel oxygenLabel = newPlayerPanelLabels("Oxygen: ");
         progressBarOxygen = newJProgressBar(0,100, 100);
@@ -224,7 +236,7 @@ public class GameFrame extends JFrame {
     private void createItemPanel() {
         itemPanel = new JPanel();
         itemPanel.setBackground(Color.RED);
-        itemPanel.setBounds(12, 200, 175, 150);
+        itemPanel.setBounds(12, 200, 175, 100);
         itemPanelLabel = new JLabel("Items seen:");
         itemPanelLabel.setFont(menuLabelFont);
         itemPanelLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -234,6 +246,40 @@ public class GameFrame extends JFrame {
         createItemButtonPanel();
 
         gameContainer.add(itemPanel);
+    }
+
+    private void createInventoryPanel() {
+        invetoryPanel = new JPanel();
+        invetoryPanel.setBounds(630, 15, 175, 150);
+        invetoryPanel.setBackground(Color.black);
+        invetoryPanelLabel = new JLabel("use invt item: ");
+        invetoryPanelLabel.setFont(normalFont);
+        invetoryPanelLabel.setForeground(Color.white);
+        invetoryPanelLabel.setHorizontalAlignment(JLabel.CENTER);
+
+        invetoryPanel.add(invetoryPanelLabel);
+
+        createInventoryButtonPanel();
+
+        gameContainer.add(invetoryPanel);
+    }
+
+    private void createInventoryButtonPanel(){
+        inventoryButtonPanel = new JPanel();
+        inventoryButtonPanel.setBounds(350, 450, 200, 300);
+        inventoryButtonPanel.setBackground(Color.BLACK);
+        inventoryButtonPanel.setLayout(new GridLayout(4,1));
+
+        inventoryButton1 = newInventoryButton();
+        inventoryButton2 = newInventoryButton();
+
+        inventoryButtonPanel.add(inventoryButton1);
+        inventoryButtonPanel.add(inventoryButton2);
+
+        invetoryPanel.add(inventoryButtonPanel);
+
+        inventoryButtons = new JButton[] {inventoryButton1, inventoryButton2};
+
     }
 
     private void createItemButtonPanel(){
@@ -271,10 +317,29 @@ public class GameFrame extends JFrame {
             buttonIdx++;
         }
     }
+     public void showInventoryItems(ArrayList<String> list){
+        int buttonIdx = 0;
+        for (String item : list) {
+            inventoryButtons[buttonIdx].setText(item);
+            inventoryButtons[buttonIdx].setVisible(true);
+            buttonIdx++;
+        }
+
+        while (buttonIdx < inventoryButtons.length) {
+            inventoryButtons[buttonIdx].setVisible(false);
+            buttonIdx++;
+        }
+    }
 
     public void setItemButtonListeners(ActionListener l) {
         for (JButton button : itemButtons) {
             button.addActionListener(l);
+        }
+    }
+
+    public void setInventoryListener(ActionListener k){
+        for (JButton button : inventoryButtons) {
+            button.addActionListener(k);
         }
     }
 
@@ -296,7 +361,7 @@ public class GameFrame extends JFrame {
 
 
     public void playerSetup(Integer hp, Integer oxygen, String inventory) {
-        inventoryLabelName.setText(inventory);
+        inventoryLabel.setText("Inventory: " + inventory);
         progressBarHealth.setValue(hp);
         progressBarOxygen.setValue(oxygen);
 
@@ -405,8 +470,8 @@ public class GameFrame extends JFrame {
     private void east() {
         position = "east";
         mainTextArea.setText("You walked east");
-        inventory = "";
-        inventoryLabelName.setText(inventory);
+        inventoryGame = "";
+        inventoryLabelName.setText(inventoryGame);
         choiceButton1.setText("Go west");
         choiceButton2.setText("");
         choiceButton3.setText("");
@@ -436,9 +501,9 @@ public class GameFrame extends JFrame {
 
         int playerDamage = 0;
 
-        if (inventory.equals("key")) {
+        if (inventoryGame.equals("key")) {
             playerDamage = new java.util.Random().nextInt(3);
-        } else if (inventory.equals("nothing")) {
+        } else if (inventoryGame.equals("nothing")) {
             playerDamage = new java.util.Random().nextInt(12);
         }
 

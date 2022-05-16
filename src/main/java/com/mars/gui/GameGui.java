@@ -9,11 +9,11 @@ import java.awt.event.*;
 
 public class GameGui {
 
-    JTextArea text;
-    JTextArea textMap;
-    JFrame frame;
-    JTextField field;
-    String userResponse="";
+    private JTextArea text;
+    private JTextArea textMap;
+    private JFrame frame;
+    private JTextField field;
+    private String userResponse="";
 
     private GameGui(){
     }
