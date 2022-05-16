@@ -13,6 +13,7 @@ import com.mars.util.TextParser;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Map;
 
 public class GameController {
@@ -35,6 +36,10 @@ public class GameController {
         this.gui = gui;
         this.currentLocation = locationMap.get("Docking Station");
         gui.setTitleScreenHandler(new TitleScreenHandler());
+
+//        DELETE ME
+        Item key = new Item("key", "Opens Stuff");
+        inventory.add(key);
     }
 
     // Title Screen stuff
@@ -50,10 +55,16 @@ public class GameController {
     class IntroScreenHandler implements ActionListener {
         public void actionPerformed(ActionEvent event){
             System.out.println("hello2");
-            gui.createGameScreen();
+            gui.createGameScreen(
+                    playerStats.getStats().get("Health"),
+                    playerStats.getStats().get("Bone Density"),
+                    inventory.getInventory().toString()
+            );
             gui.setDirectionChoiceButtonListeners(new GameScreenHandler());
             gui.setChallengeButtonListeners(new PuzzleButtonHandler());
             gui.setItemButtonListeners(new ItemButtonHandler());
+            gui.setInventoryListener(new InventoryButtonHandler());
+
             gui.setLocationInfo(currentLocation);
 
         }
@@ -76,10 +87,12 @@ public class GameController {
             gui.setLocationInfo(currentLocation);
 
             //add User Stats
-            gui.playerSetup(playerStats.getStats().get("Health"),90,inventory.getInventory().toString());
-//            gui.playerSetup(playerStats.getStats().get("Health"));
-
-
+            gui.playerSetup(
+                    playerStats.getStats().get("Health"),
+                    playerStats.getStats().get("Bone Density"),
+                    inventory.getInventory().toString()
+            );
+//            gui.showInventoryItems((ArrayList<String>) inventory.getInventory());
         }
     }
 
@@ -94,6 +107,12 @@ public class GameController {
             // reload location to show item is gone
             gui.setLocationInfo(currentLocation);
             System.out.println("Inventory: " + inventory.getInventory());
+        }
+    }
+    class InventoryButtonHandler implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            String inventoryName = ((JButton) e.getSource()).getText();
+            System.out.println(inventoryName + " trying to use item");
         }
     }
 
