@@ -2,6 +2,7 @@ package com.mars.puzzle;
 
 import com.mars.display.Display;
 import com.mars.objects.Inventory;
+import com.mars.util.JSONHandler;
 import com.mars.util.TextParser;
 
 import java.util.List;
@@ -9,14 +10,15 @@ import java.util.Scanner;
 
 
 public class ReactorPuzzle implements Puzzle {
+    String name = "ReactorPuzzle";
     boolean isSolved = false;
     Display display = new Display();
     TextParser parser = new TextParser();
 
 
     @Override
-    public void showIntro() {
-        display.displayText("text/reactorIntro.txt");
+    public String showIntro() {
+        return JSONHandler.getFileContentAsString("text/reactorIntro.txt");
     }
 
     @Override
@@ -56,6 +58,11 @@ public class ReactorPuzzle implements Puzzle {
         else{
             System.out.println("What are you doing? You solved this game already!");
         }
+    }
+
+    @Override
+    public String getName() {
+        return this.name;
     }
 
     private void runChallenge(){

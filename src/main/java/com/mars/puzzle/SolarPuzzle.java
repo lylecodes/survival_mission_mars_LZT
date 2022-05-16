@@ -1,19 +1,21 @@
 package com.mars.puzzle;
 
 import com.mars.display.Display;
+import com.mars.util.JSONHandler;
 
 import java.util.Random;
 import java.util.Scanner;
 
 public class SolarPuzzle implements Puzzle{
+    String name = "SolarPuzzle";
     boolean isSolved = false;
     Display display = new Display();
 
 
 
     @Override // Puzzle interface
-    public void showIntro(){
-        display.displayText("text/solarIntro.txt");
+    public String showIntro(){
+        return JSONHandler.getFileContentAsString("text/solarIntro.txt");
     }
 
     private void solarPuzzle(){
@@ -53,6 +55,11 @@ public class SolarPuzzle implements Puzzle{
         //solarChallenge specific logic
 
         solarPuzzle();
+    }
+
+    @Override
+    public String getName() {
+        return this.name;
     }
 
     public boolean isSolved() {

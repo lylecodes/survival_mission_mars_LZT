@@ -4,6 +4,7 @@ import com.mars.gui.alt.GameFrame;
 import com.mars.objects.Inventory;
 import com.mars.objects.Item;
 import com.mars.objects.Location;
+import com.mars.puzzle.Puzzle;
 import com.mars.stats.Stats;
 import com.mars.util.CommandProcessor;
 import com.mars.util.JSONHandler;
@@ -51,6 +52,7 @@ public class GameController {
             System.out.println("hello2");
             gui.createGameScreen();
             gui.setDirectionChoiceButtonListeners(new GameScreenHandler());
+            gui.setChallengeButtonListeners(new PuzzleButtonHandler());
             gui.setItemButtonListeners(new ItemButtonHandler());
             gui.setLocationInfo(currentLocation);
 
@@ -92,6 +94,16 @@ public class GameController {
             // reload location to show item is gone
             gui.setLocationInfo(currentLocation);
             System.out.println("Inventory: " + inventory.getInventory());
+        }
+    }
+
+    class PuzzleButtonHandler implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            Puzzle puzzle = currentLocation.getTypePuzzle();
+
+
+
+            System.out.println("Puzzle button clicked!");
         }
     }
 
