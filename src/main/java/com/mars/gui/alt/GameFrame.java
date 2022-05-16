@@ -14,28 +14,28 @@ import java.util.Collection;
 
 public class GameFrame extends JFrame {
 
-    private  Container gameContainer;
+    private Container gameContainer;
 
-    private  JPanel titleNamePanel, startButtonPanel, backGroundStoryButtonPanel, mainTextPanel, choiceButtonPanel, playerPanel, backGroundStoryPanel, playerStats, itemPanel, itemButtonPanel, invetoryPanel ,inventoryButtonPanel;
-    private  JLabel titleNameLabel, playerPanelLabel, hpLabel, hpLabelNumber, inventoryLabel, inventoryLabelName, itemPanelLabel, locationNameLabel, invetoryPanelLabel;
+    private JPanel titleNamePanel, startButtonPanel, backGroundStoryButtonPanel, mainTextPanel, choiceButtonPanel, playerPanel, backGroundStoryPanel, playerStats, itemPanel, itemButtonPanel, invetoryPanel, inventoryButtonPanel;
+    private JLabel titleNameLabel, playerPanelLabel, hpLabel, hpLabelNumber, inventoryLabel, inventoryLabelName, itemPanelLabel, locationNameLabel, invetoryPanelLabel;
 
-    private  JProgressBar progressBar, progressBarHealth, progressBarOxygen;
-    private  Font titleFont = new Font("Times New Roman", Font.PLAIN, 90);
+    private JProgressBar progressBar, progressBarHealth, progressBarOxygen;
+    private Font titleFont = new Font("Times New Roman", Font.PLAIN, 90);
     private Font menuLabelFont = new Font("Dialog", Font.BOLD, 20);
-    private  Font normalFont = new Font("Times New Roman", Font.PLAIN, 28);
+    private Font normalFont = new Font("Times New Roman", Font.PLAIN, 28);
     private Font itemButtonFont = new Font("Times New Roman", Font.PLAIN, 18);
-    private  JButton startButton, backGroundStoryButton, choiceButton, choiceButton1, choiceButton2, choiceButton3, choiceButton4, itemButton, itemButton1, itemButton2, itemButton3, itemButton4, inventoryButton, inventoryButton1, inventoryButton2;
-    private  JTextArea mainTextArea, backGroundTextArea;
-    private  int playerHP, airdamageHP, silverRing;
-    private  String inventoryGame, position;
+    private JButton startButton, backGroundStoryButton, choiceButton, choiceButton1, choiceButton2, choiceButton3, choiceButton4, itemButton, itemButton1, itemButton2, itemButton3, itemButton4, inventoryButton, inventoryButton1, inventoryButton2;
+    private JTextArea mainTextArea, backGroundTextArea;
+    private int playerHP, airdamageHP, silverRing;
+    private String inventoryGame, position;
     private Inventory inventory = Inventory.getInstance();
-    
-    private  ChoiceHandler choiceHandler = new ChoiceHandler();
+
+//    private  ChoiceHandler choiceHandler = new ChoiceHandler();
 
     private JButton[] choiceButtons;
     private JButton[] itemButtons, inventoryButtons;
 
-    public GameFrame(){
+    public GameFrame() {
         // added 200 to width and height
         setSize(1000, 800);
         getContentPane().setBackground(Color.BLACK);
@@ -79,7 +79,7 @@ public class GameFrame extends JFrame {
         startButton.setFont(normalFont);
 //        startButton.addActionListener(titleScreenHandler);
     }
-    
+
     public void setTitleScreenHandler(ActionListener l) {
         startButton.addActionListener(l);
     }
@@ -107,7 +107,7 @@ public class GameFrame extends JFrame {
 
     }
 
-    private void createMainTextPanel(){
+    private void createMainTextPanel() {
         mainTextPanel = new JPanel();
         // added 100 to x and y
         mainTextPanel.setBounds(200, 200, 600, 250);
@@ -118,7 +118,7 @@ public class GameFrame extends JFrame {
         createMainTextArea();
     }
 
-    private void createMainTextArea(){
+    private void createMainTextArea() {
         mainTextArea = new JTextArea("");
         mainTextArea.setBounds(100, 100, 600, 250);
         mainTextArea.setBackground(Color.black);
@@ -134,7 +134,7 @@ public class GameFrame extends JFrame {
         mainTextPanel.add(locationNameLabel);
     }
 
-    private void createButtonPanel(){
+    private void createButtonPanel() {
         choiceButtonPanel = new JPanel();
         // added 100 to x and y
         choiceButtonPanel.setBounds(350, 450, 300, 150);
@@ -152,7 +152,7 @@ public class GameFrame extends JFrame {
         choiceButtonPanel.add(choiceButton3);
         choiceButtonPanel.add(choiceButton4);
 
-        choiceButtons = new JButton[] {choiceButton1, choiceButton2, choiceButton3, choiceButton4};
+        choiceButtons = new JButton[]{choiceButton1, choiceButton2, choiceButton3, choiceButton4};
     }
 
     public void setLocationInfo(Location location) {
@@ -203,7 +203,7 @@ public class GameFrame extends JFrame {
         return itemButton;
     }
 
-    private JButton newInventoryButton(){
+    private JButton newInventoryButton() {
         inventoryButton = new JButton();
         inventoryButton.setFont(itemButtonFont);
         inventoryButton.setFocusPainted(false);
@@ -222,11 +222,11 @@ public class GameFrame extends JFrame {
         gameContainer.add(playerPanel);
 
         hpLabel = newPlayerPanelLabels("HP: ");
-        progressBarHealth = newJProgressBar(0,100, 100);
+        progressBarHealth = newJProgressBar(0, 100, 100);
         inventoryLabel = newPlayerPanelLabels("Inventory: ");
         JLabel timeLabel = newPlayerPanelLabels("Time: 5:00");
         JLabel oxygenLabel = newPlayerPanelLabels("Oxygen: ");
-        progressBarOxygen = newJProgressBar(0,100, 100);
+        progressBarOxygen = newJProgressBar(0, 100, 100);
 
 //        Labels
         playerPanel.add(hpLabel);
@@ -271,11 +271,11 @@ public class GameFrame extends JFrame {
         gameContainer.add(invetoryPanel);
     }
 
-    private void createInventoryButtonPanel(){
+    private void createInventoryButtonPanel() {
         inventoryButtonPanel = new JPanel();
         inventoryButtonPanel.setBounds(350, 450, 200, 300);
         inventoryButtonPanel.setBackground(Color.BLACK);
-        inventoryButtonPanel.setLayout(new GridLayout(4,1));
+        inventoryButtonPanel.setLayout(new GridLayout(4, 1));
 
         inventoryButton1 = newInventoryButton();
         inventoryButton2 = newInventoryButton();
@@ -285,11 +285,11 @@ public class GameFrame extends JFrame {
 
         invetoryPanel.add(inventoryButtonPanel);
 
-        inventoryButtons = new JButton[] {inventoryButton1, inventoryButton2};
+        inventoryButtons = new JButton[]{inventoryButton1, inventoryButton2};
 
     }
 
-    private void createItemButtonPanel(){
+    private void createItemButtonPanel() {
         itemButtonPanel = new JPanel();
         itemButtonPanel.setBounds(350, 450, 300, 300);
         itemButtonPanel.setBackground(Color.MAGENTA);
@@ -307,7 +307,7 @@ public class GameFrame extends JFrame {
 
         itemPanel.add(itemButtonPanel);
 
-        itemButtons = new JButton[] {itemButton1, itemButton2, itemButton3, itemButton4};
+        itemButtons = new JButton[]{itemButton1, itemButton2, itemButton3, itemButton4};
     }
 
     private void setItemInfo(Collection<String> itemNames) {
@@ -324,7 +324,8 @@ public class GameFrame extends JFrame {
             buttonIdx++;
         }
     }
-     public void showInventoryItems(ArrayList<String> list){
+
+    public void showInventoryItems(ArrayList<String> list) {
         int buttonIdx = 0;
         for (String item : list) {
             inventoryButtons[buttonIdx].setText(item);
@@ -345,42 +346,43 @@ public class GameFrame extends JFrame {
     }
 
 
-    public void setInventoryListener(ActionListener k){
+    public void setInventoryListener(ActionListener k) {
         for (JButton button : inventoryButtons) {
             button.addActionListener(k);
         }
-
-    private void createPlayerPanel() {
-        // Colors the progress bar green
-        UIManager.put("ProgressBar.selectionForeground", Color.GREEN);
-
-        playerPanel = new JPanel();
-        playerPanel.setBounds(100, 15, 700, 70);
-        playerPanel.setBackground(Color.BLACK);
-        playerPanel.setLayout(new GridLayout(3, 2));
-        gameContainer.add(playerPanel);
-
-        hpLabel = newPlayerPanelLabels("HP: ");
-        progressBarHealth = newJProgressBar(0,100, 100);
-        inventoryLabel = newPlayerPanelLabels("Inventory: ");
-        inventoryLabelName = newPlayerPanelLabels(" ");
-        JLabel timeLabel = newPlayerPanelLabels("Time: 5:00");
-        JLabel oxygenLabel = newPlayerPanelLabels("Oxygen: ");
-        progressBarOxygen = newJProgressBar(0,100, 100);
-
-//        Labels
-        playerPanel.add(hpLabel);
-        playerPanel.add(oxygenLabel);
-
-        playerPanel.add(progressBarHealth);
-        playerPanel.add(progressBarOxygen);
-
-        playerPanel.add(timeLabel);
-        playerPanel.add(inventoryLabel);
-
     }
 
-    private JLabel newPlayerPanelLabels(String labelName){
+//    private void createPlayerPanel() {
+//        // Colors the progress bar green
+//        UIManager.put("ProgressBar.selectionForeground", Color.GREEN);
+//
+//        playerPanel = new JPanel();
+//        playerPanel.setBounds(100, 15, 700, 70);
+//        playerPanel.setBackground(Color.BLACK);
+//        playerPanel.setLayout(new GridLayout(3, 2));
+//        gameContainer.add(playerPanel);
+//
+//        hpLabel = newPlayerPanelLabels("HP: ");
+//        progressBarHealth = newJProgressBar(0,100, 100);
+//        inventoryLabel = newPlayerPanelLabels("Inventory: ");
+//        inventoryLabelName = newPlayerPanelLabels(" ");
+//        JLabel timeLabel = newPlayerPanelLabels("Time: 5:00");
+//        JLabel oxygenLabel = newPlayerPanelLabels("Oxygen: ");
+//        progressBarOxygen = newJProgressBar(0,100, 100);
+//
+////        Labels
+//        playerPanel.add(hpLabel);
+//        playerPanel.add(oxygenLabel);
+//
+//        playerPanel.add(progressBarHealth);
+//        playerPanel.add(progressBarOxygen);
+//
+//        playerPanel.add(timeLabel);
+//        playerPanel.add(inventoryLabel);
+//
+//    }
+
+    private JLabel newPlayerPanelLabels(String labelName) {
         playerPanelLabel = new JLabel(labelName);
         playerPanelLabel.setText(labelName);
         playerPanelLabel.setFont(normalFont);
@@ -388,13 +390,12 @@ public class GameFrame extends JFrame {
         return playerPanelLabel;
     }
 
-    private JProgressBar newJProgressBar(int min, int max, int currentHealth){
+    private JProgressBar newJProgressBar(int min, int max, int currentHealth) {
         progressBar = new JProgressBar(min, max);
         progressBar.setStringPainted(true);
         progressBar.setValue(currentHealth);
         return progressBar;
     }
-
 
 
     public void playerSetup(Integer hp, Integer oxygen, String inventory) {
@@ -420,7 +421,7 @@ public class GameFrame extends JFrame {
 //        mainTextPanel.add(inventoryLogoLabel);
     }
 
-    public void createIntroScreen(){
+    public void createIntroScreen() {
         titleNamePanel.setVisible(false);
         startButtonPanel.setVisible(false);
 
@@ -437,13 +438,13 @@ public class GameFrame extends JFrame {
         gameContainer.add(backGroundStoryButtonPanel);
     }
 
-    private void createBackGroundStoryPanel(){
+    private void createBackGroundStoryPanel() {
         backGroundStoryPanel = new JPanel();
         backGroundStoryPanel.setBounds(20, 100, 600, 250);
         backGroundStoryPanel.setBackground(Color.BLACK);
     }
 
-    private void createBackGroundStoryArea(){
+    private void createBackGroundStoryArea() {
         backGroundTextArea = new JTextArea("You have been deployed from Mars HQ to a remote outpost.\nYour objective is to return this outpost to operational status.\n" +
                 " You have 14 days to complete these tasks.");
         backGroundTextArea.setBounds(200, 100, 600, 600);
@@ -470,7 +471,7 @@ public class GameFrame extends JFrame {
         backGroundStoryButton.addActionListener(l);
     }
 
-    private  void solarPanel() {
+    private void solarPanel() {
         position = "In freaking space";
         mainTextArea.setText("You are stuck in a dying mars outpost. \n\nWhat do you do?");
         choiceButton1.setText("Go North");
@@ -548,7 +549,7 @@ public class GameFrame extends JFrame {
         choiceButton4.setText("");
     }
 
-    private  void playerAttack() {
+    private void playerAttack() {
         position = "playerAttack";
 
         int playerDamage = 0;
@@ -569,7 +570,7 @@ public class GameFrame extends JFrame {
         choiceButton4.setText("");
     }
 
-    private  void airdamageAttack() {
+    private void airdamageAttack() {
         position = "airdamageAttack";
 
         int airdamageDamage = 0;
@@ -587,7 +588,7 @@ public class GameFrame extends JFrame {
         choiceButton4.setText("");
     }
 
-    private  void win() {
+    private void win() {
         position = "win";
 
         mainTextArea.setText("You defeated the airdamage.\n\n(You obtained blank )");
@@ -600,19 +601,19 @@ public class GameFrame extends JFrame {
         choiceButton4.setText("");
     }
 
-    private  void lose() {
+    private void lose() {
         position = "lose";
         mainTextArea.setText("You are dead!\n\n");
         disableChoices();
     }
 
-    private  void ending() {
+    private void ending() {
         position = "ending";
         mainTextArea.setText(" You are true hero.");
         disableChoices();
     }
 
-    private  void disableChoices(){
+    private void disableChoices() {
         choiceButton1.setText("");
         choiceButton2.setText("");
         choiceButton3.setText("");
@@ -622,112 +623,112 @@ public class GameFrame extends JFrame {
         choiceButton3.setVisible(false);
         choiceButton4.setVisible(false);
     }
-
-
-
-    public  class ChoiceHandler implements ActionListener {
-        public void actionPerformed(ActionEvent event) {
-            String yourChoice = event.getActionCommand();
-            switch (position) {
-                case "solarPanel":
-                    switch (yourChoice) {
-                        case "c1":
-                            //if (keys == 1)
-                                ending();
-                            //else
-                                challenge();
-                            break;
-                        case "c2":
-                            challenge();
-                            if(playerHP < 1)
-                                lose();
-                            break;
-                        case "c3":
-                            crossRoad();
-                            break;
-                    }
-                    break;
-                case "north":
-                    switch (yourChoice) {
-                        case "c1":
-                            solarPanel();
-                            break;
-                    }
-                    break;
-                case "south":
-                    switch (yourChoice) {
-                        case "c1":
-                            solarPanel();
-                            break;
-                    }
-                    break;
-                case "east":
-                    switch (yourChoice) {
-                        case "c1":
-                            north();
-                            break;
-                        case "c2":
-                            east();
-                            break;
-                        case "c3":
-                            solarPanel();
-                            break;
-                        case "c4":
-                            west();
-                            break;
-                    }
-                    break;
-                case "west":
-                    switch (yourChoice) {
-                        case "c1":
-                            //place();//todo places into case
-                            break;
-                        case "c2":
-                            crossRoad();
-                            break;
-                    }
-                    break;
-                case "use":
-                    switch (yourChoice) {
-                        case "c1":
-                            north();
-                            break;
-                        case "c2":
-                            crossRoad();
-                            break;
-                    }
-                    break;
-                case "playerdamage":
-                    switch (yourChoice) {
-                        case "c1":
-                            if (airdamageHP < 1) {
-                                win();
-                            } else {
-                                airdamageAttack();
-                            }
-                            break;
-                    }
-                    break;
-
-                case "bonedamage":
-
-                    switch (yourChoice) {
-                        case "c1":
-                            if (playerHP < 1) {
-                                lose();
-                            } else {
-                                lose();
-                            }
-                            break;
-                    }
-                    break;
-                case "win":
-                    switch (yourChoice) {
-                        case "c1":
-                            crossRoad();
-                    }
-                    break;
-            }
-        }
-    }
 }
+
+
+//    public  class ChoiceHandler implements ActionListener {
+//        public void actionPerformed(ActionEvent event) {
+//            String yourChoice = event.getActionCommand();
+//            switch (position) {
+//                case "solarPanel":
+//                    switch (yourChoice) {
+//                        case "c1":
+//                            //if (keys == 1)
+//                                ending();
+//                            //else
+//                                challenge();
+//                            break;
+//                        case "c2":
+//                            challenge();
+//                            if(playerHP < 1)
+//                                lose();
+//                            break;
+//                        case "c3":
+//                            crossRoad();
+//                            break;
+//                    }
+//                    break;
+//                case "north":
+//                    switch (yourChoice) {
+//                        case "c1":
+//                            solarPanel();
+//                            break;
+//                    }
+//                    break;
+//                case "south":
+//                    switch (yourChoice) {
+//                        case "c1":
+//                            solarPanel();
+//                            break;
+//                    }
+//                    break;
+//                case "east":
+//                    switch (yourChoice) {
+//                        case "c1":
+//                            north();
+//                            break;
+//                        case "c2":
+//                            east();
+//                            break;
+//                        case "c3":
+//                            solarPanel();
+//                            break;
+//                        case "c4":
+//                            west();
+//                            break;
+//                    }
+//                    break;
+//                case "west":
+//                    switch (yourChoice) {
+//                        case "c1":
+//                            //place();//todo places into case
+//                            break;
+//                        case "c2":
+//                            crossRoad();
+//                            break;
+//                    }
+//                    break;
+//                case "use":
+//                    switch (yourChoice) {
+//                        case "c1":
+//                            north();
+//                            break;
+//                        case "c2":
+//                            crossRoad();
+//                            break;
+//                    }
+//                    break;
+//                case "playerdamage":
+//                    switch (yourChoice) {
+//                        case "c1":
+//                            if (airdamageHP < 1) {
+//                                win();
+//                            } else {
+//                                airdamageAttack();
+//                            }
+//                            break;
+//                    }
+//                    break;
+//
+//                case "bonedamage":
+//
+//                    switch (yourChoice) {
+//                        case "c1":
+//                            if (playerHP < 1) {
+//                                lose();
+//                            } else {
+//                                lose();
+//                            }
+//                            break;
+//                    }
+//                    break;
+//                case "win":
+//                    switch (yourChoice) {
+//                        case "c1":
+//                            crossRoad();
+//                    }
+//                    break;
+//            }
+//        }
+//    }
+//}
