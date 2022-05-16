@@ -113,7 +113,7 @@ public class JSONHandler {
         locationMap.put(name, new Location(name, directions, description, lookitems,oxygen,ascii, puzzle));
 
     }
-    private static InputStream getFileFromResourceAsStream(String fileName) {
+    static InputStream getFileFromResourceAsStream(String fileName) {
         ClassLoader classLoader = JSONHandler.class.getClassLoader();
         InputStream inputStream = classLoader.getResourceAsStream(fileName);
         if (inputStream == null) {
