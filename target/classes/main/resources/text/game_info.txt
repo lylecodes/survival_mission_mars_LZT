@@ -1,6 +1,0 @@
-You have been deployed from Mars HQ to a remote outpost.  Your objective is to return this outpost to operational status.
-In order to do so, you must return the Solar farm to operational status for basic lighting, turn on the reactor for full power,
-initialize the hydro system to provide both breathable air and water and utilize the provided water for planting seeds in the
-greenhouse and obtaining growth from those seeds.  You have 14 days to complete these tasks. After 12 days, if you have not
-accomplished all these tasks you will be given the option to continue AT YOUR OWN RISK, or return to Mars HQ as a complete and
-total failure, with your head held low.

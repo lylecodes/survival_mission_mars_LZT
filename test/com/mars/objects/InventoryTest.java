@@ -35,6 +35,6 @@ public class InventoryTest {
     public void drop() {
         inventoryTest.add(itemTest);
         inventoryTest.drop("itemTest");
-        assertEquals("[itemTest]", inventoryTest.getInventory().toString());
+        assertEquals("[]", inventoryTest.getInventory().toString());
     }
 }

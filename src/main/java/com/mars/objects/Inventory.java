@@ -39,7 +39,7 @@ public class Inventory {
 
     // index'ing through Items for K,V to move to inventory
     private int getItemIndex(String itemName){
-        int index = 0;
+        int index = -1;
         int counter = 0;
         for(Item item: inventory){
             if (item.getName().equals(itemName)){
@@ -52,6 +52,10 @@ public class Inventory {
     // dropping item and acquiring the correct item index to remove from inventory
     public Item drop(String item){
         int dropIndex = getItemIndex(item);
+        if (dropIndex < 0) {
+            System.out.println("Item does not exist");
+            return null;
+        }
         return inventory.remove(dropIndex);
     }
 
