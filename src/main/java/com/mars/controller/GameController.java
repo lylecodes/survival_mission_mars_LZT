@@ -162,14 +162,20 @@ public class GameController {
                 System.out.println("using item " + inventoryName );
                 Item itemToUse = inventory.getItem(inventoryName);
                 int value = inventory.use(itemToUse);
-                System.out.println(value);
-                playerStats.updateCurrentHealthGain(value);
-                gui.playerSetup(
-                        playerStats.getStats().get("Health"),
-                        playerStats.getStats().get("Bone Density"),
-                        inventory.getInventory().toString()
-                );
-                gui.popUp("You ate " + inventoryName + " and got " + value + " health back");
+                if (value > 0){
+                    System.out.println(value);
+                    playerStats.updateCurrentHealthGain(value);
+                    gui.playerSetup(
+                            playerStats.getStats().get("Health"),
+                            playerStats.getStats().get("Bone Density"),
+                            inventory.getInventory().toString()
+                    );
+                    gui.popUp("You ate " + inventoryName + " and got " + value + " health back");
+                }
+                else{
+                    gui.popUp("You cant use " + inventoryName);
+                }
+
 
             }
             else if(answer == 1){
