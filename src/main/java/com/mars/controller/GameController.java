@@ -7,6 +7,8 @@ import com.mars.objects.Item;
 import com.mars.objects.Location;
 import com.mars.puzzle.GhPuzzle;
 import com.mars.puzzle.Puzzle;
+import com.mars.puzzle.ReactorPuzzle;
+import com.mars.puzzle.SolarPuzzle;
 import com.mars.stats.Stats;
 import com.mars.util.CommandProcessor;
 import com.mars.util.JSONHandler;
@@ -43,9 +45,9 @@ public class GameController {
     }
 
     // Puzzles
-    private boolean isGhSolved = false;
-    private boolean isReactorSolved = false;
-    private boolean isSolarSolved = false;
+    private static boolean isGhSolved = false;
+    private static boolean isReactorSolved = false;
+    private static boolean isSolarSolved = false;
 
     public void setCurrentLocation(Location currentLocation) {
         this.currentLocation = currentLocation;
@@ -72,7 +74,7 @@ public class GameController {
             gui.setChallengeButtonListeners(new PuzzleButtonHandler());
             gui.setItemButtonListeners(new ItemButtonHandler());
             gui.setInventoryListener(new InventoryButtonHandler());
-
+            gui.setMainMenuButtonListeners(new MainMenuButtonHandler());
             gui.setLocationInfo(currentLocation);
             String storySplash = display.displayGUI("text/game_info.txt");
 
@@ -81,24 +83,24 @@ public class GameController {
     }
 
     // Intro Screen stuff
-    class IntroScreenHandler implements ActionListener {
-        public void actionPerformed(ActionEvent event){
-            System.out.println("hello2");
-            gui.createGameScreen(
-                    playerStats.getStats().get("Health"),
-                    playerStats.getStats().get("Bone Density"),
-                    inventory.getInventory().toString()
-            );
-            gui.setDirectionChoiceButtonListeners(new GameScreenHandler());
-            gui.setChallengeButtonListeners(new PuzzleButtonHandler());
-            gui.setItemButtonListeners(new ItemButtonHandler());
-            gui.setInventoryListener(new InventoryButtonHandler());
-            gui.setMainMenuButtonListeners(new MainMenuButtonHandler());
-
-            gui.setLocationInfo(currentLocation);
-
-        }
-    }
+//    class IntroScreenHandler implements ActionListener {
+//        public void actionPerformed(ActionEvent event){
+//            System.out.println("hello2");
+//            gui.createGameScreen(
+//                    playerStats.getStats().get("Health"),
+//                    playerStats.getStats().get("Bone Density"),
+//                    inventory.getInventory().toString()
+//            );
+//            gui.setDirectionChoiceButtonListeners(new GameScreenHandler());
+//            gui.setChallengeButtonListeners(new PuzzleButtonHandler());
+//            gui.setItemButtonListeners(new ItemButtonHandler());
+//            gui.setInventoryListener(new InventoryButtonHandler());
+//            gui.setMainMenuButtonListeners(new MainMenuButtonHandler());
+//
+//            gui.setLocationInfo(currentLocation);
+//
+//        }
+//    }
 
     // Game Screen stuff
     class GameScreenHandler implements ActionListener {
@@ -221,6 +223,7 @@ public class GameController {
             Puzzle puzzle = currentLocation.getTypePuzzle();
             boolean puzzleComplete = puzzle.runPuzzle();
             if (puzzleComplete) {
+
                 ((JButton) e.getSource()).setVisible(false);
             }
         }
@@ -254,6 +257,6 @@ public class GameController {
     }
 
     boolean allPuzzlesCompleted() {
-        return isGhSolved && isReactorSolved && isSolarSolved;
+        return GhPuzzle.isSolved && SolarPuzzle.isSolved && ReactorPuzzle.isSolved;
     }
 }

@@ -6,8 +6,8 @@ import static com.mars.puzzle.Dialogue.*;
 import java.util.Random;
 
 public class SolarPuzzle implements Puzzle{
-    String name = "SolarPuzzle";
-    boolean isSolved = false;
+    private String name = "SolarPuzzle";
+    public static boolean isSolved = false;
 
     @Override // Puzzle interface
     public String showIntro(){

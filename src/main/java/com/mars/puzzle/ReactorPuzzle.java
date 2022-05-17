@@ -1,19 +1,17 @@
 package com.mars.puzzle;
 
-import com.mars.display.Display;
 import com.mars.objects.Inventory;
 import com.mars.util.JSONHandler;
 import com.mars.util.TextParser;
 
-import javax.swing.*;
 import java.util.List;
 import java.util.Scanner;
 import static com.mars.puzzle.Dialogue.*;
 
 
 public class ReactorPuzzle implements Puzzle {
-    String name = "ReactorPuzzle";
-    boolean isSolved = false;
+    private String name = "ReactorPuzzle";
+    public static boolean isSolved = false;
     TextParser parser = new TextParser();
 
     @Override
