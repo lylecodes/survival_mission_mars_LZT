@@ -1,5 +1,6 @@
 package com.mars.controller;
 
+import com.mars.display.Display;
 import com.mars.gui.alt.GameFrame;
 import com.mars.objects.Inventory;
 import com.mars.objects.Item;
@@ -25,6 +26,7 @@ public class GameController {
     private final GameFrame gui;
     private Location currentLocation;
     private Inventory inventory = Inventory.getInstance();
+    private Display display = new Display();
 
     // Puzzles
     private boolean isGhSolved = false;
@@ -36,10 +38,6 @@ public class GameController {
         this.gui = gui;
         this.currentLocation = locationMap.get("Docking Station");
         gui.setTitleScreenHandler(new TitleScreenHandler());
-
-//        DELETE ME
-        Item key = new Item("key", "Opens Stuff");
-        inventory.add(key);
     }
 
     // Title Screen stuff
@@ -48,6 +46,9 @@ public class GameController {
             System.out.println("hello1");
             gui.createIntroScreen();
             gui.setIntroScreenHandler(new IntroScreenHandler());
+            String storySplash = display.displayGUI("text/game_info.txt");
+
+            gui.popUp(storySplash);
         }
     }
 
@@ -92,6 +93,7 @@ public class GameController {
                     playerStats.getStats().get("Bone Density"),
                     inventory.getInventory().toString()
             );
+//            System.out.println(inventory.getInventory().size());
 //            gui.showInventoryItems((ArrayList<String>) inventory.getInventory());
         }
     }
@@ -101,18 +103,45 @@ public class GameController {
             // get item name from button click
             String itemName = ((JButton) e.getSource()).getText();
             // remove item from current location and get reference
-            Item removedItem = currentLocation.removeItem(itemName);
-            // add item to inventory
-            inventory.add(removedItem);
-            // reload location to show item is gone
-            gui.setLocationInfo(currentLocation);
-            System.out.println("Inventory: " + inventory.getInventory());
+            if (inventory.getInventory().size() <= 1){
+                System.out.println(inventory.getInventory().size());
+                Item removedItem = currentLocation.removeItem(itemName);
+                // add item to inventory
+                inventory.add(removedItem);
+                // reload location to show item is gone
+                gui.setLocationInfo(currentLocation);
+                System.out.println("Inventory: " + inventory.getInventory());
+            }
+            else {
+                System.out.println("Inventory full");
+                gui.popUp("You inventory is full, drop items if needed.");
+                gui.setLocationInfo(currentLocation);
+            }
+
         }
     }
     class InventoryButtonHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             String inventoryName = ((JButton) e.getSource()).getText();
-            System.out.println(inventoryName + " trying to use item");
+            String inventoryDescription = inventory.getItemDescription(inventoryName);
+
+            int answer = gui.popUpInventory(inventoryName, inventoryDescription);
+            if (answer == 2){
+                System.out.println("using item " + inventoryName );
+                Item itemToUse = inventory.getItem(inventoryName);
+                inventory.use(itemToUse);
+
+            }
+            else if(answer == 1){
+                System.out.println("dropping item " + inventoryName);
+                Item dropItem = inventory.drop(inventoryName);
+                currentLocation.droppedItemAddedToRoom(dropItem);
+            }
+            else{
+                System.out.println("cancel");
+            }
+
+            gui.setLocationInfo(currentLocation);
         }
     }
 
