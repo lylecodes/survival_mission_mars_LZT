@@ -241,7 +241,7 @@ public class GameFrame extends JFrame {
         progressBarHealth = newJProgressBar(0, 100, 100);
         inventoryLabel = newPlayerPanelLabels("Inventory: ");
         JLabel timeLabel = newPlayerPanelLabels("Time: 5:00");
-        JLabel oxygenLabel = newPlayerPanelLabels("Oxygen: ");
+        JLabel oxygenLabel = newPlayerPanelLabels("Bone Density: ");
         progressBarOxygen = newJProgressBar(0, 100, 100);
 
 //        Labels
@@ -370,7 +370,7 @@ public class GameFrame extends JFrame {
                 "use" };
 
         int result = JOptionPane.showOptionDialog(
-                null,
+                gameContainer,
                 "Item: " + item + "\n" + "Description: " + description,
                 "Item: " + item,
                 JOptionPane.YES_NO_CANCEL_OPTION,
@@ -378,6 +378,21 @@ public class GameFrame extends JFrame {
                 null,
                 options1,
                 options1[2]);
+        return result;
+    }
+    public int popUpPlayAgain(){
+        Object[] options1 = { "Play Again!",
+                "Quit" };
+
+        int result = JOptionPane.showOptionDialog(
+                gameContainer,
+                "You Died \n Health or Bone Density hit 0 \n Blue Origin needs you please continue",
+                "Game Over",
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options1,
+                options1[0]);
         return result;
     }
     public void setItemButtonListeners(ActionListener l) {

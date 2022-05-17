@@ -68,8 +68,19 @@ public class Inventory {
     }
 
 
-    public void use(Item item){
-        System.out.println("You used " + item.getName());
+    public int use(Item item){
+        if (item.getDescription().contains("healthItem")){
+            System.out.println("eating item " + item.getName());
+            // Remove from inventory
+            inventory.remove(item);
+            // Give player health
+            return 20;
+        }
+        else{
+            System.out.println("cant eat " + item.getName());
+            // Let player know they cant eat this
+            return 0;
+        }
     }
     public List<String> getInventory() {
         List<String> holder = new ArrayList<>();
