@@ -12,23 +12,47 @@ public class GhPuzzle implements Puzzle{
     //fields
     private String name = "GhPuzzle";
     private boolean isSolved = false;
-    private Display display = new Display();
-    JLabel questionLabel;
-    JButton yesBtn;
-    JButton noBtn;
+    private String question1 = "You notice a valve in the corner of the room connected to " +  //challenge hard coded/very guided at this point
+            "the water main. Do you turn it on? Enter 'y' or 'n'\n>> ";
+    private String question2 = "You see the water mister engage and moisten the soil." +
+            "Would you like to plant some seeds? Enter 'y' or 'n'\n>> ";
+    private String question3 = "Congratulations! You are able to grow food on Mars!";
+    private String question4 = "Oh well, your loss...have fun eating your MREs...";
+    private String question5 = "Hmm....interesting choice.";
 
-    // could make Question nodes, put inside of question array.
-    // it would hold a string question, an action listener, and refs to yes/no children paths
-    // but how would the question object make changes to gui? make relevant gui components static
-    // make json to hold question data and gson?
-    // currentQuestion = questionMap.get(currentQuestion.getChildren()[0]) ??-- for no --
-    // you will store refs to children, keyed in map by string of some sort
+    public int popUpDialogue(String dialogue){
+        Object[] options = { "yes", "no", "cancel" };
 
-//    private int questionIdx = 0;
-//    private String question1 = "You notice a valve in the corner of the room connected to " +  //challenge hard coded/very guided at this point
-//            "the water main. Do you turn it on? Enter 'y' or 'n'\n>> ";
-//    private String question2 = "You see the water mister engage and moisten the soil." +
-//            "Would you like to plant some seeds? Enter 'y' or 'n'\n>> ";
+        return JOptionPane.showOptionDialog(
+                null,
+                dialogue,
+                this.getName(),
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]);
+    }
+
+    public void popUpDialogueEnd(String dialogue) {
+        String[] options = { "ok" };
+
+        JOptionPane.showOptionDialog(
+                null,
+                dialogue,
+                this.getName(),
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]
+        );
+    }
+
+    /*
+    * Pop up is shown with question and buttons
+    * each button has an action listener leading to another popup
+    * */
 //
 //    private ActionListener listener_1 = e -> {
 //        String answer = ((JButton) e.getSource()).getText();
@@ -74,7 +98,23 @@ public class GhPuzzle implements Puzzle{
 
     @Override
     public void runPuzzle() {
-        greenHousePuzzle(); //run the room specific puzzle
+        int res = popUpDialogue(question1);
+
+        if (res == 0) {
+            res = popUpDialogue(question2);
+            if (res == 0) {
+                isSolved = true;
+                popUpDialogueEnd(question3);
+            } else if (res == 1) {
+                popUpDialogueEnd(question4);
+            } else {
+                System.out.println("Cancelled");
+            }
+        } else if (res == 1){
+            popUpDialogueEnd(question5);
+        } else {
+            System.out.println("Cancelled");
+        }
     }
 
     @Override
