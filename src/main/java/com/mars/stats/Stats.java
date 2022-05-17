@@ -20,6 +20,20 @@ public class Stats {
         stats.put("Health", playerHealth.getHealth());
         return stats;
     }
+    public void updateCurrentBoneLoss(int boneLoss){
+        bD.updateBoneDensityLoss(boneLoss);
+    }
+    public void updateCurrentBoneGain(int boneGain){
+        bD.updateBoneDensityGain(boneGain);
+    }
+
+    public void updateCurrentHealthLoss(int healthLoss){
+        playerHealth.updateHealthLoss(healthLoss);
+    }
+
+    public void updateCurrentHealthGain(int healthGain){
+        playerHealth.updateHealthGain(healthGain);
+    }
 
     //for help in debugging
     @Override

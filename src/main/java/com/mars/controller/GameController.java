@@ -11,6 +11,7 @@ import com.mars.stats.Stats;
 import com.mars.util.CommandProcessor;
 import com.mars.util.JSONHandler;
 import com.mars.util.TextParser;
+import com.sun.tools.javac.Main;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -34,6 +35,10 @@ public class GameController {
     private boolean isHydroSolved = false;
     private boolean isReactorSolved = false;
     private boolean isSolarSolved = false;
+
+    public void setCurrentLocation(Location currentLocation) {
+        this.currentLocation = currentLocation;
+    }
 
     public GameController(GameFrame gui) {
         this.gui = gui;
@@ -75,6 +80,28 @@ public class GameController {
     // Game Screen stuff
     class GameScreenHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
+            if (playerStats.getStats().get("Health") <= 0 || playerStats.getStats().get("Bone Density") <= 0){
+               int response = gui.popUpPlayAgain();
+               if(response == 0){
+                   gui.setLocationInfo(locationMap.get("Docking Station"));
+                   currentLocation = locationMap.get("Docking Station");
+                   playerStats.updateCurrentHealthGain(120);
+                   playerStats.updateCurrentBoneGain(120);
+               }
+               else{
+                   System.exit(0);
+               }
+                //TODO Would you like to play again
+            }
+            if (currentLocation.equals(locationMap.get("Gym"))){
+                playerStats.updateCurrentBoneGain(120);
+                gui.playerSetup(
+                        playerStats.getStats().get("Health"),
+                        playerStats.getStats().get("Bone Density"),
+                        inventory.getInventory().toString()
+                );
+                gui.popUp("You just hit the gym, which restored your bone density");
+            }
             System.out.println("hello3");
             allPuzzlesCompleted();
             // get text input from field
@@ -87,7 +114,9 @@ public class GameController {
             currentLocation = locationMap.get(nextRoomName);
             // update gui with new location info
             gui.setLocationInfo(currentLocation);
-
+            // Subtract Health and Bone Density per turn
+            playerStats.updateCurrentBoneLoss(5);
+            playerStats.updateCurrentHealthLoss(10);
             //add User Stats
             gui.playerSetup(
                     playerStats.getStats().get("Health"),
@@ -110,8 +139,9 @@ public class GameController {
                 // add item to inventory
                 inventory.add(removedItem);
                 // reload location to show item is gone
-                gui.setLocationInfo(currentLocation);
                 System.out.println("Inventory: " + inventory.getInventory());
+                gui.setLocationInfo(currentLocation);
+
             }
             else {
                 System.out.println("Inventory full");
@@ -128,9 +158,18 @@ public class GameController {
 
             int answer = gui.popUpInventory(inventoryName, inventoryDescription);
             if (answer == 2){
+                gui.setLocationInfo(currentLocation);
                 System.out.println("using item " + inventoryName );
                 Item itemToUse = inventory.getItem(inventoryName);
-                inventory.use(itemToUse);
+                int value = inventory.use(itemToUse);
+                System.out.println(value);
+                playerStats.updateCurrentHealthGain(value);
+                gui.playerSetup(
+                        playerStats.getStats().get("Health"),
+                        playerStats.getStats().get("Bone Density"),
+                        inventory.getInventory().toString()
+                );
+                gui.popUp("You ate " + inventoryName + " and got " + value + " health back");
 
             }
             else if(answer == 1){
