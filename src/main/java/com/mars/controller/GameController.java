@@ -30,9 +30,21 @@ public class GameController {
     private Inventory inventory = Inventory.getInstance();
     private Display display = new Display();
 
+    public boolean isGhSolved() {
+        return isGhSolved;
+    }
+
+    public boolean isReactorSolved() {
+        return isReactorSolved;
+    }
+
+    public boolean isSolarSolved() {
+        return isSolarSolved;
+    }
+
     // Puzzles
     private boolean isGhSolved = false;
-    private boolean isHydroSolved = false;
+//    private boolean isHydroSolved = false; removed till further notice
     private boolean isReactorSolved = false;
     private boolean isSolarSolved = false;
 
@@ -82,6 +94,7 @@ public class GameController {
             gui.setChallengeButtonListeners(new PuzzleButtonHandler());
             gui.setItemButtonListeners(new ItemButtonHandler());
             gui.setInventoryListener(new InventoryButtonHandler());
+            gui.setMainMenuButtonListeners(new MainMenuButtonHandler());
 
             gui.setLocationInfo(currentLocation);
 
@@ -102,7 +115,6 @@ public class GameController {
                else{
                    System.exit(0);
                }
-                //TODO Would you like to play again
             }
             if (currentLocation.equals(locationMap.get("Gym"))){
                 playerStats.updateCurrentBoneGain(120);
@@ -214,6 +226,33 @@ public class GameController {
 
 
             System.out.println("Puzzle button clicked!");
+        }
+    }
+
+    class MainMenuButtonHandler implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            int reply = gui.popUpGameOption();
+            System.out.println(reply);
+            if (reply == 3){
+                System.out.println("mission list");
+                StringBuilder sb = new StringBuilder("Mission To Do: \n");
+                sb.append("Green House operational: "  + isGhSolved() + "\n");
+                sb.append("Reactor Operational: " + isReactorSolved() + "\n");
+                sb.append("Solar Panels operation: " + isSolarSolved() + "\n");
+                gui.popUp(sb.toString());
+            }
+            else if (reply == 2){
+                System.out.println("game help");
+                String help = display.displayGUI("text/help.txt");
+                gui.popUp(help);
+            }
+            else if (reply == 1){
+                gui.popUp("See you later space cowboy");
+                System.exit(0);
+            }
+            else{
+                System.out.println("Cancel");
+            }
         }
     }
 
