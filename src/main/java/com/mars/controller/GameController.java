@@ -50,8 +50,19 @@ public class GameController {
     class TitleScreenHandler implements ActionListener {
         public void actionPerformed(ActionEvent event) {
             System.out.println("hello1");
-            gui.createIntroScreen();
-            gui.setIntroScreenHandler(new IntroScreenHandler());
+
+//            gui.setIntroScreenHandler(new IntroScreenHandler());
+            gui.createGameScreen(
+                    playerStats.getStats().get("Health"),
+                    playerStats.getStats().get("Bone Density"),
+                    inventory.getInventory().toString()
+            );
+            gui.setDirectionChoiceButtonListeners(new GameScreenHandler());
+            gui.setChallengeButtonListeners(new PuzzleButtonHandler());
+            gui.setItemButtonListeners(new ItemButtonHandler());
+            gui.setInventoryListener(new InventoryButtonHandler());
+
+            gui.setLocationInfo(currentLocation);
             String storySplash = display.displayGUI("text/game_info.txt");
 
             gui.popUp(storySplash);

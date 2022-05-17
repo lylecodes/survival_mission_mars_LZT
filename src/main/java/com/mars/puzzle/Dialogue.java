@@ -1,13 +1,18 @@
 package com.mars.puzzle;
 
+import com.mars.gui.alt.GameFrame;
+
 import javax.swing.*;
+import java.awt.*;
 
 public class Dialogue {
+    private static Container gameContainer = GameFrame.gameContainer;
+
     public static int popUpDialogue(String dialogue, String titleName){
         Object[] options = { "yes", "no", "cancel" };
 
         return JOptionPane.showOptionDialog(
-                null,
+                gameContainer,
                 dialogue,
                 titleName,
                 JOptionPane.YES_NO_CANCEL_OPTION,
@@ -21,7 +26,7 @@ public class Dialogue {
         String[] options = { "ok" };
 
         JOptionPane.showOptionDialog(
-                null,
+                gameContainer,
                 dialogue,
                 titleName,
                 JOptionPane.YES_NO_CANCEL_OPTION,

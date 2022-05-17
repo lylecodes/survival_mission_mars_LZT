@@ -14,9 +14,7 @@ import static com.mars.puzzle.Dialogue.*;
 public class ReactorPuzzle implements Puzzle {
     String name = "ReactorPuzzle";
     boolean isSolved = false;
-    Display display = new Display();
     TextParser parser = new TextParser();
-
 
     @Override
     public String showIntro() {

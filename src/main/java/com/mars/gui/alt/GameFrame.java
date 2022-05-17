@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 
 public class GameFrame extends JFrame {
 
-    private Container gameContainer;
+    public static Container gameContainer;
 
     private JPanel titleNamePanel, startButtonPanel, backGroundStoryButtonPanel, mainTextPanel, choiceButtonPanel, playerPanel, backGroundStoryPanel, playerStats, itemPanel, itemButtonPanel, invetoryPanel, inventoryButtonPanel;
     private JLabel titleNameLabel, playerPanelLabel, hpLabel, hpLabelNumber, inventoryLabel, inventoryLabelName, itemPanelLabel, locationNameLabel, invetoryPanelLabel;
@@ -39,6 +39,7 @@ public class GameFrame extends JFrame {
 
     public GameFrame() {
         setSize(1000, 800);
+        setResizable(false);
         getContentPane().setBackground(Color.BLACK);
         setLayout(null);
 
@@ -48,16 +49,18 @@ public class GameFrame extends JFrame {
         createStartButtonPanel();
         createStartButton();
 
+
         titleNamePanel.add(titleNameLabel);
         startButtonPanel.add(startButton);
 
         gameContainer.add(titleNamePanel);
         gameContainer.add(startButtonPanel);
+        createIntroScreen();
     }
 
     private void createTitleNamePanel() {
         titleNamePanel = new JPanel();
-        titleNamePanel.setBounds(100, 100, 600, 150);
+        titleNamePanel.setBounds(200, 200, 600, 150);
         titleNamePanel.setBackground(Color.red);
     }
 
@@ -69,7 +72,7 @@ public class GameFrame extends JFrame {
 
     private void createStartButtonPanel() {
         startButtonPanel = new JPanel();
-        startButtonPanel.setBounds(300, 400, 200, 100);
+        startButtonPanel.setBounds(400, 500, 200, 100);
         startButtonPanel.setBackground(Color.black);
     }
 
@@ -87,7 +90,8 @@ public class GameFrame extends JFrame {
 
     public void createGameScreen(Integer hp, Integer oxygen, String inventory) {
         backGroundStoryPanel.setVisible(false);
-        backGroundStoryButtonPanel.setVisible(false);
+        titleNamePanel.setVisible(false);
+        startButtonPanel.setVisible(false);
 
         createMainTextPanel();
 
@@ -158,6 +162,53 @@ public class GameFrame extends JFrame {
 
 
         choiceButtons = new JButton[]{choiceButton1, choiceButton2, choiceButton3, choiceButton4};
+    }
+
+    public void createIntroScreen() {
+
+        createBackGroundStoryPanel();
+        createBackGroundStoryArea();
+
+//        createBackGroundStoryButtonPanel();
+//        createBackGroundStoryButton();
+
+        backGroundStoryPanel.add(backGroundTextArea);
+//        backGroundStoryButtonPanel.add(backGroundStoryButton);
+        gameContainer.add(backGroundStoryPanel);
+//        gameContainer.add(backGroundStoryButtonPanel);
+    }
+
+    private void createBackGroundStoryPanel() {
+        backGroundStoryPanel = new JPanel();
+        backGroundStoryPanel.setBounds(50, 400, 500, 250);
+        backGroundStoryPanel.setBackground(Color.BLACK);
+    }
+
+    private void createBackGroundStoryArea() {
+        String storySplash = display.displayGUI("text/splash2.txt");
+        backGroundTextArea = new JTextArea(storySplash);
+        backGroundTextArea.setBounds(200, 100, 600, 600);
+        backGroundTextArea.setBackground(Color.black);
+        backGroundTextArea.setForeground(Color.green);
+        backGroundTextArea.setFont(normalFont);
+        backGroundTextArea.setLineWrap(true);
+    }
+
+    private void createBackGroundStoryButtonPanel() {
+        backGroundStoryButtonPanel = new JPanel();
+        backGroundStoryButtonPanel.setBounds(290, 400, 200, 100);
+        backGroundStoryButtonPanel.setBackground(Color.black);
+    }
+
+    private void createBackGroundStoryButton() {
+        backGroundStoryButton = new JButton("START");
+        backGroundStoryButton.setBackground(Color.black);
+        backGroundStoryButton.setForeground(Color.RED);
+        backGroundStoryButton.setFont(normalFont);
+    }
+
+    public void setIntroScreenHandler(ActionListener l) {
+        backGroundStoryButton.addActionListener(l);
     }
 
     public void setLocationInfo(Location location) {
@@ -275,12 +326,13 @@ public class GameFrame extends JFrame {
         invetoryPanel = new JPanel();
         invetoryPanel.setBounds(630, 15, 175, 150);
         invetoryPanel.setBackground(Color.black);
-        invetoryPanelLabel = new JLabel("use invt item: ");
-        invetoryPanelLabel.setFont(normalFont);
-        invetoryPanelLabel.setForeground(Color.white);
-        invetoryPanelLabel.setHorizontalAlignment(JLabel.CENTER);
+//        invetoryPanelLabel = new JLabel("use invt item: ");
+//        invetoryPanelLabel.setFont(normalFont);
+//        invetoryPanelLabel.setForeground(Color.white);
+//        invetoryPanelLabel.setHorizontalAlignment(JLabel.CENTER);
 
-        invetoryPanel.add(invetoryPanelLabel);
+        invetoryPanel.add(createInventoryLogoLabel());
+//        invetoryPanel.add(invetoryPanelLabel);
 
         createInventoryButtonPanel();
 
@@ -432,7 +484,7 @@ public class GameFrame extends JFrame {
 //        solarPanel();
     }
 
-    private void createInventoryLogoLabel() {
+    private JLabel createInventoryLogoLabel() {
 //        inventoryLogoPanel = new JPanel() {{
 //            setBackground(Color.blue);
 //            setSize(10, 10);
@@ -444,57 +496,8 @@ public class GameFrame extends JFrame {
                 ResourceUtils.getImageIconScaledToLabelSize("images/backpack.png", inventoryLogoLabel);
         inventoryLogoLabel.setIcon(imageIcon);
         inventoryLogoLabel.setBackground(Color.ORANGE);
+        return inventoryLogoLabel;
 //        mainTextPanel.add(inventoryLogoLabel);
-    }
-
-    public void createIntroScreen() {
-        titleNamePanel.setVisible(false);
-        startButtonPanel.setVisible(false);
-
-        createBackGroundStoryPanel();
-        createBackGroundStoryArea();
-
-        createBackGroundStoryButtonPanel();
-        createBackGroundStoryButton();
-
-        backGroundStoryPanel.add(backGroundTextArea);
-        backGroundStoryButtonPanel.add(backGroundStoryButton);
-
-        gameContainer.add(backGroundStoryPanel);
-        gameContainer.add(backGroundStoryButtonPanel);
-    }
-
-    private void createBackGroundStoryPanel() {
-        backGroundStoryPanel = new JPanel();
-        backGroundStoryPanel.setBounds(20, 100, 600, 250);
-        backGroundStoryPanel.setBackground(Color.BLACK);
-    }
-
-    private void createBackGroundStoryArea() {
-        String storySplash = display.displayGUI("text/splash2.txt");
-        backGroundTextArea = new JTextArea(storySplash);
-        backGroundTextArea.setBounds(200, 100, 600, 600);
-        backGroundTextArea.setBackground(Color.black);
-        backGroundTextArea.setForeground(Color.green);
-        backGroundTextArea.setFont(normalFont);
-        backGroundTextArea.setLineWrap(true);
-    }
-
-    private void createBackGroundStoryButtonPanel() {
-        backGroundStoryButtonPanel = new JPanel();
-        backGroundStoryButtonPanel.setBounds(290, 400, 200, 100);
-        backGroundStoryButtonPanel.setBackground(Color.black);
-    }
-
-    private void createBackGroundStoryButton() {
-        backGroundStoryButton = new JButton("START");
-        backGroundStoryButton.setBackground(Color.black);
-        backGroundStoryButton.setForeground(Color.RED);
-        backGroundStoryButton.setFont(normalFont);
-    }
-
-    public void setIntroScreenHandler(ActionListener l) {
-        backGroundStoryButton.addActionListener(l);
     }
 
     private void solarPanel() {
