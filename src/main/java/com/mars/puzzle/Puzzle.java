@@ -6,7 +6,7 @@ public interface Puzzle {
 
 //methods each challenge must implement
     public String showIntro();
-    public void runPuzzle();
+    public boolean runPuzzle();
     public boolean isSolved();
     public String getName();
 

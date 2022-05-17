@@ -25,8 +25,8 @@ public class HydroPuzzle implements Puzzle {
 
     @Override
     //running the challenge
-    public void runPuzzle(){
-        hydroPuzzle();
+    public boolean runPuzzle(){
+        return hydroPuzzle();
     }
 
     @Override
@@ -34,7 +34,7 @@ public class HydroPuzzle implements Puzzle {
         return isSolved;
     }
 
-    private void hydroPuzzle() {
+    private boolean hydroPuzzle() {
         if(!isSolved) {
             showIntro();
             runChallenge();
@@ -42,16 +42,18 @@ public class HydroPuzzle implements Puzzle {
         else{
             System.out.println("What are you doing? You solved this game already!");
         }
+        return isSolved();
     }
 
     // series/sequence of events within the challenge
-    private void runChallenge() {
+    private boolean runChallenge() {
         particleFilterCheck();
         sensorsAmmoniaAndAcetone();
         checkTankAndWaterLevel();
         buttonPower();
         buttonElectro();
         isSolved = true;
+        return isSolved();
     }
     // filter check
     private void particleFilterCheck() {
