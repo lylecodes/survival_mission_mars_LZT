@@ -5,6 +5,7 @@ import com.mars.gui.alt.GameFrame;
 import com.mars.objects.Inventory;
 import com.mars.objects.Item;
 import com.mars.objects.Location;
+import com.mars.puzzle.GhPuzzle;
 import com.mars.puzzle.Puzzle;
 import com.mars.stats.Stats;
 import com.mars.util.CommandProcessor;
@@ -148,6 +149,8 @@ public class GameController {
     class PuzzleButtonHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             Puzzle puzzle = currentLocation.getTypePuzzle();
+            puzzle.runPuzzle();
+            ((JButton) e.getSource()).setVisible(false);
 
 
 

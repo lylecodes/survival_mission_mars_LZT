@@ -176,7 +176,7 @@ public class GameFrame extends JFrame {
         }
 
         // add challenge button
-        if (location.getPuzzle()) {
+        if (location.getPuzzle() && !location.getTypePuzzle().isSolved()) {
             challengeButton.setText("Do " + location.getTypePuzzle().getName());
             challengeButton.setVisible(true);
         } else {
