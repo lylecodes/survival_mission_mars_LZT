@@ -44,7 +44,6 @@ public class GameController {
 
     // Puzzles
     private boolean isGhSolved = false;
-//    private boolean isHydroSolved = false; removed till further notice
     private boolean isReactorSolved = false;
     private boolean isSolarSolved = false;
 
@@ -127,7 +126,6 @@ public class GameController {
                 gui.popUp("You just hit the gym, which restored your bone density");
             }
             System.out.println("hello3");
-            allPuzzlesCompleted();
             // get text input from field
             String choice = ((JButton) e.getSource()).getText();
             // get direction from input
@@ -147,6 +145,10 @@ public class GameController {
                     playerStats.getStats().get("Bone Density"),
                     inventory.getInventory().toString()
             );
+            if (allPuzzlesCompleted()) {
+                gui.popUp("You completed all of the puzzles! Amazing!");
+                System.exit(0);
+            }
 //            System.out.println(inventory.getInventory().size());
 //            gui.showInventoryItems((ArrayList<String>) inventory.getInventory());
         }
@@ -222,7 +224,6 @@ public class GameController {
             if (puzzleComplete) {
                 ((JButton) e.getSource()).setVisible(false);
             }
-            System.out.println("Puzzle button clicked!");
         }
     }
 
@@ -254,6 +255,6 @@ public class GameController {
     }
 
     boolean allPuzzlesCompleted() {
-        return true;
+        return isGhSolved && isReactorSolved && isSolarSolved;
     }
 }
