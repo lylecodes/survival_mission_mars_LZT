@@ -149,8 +149,11 @@ public class GameController {
     class PuzzleButtonHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             Puzzle puzzle = currentLocation.getTypePuzzle();
-            puzzle.runPuzzle();
-            ((JButton) e.getSource()).setVisible(false);
+            boolean puzzleComplete = puzzle.runPuzzle();
+            if (puzzleComplete) {
+                ((JButton) e.getSource()).setVisible(false);
+            }
+
 
 
 

@@ -5,8 +5,10 @@ import com.mars.objects.Inventory;
 import com.mars.util.JSONHandler;
 import com.mars.util.TextParser;
 
+import javax.swing.*;
 import java.util.List;
 import java.util.Scanner;
+import static com.mars.puzzle.Dialogue.*;
 
 
 public class ReactorPuzzle implements Puzzle {
@@ -22,13 +24,56 @@ public class ReactorPuzzle implements Puzzle {
     }
 
     @Override
-    public void runPuzzle() {
-        reactorPuzzle();
+    public boolean runPuzzle() {
+        popUpDialogueEnd(showIntro(), this.getName());
+        int res;
+        if (Inventory.getInstance().lookItem().contains("r_key")) {
+            res = popUpDialogue("Do you want to use the r_key?", this.getName());
+            if (res == 0) {
+                popUpDialogueEnd("Reactor recognizes key and lever lights up", this.getName());
+                res = popUpDialogue("Do you want to pull the lever?", this.getName());
+                if (res == 0) {
+                    popUpDialogueEnd("You pulled the lever", this.getName());
+                    popUpDialogueEnd("The reactor whirrs as it spins up", this.getName());
+                    popUpDialogueEnd("Full power restored to outpost", this.getName());
+                    isSolved = true;
+                } else if (res == 1) {
+                    popUpDialogueEnd("See ya", this.getName());
+                } else {
+                    System.out.println("Cancelled");
+                }
+            } else if (res == 1) {
+                popUpDialogueEnd("See ya", this.getName());
+            } else {
+                System.out.println("Cancelled");
+            }
+        } else {
+            popUpDialogueEnd("You need the R_key to activate the reactor", this.getName());
+        }
+        return isSolved();
     }
 
     @Override
     public boolean isSolved(){
         return isSolved;
+    }
+
+    private void runChallenge(){
+        System.out.println("Reactor recognizes key and lever lights up");
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Do you want to pull the lever? 'y' or 'n':\n>> ");
+        String userInput = scanner.nextLine().toLowerCase();
+        if(userInput.equals("y")){
+            System.out.println("You pulled the lever");
+            System.out.println("Reactor whirrs as it spins up");
+            System.out.println("Full power restored to outpost");
+            isSolved = true;
+        }
+        else{
+            System.out.println("ok maybe next time.");
+        }
+
     }
 
     private void reactorPuzzle(){
@@ -65,21 +110,5 @@ public class ReactorPuzzle implements Puzzle {
         return this.name;
     }
 
-    private void runChallenge(){
-        System.out.println("Reactor recognizes key and lever lights up");
-        Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Do you want to pull the lever? 'y' or 'n':\n>> ");
-        String userInput = scanner.nextLine().toLowerCase();
-        if(userInput.equals("y")){
-            System.out.println("You pulled the lever");
-            System.out.println("Reactor whirrs as it spins up");
-            System.out.println("Full power restored to outpost");
-            isSolved = true;
-        }
-        else{
-            System.out.println("ok maybe next time.");
-        }
-
-    }
 }
