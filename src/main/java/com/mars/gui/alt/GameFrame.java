@@ -28,7 +28,7 @@ public class GameFrame extends JFrame {
     private Font menuLabelFont = new Font("Dialog", Font.BOLD, 20);
     private Font normalFont = new Font("Times New Roman", Font.PLAIN, 28);
     private Font itemButtonFont = new Font("Times New Roman", Font.PLAIN, 18);
-    private  JButton startButton, backGroundStoryButton, choiceButton, choiceButton1, choiceButton2, choiceButton3, choiceButton4, challengeButton, itemButton, itemButton1, itemButton2, itemButton3, itemButton4, inventoryButton, inventoryButton1, inventoryButton2;
+    private  JButton startButton, backGroundStoryButton, choiceButton, choiceButton1, choiceButton2, choiceButton3, choiceButton4, challengeButton, itemButton, itemButton1, itemButton2, itemButton3, itemButton4, inventoryButton, inventoryButton1, inventoryButton2, gameMenu;
     private JTextArea mainTextArea, backGroundTextArea;
     private int playerHP, airdamageHP, silverRing;
     private String inventoryGame, position;
@@ -240,6 +240,10 @@ public class GameFrame extends JFrame {
         hpLabel = newPlayerPanelLabels("HP: ");
         progressBarHealth = newJProgressBar(0, 100, 100);
         inventoryLabel = newPlayerPanelLabels("Inventory: ");
+
+        gameMenu = new JButton();
+        gameMenu.setText("Game Menu");
+
         JLabel timeLabel = newPlayerPanelLabels("Time: 5:00");
         JLabel oxygenLabel = newPlayerPanelLabels("Bone Density: ");
         progressBarOxygen = newJProgressBar(0, 100, 100);
@@ -252,7 +256,8 @@ public class GameFrame extends JFrame {
         playerPanel.add(progressBarOxygen);
 
         playerPanel.add(timeLabel);
-        playerPanel.add(inventoryLabel);
+//        playerPanel.add(inventoryLabel);
+        playerPanel.add(gameMenu);
 
     }
 
@@ -395,10 +400,34 @@ public class GameFrame extends JFrame {
                 options1[0]);
         return result;
     }
+
+    public int popUpGameOption(){
+        Object[] options1 = {
+                "Cancel",
+                "Quit",
+                "Game Help",
+                "Mission List" };
+
+        int result = JOptionPane.showOptionDialog(
+                gameContainer,
+                "Game Options Menu:",
+                "Game Option",
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options1,
+                options1[0]);
+        return result;
+    }
+
     public void setItemButtonListeners(ActionListener l) {
         for (JButton button : itemButtons) {
             button.addActionListener(l);
         }
+    }
+
+    public void setMainMenuButtonListeners(ActionListener j){
+        gameMenu.addActionListener(j);
     }
 
 
