@@ -283,7 +283,7 @@ public class GameFrame extends JFrame {
         UIManager.put("ProgressBar.selectionForeground", Color.GREEN);
 
         playerPanel = new JPanel();
-        playerPanel.setBounds(20, 15, 600, 100);
+        playerPanel.setBounds(120, 15, 600, 100);
         playerPanel.setBackground(Color.BLACK);
         playerPanel.setLayout(new GridLayout(3, 2));
         gameContainer.add(playerPanel);
@@ -329,7 +329,7 @@ public class GameFrame extends JFrame {
 
     private void createInventoryPanel() {
         invetoryPanel = new JPanel();
-        invetoryPanel.setBounds(630, 15, 175, 150);
+        invetoryPanel.setBounds(800, 15, 175, 150);
         invetoryPanel.setBackground(Color.black);
 //        invetoryPanelLabel = new JLabel("use invt item: ");
 //        invetoryPanelLabel.setFont(normalFont);

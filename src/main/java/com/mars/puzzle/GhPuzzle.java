@@ -8,7 +8,7 @@ import java.util.*;
 public class GhPuzzle implements Puzzle{
     //fields
     private String name = "GhPuzzle";
-    private boolean isSolved = false;
+    public static boolean isSolved = false;
 
     @Override
     public String showIntro() {
