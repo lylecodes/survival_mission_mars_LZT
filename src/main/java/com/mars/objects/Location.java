@@ -101,6 +101,9 @@ public class Location {
         }
         return names;
     }
+    public void droppedItemAddedToRoom(Item item){
+        items.add(item);
+    }
 
     public void setItems(List<Item> items) {
         this.items = items;

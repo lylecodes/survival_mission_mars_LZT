@@ -58,6 +58,14 @@ public class Inventory {
         }
         return inventory.remove(dropIndex);
     }
+    public Item getItem(String item){
+        int index = getItemIndex(item);
+        if (index < 0) {
+            System.out.println("Item does not exist");
+            return null;
+        }
+        return inventory.get(index);
+    }
 
 
     public void use(Item item){

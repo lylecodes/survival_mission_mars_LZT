@@ -1,16 +1,18 @@
 package com.mars.gui.alt;
 
+import com.mars.display.Display;
 import com.mars.objects.Inventory;
 import com.mars.objects.Location;
-import com.mars.puzzle.Puzzle;
 import com.mars.util.ResourceUtils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Objects;
 import javax.swing.JOptionPane;
+
 
 
 public class GameFrame extends JFrame {
@@ -33,6 +35,7 @@ public class GameFrame extends JFrame {
     private Inventory inventory = Inventory.getInstance();
     private JButton[] choiceButtons;
     private JButton[] itemButtons, inventoryButtons;
+    private Display display = new Display();
 
     public GameFrame() {
         setSize(1000, 800);
@@ -256,7 +259,7 @@ public class GameFrame extends JFrame {
     private void createItemPanel() {
         itemPanel = new JPanel();
         itemPanel.setBackground(Color.RED);
-        itemPanel.setBounds(12, 200, 175, 100);
+        itemPanel.setBounds(12, 200, 175, 155);
         itemPanelLabel = new JLabel("Items seen:");
         itemPanelLabel.setFont(menuLabelFont);
         itemPanelLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -304,7 +307,7 @@ public class GameFrame extends JFrame {
 
     private void createItemButtonPanel() {
         itemButtonPanel = new JPanel();
-        itemButtonPanel.setBounds(350, 450, 300, 300);
+        itemButtonPanel.setBounds(350, 450, 300, 400);
         itemButtonPanel.setBackground(Color.MAGENTA);
         itemButtonPanel.setLayout(new GridLayout(4, 1));
 
@@ -353,10 +356,30 @@ public class GameFrame extends JFrame {
     }
 
     public void popUp(String errorMessage){
-        JOptionPane.showMessageDialog(gameContainer,
-                errorMessage);
+
+        JOptionPane.showMessageDialog(
+                gameContainer,
+                errorMessage
+        );
+
+
     }
 
+    public int popUpInventory(String item, String description){
+        Object[] options1 = { "cancel", "drop",
+                "use" };
+
+        int result = JOptionPane.showOptionDialog(
+                null,
+                "Item: " + item + "\n" + "Description: " + description,
+                "Item: " + item,
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options1,
+                options1[2]);
+        return result;
+    }
     public void setItemButtonListeners(ActionListener l) {
         for (JButton button : itemButtons) {
             button.addActionListener(l);
@@ -433,8 +456,8 @@ public class GameFrame extends JFrame {
     }
 
     private void createBackGroundStoryArea() {
-        backGroundTextArea = new JTextArea("You have been deployed from Mars HQ to a remote outpost.\nYour objective is to return this outpost to operational status.\n" +
-                " You have 14 days to complete these tasks.");
+        String storySplash = display.displayGUI("text/splash2.txt");
+        backGroundTextArea = new JTextArea(storySplash);
         backGroundTextArea.setBounds(200, 100, 600, 600);
         backGroundTextArea.setBackground(Color.black);
         backGroundTextArea.setForeground(Color.green);
