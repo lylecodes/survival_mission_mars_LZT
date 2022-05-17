@@ -73,6 +73,7 @@ public class GameController {
             gui.setChallengeButtonListeners(new PuzzleButtonHandler());
             gui.setItemButtonListeners(new ItemButtonHandler());
             gui.setInventoryListener(new InventoryButtonHandler());
+            gui.setMainMenuButtonListeners(new MainMenuButtonHandler());
 
             gui.setLocationInfo(currentLocation);
             String storySplash = display.displayGUI("text/game_info.txt");
@@ -221,10 +222,6 @@ public class GameController {
             if (puzzleComplete) {
                 ((JButton) e.getSource()).setVisible(false);
             }
-
-
-
-
             System.out.println("Puzzle button clicked!");
         }
     }
