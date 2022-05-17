@@ -1,11 +1,13 @@
 package com.mars.puzzle;
 
 import com.mars.display.Display;
+import com.mars.util.JSONHandler;
 import com.mars.util.TextParser;
 
 import java.util.Scanner;
 
 public class HydroPuzzle implements Puzzle {
+    String name = "HydroPuzzle";
     boolean isSolved = false;           // full challenge logic / completion check
     boolean checkFilter = false;        // check filter logic / completion check
     boolean checkMonitors = false;      // check monitors logic / completion check
@@ -17,14 +19,14 @@ public class HydroPuzzle implements Puzzle {
 
     @Override // Puzzle interface
     // launch challenge, display text
-    public void showIntro(){
-        display.displayText("text/hydroIntro.txt");
+    public String showIntro(){
+        return JSONHandler.getFileContentAsString("text/hydroIntro.txt");
     }
 
     @Override
     //running the challenge
-    public void runPuzzle(){
-        hydroPuzzle();
+    public boolean runPuzzle(){
+        return hydroPuzzle();
     }
 
     @Override
@@ -32,7 +34,7 @@ public class HydroPuzzle implements Puzzle {
         return isSolved;
     }
 
-    private void hydroPuzzle() {
+    private boolean hydroPuzzle() {
         if(!isSolved) {
             showIntro();
             runChallenge();
@@ -40,16 +42,18 @@ public class HydroPuzzle implements Puzzle {
         else{
             System.out.println("What are you doing? You solved this game already!");
         }
+        return isSolved();
     }
 
     // series/sequence of events within the challenge
-    private void runChallenge() {
+    private boolean runChallenge() {
         particleFilterCheck();
         sensorsAmmoniaAndAcetone();
         checkTankAndWaterLevel();
         buttonPower();
         buttonElectro();
         isSolved = true;
+        return isSolved();
     }
     // filter check
     private void particleFilterCheck() {
@@ -162,5 +166,10 @@ public class HydroPuzzle implements Puzzle {
                 System.out.println("You may have missed step. Look at the challenge again and pay attention to the placard.");
             }
         }
+    }
+
+    @Override
+    public String getName() {
+        return this.name;
     }
 }

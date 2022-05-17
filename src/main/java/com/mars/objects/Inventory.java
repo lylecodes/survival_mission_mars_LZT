@@ -9,12 +9,14 @@ public class Inventory {
     private Inventory(){
         inventory = new ArrayList<>();
     }
+
     public static Inventory getInstance(){
         if(single_instance == null){
             single_instance = new Inventory();
         }
         return single_instance;
     }
+
     public void add(Item item){
         inventory.add(item);
     }
@@ -37,7 +39,7 @@ public class Inventory {
 
     // index'ing through Items for K,V to move to inventory
     private int getItemIndex(String itemName){
-        int index = 0;
+        int index = -1;
         int counter = 0;
         for(Item item: inventory){
             if (item.getName().equals(itemName)){
@@ -50,7 +52,19 @@ public class Inventory {
     // dropping item and acquiring the correct item index to remove from inventory
     public Item drop(String item){
         int dropIndex = getItemIndex(item);
+        if (dropIndex < 0) {
+            System.out.println("Item does not exist");
+            return null;
+        }
         return inventory.remove(dropIndex);
+    }
+    public Item getItem(String item){
+        int index = getItemIndex(item);
+        if (index < 0) {
+            System.out.println("Item does not exist");
+            return null;
+        }
+        return inventory.get(index);
     }
 
 
