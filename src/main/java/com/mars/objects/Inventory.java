@@ -1,9 +1,12 @@
 package com.mars.objects;
 
+import com.mars.util.Audio;
+
 import java.util.*;
 
 public class Inventory {
     private static Inventory single_instance = null;
+    private Audio audio = Audio.getInstance();
     private List<Item> inventory;
 
     private Inventory(){
@@ -75,6 +78,9 @@ public class Inventory {
             inventory.remove(item);
             // Give player health
             return 20;
+        } else if (item.getDescription().contains("cassette")) {
+            audio.play("start.wav");
+            return 999;
         }
         else{
             System.out.println("cant eat " + item.getName());

@@ -8,10 +8,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class JSONHandler {
 
@@ -115,7 +112,7 @@ public class JSONHandler {
     }
     public static InputStream getFileFromResourceAsStream(String fileName) {
         ClassLoader classLoader = JSONHandler.class.getClassLoader();
-        InputStream inputStream = classLoader.getResourceAsStream(fileName);
+        InputStream inputStream = new BufferedInputStream(classLoader.getResourceAsStream(fileName));
         if (inputStream == null) {
             throw new IllegalArgumentException("file not found! " + fileName);
         } else {

@@ -10,6 +10,10 @@ import com.mars.puzzle.Puzzle;
 import com.mars.puzzle.ReactorPuzzle;
 import com.mars.puzzle.SolarPuzzle;
 import com.mars.stats.Stats;
+import com.mars.util.Audio;
+import com.mars.util.CommandProcessor;
+import com.mars.util.JSONHandler;
+import com.mars.util.TextParser;
 import com.mars.util.*;
 import com.sun.tools.javac.Main;
 
@@ -22,8 +26,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class GameController {
-    private final TextParser parser = new TextParser();
-    private final CommandProcessor processor = new CommandProcessor();
+    private final Audio audio = Audio.getInstance();
     private final JSONHandler jsonhandler = new JSONHandler();
     private final Map<String, Location> locationMap = jsonhandler.loadLocationMap();
     private final Stats playerStats = new Stats();
@@ -33,11 +36,6 @@ public class GameController {
     private Display display = new Display();
     private String dieTime;
 //    TIME
-
-    // Puzzles
-    private static boolean isGhSolved = false;
-    private static boolean isReactorSolved = false;
-    private static boolean isSolarSolved = false;
 
     public GameController(GameFrame gui) {
         this.gui = gui;
@@ -50,6 +48,7 @@ public class GameController {
     // Title Screen stuff
     class TitleScreenHandler implements ActionListener {
         public void actionPerformed(ActionEvent event) {
+
             System.out.println("hello1");
             gui.createGameScreen(
                     playerStats.getStats().get("Health"),
@@ -116,7 +115,11 @@ public class GameController {
                     inventory.getInventory().toString(),
                     TimeCalc.findDifferenceGUI(dieTime)
             );
+            if ("Green House".equals(currentLocation.getName())) {
+                audio.play("lobby.wav");
+            }
             if (allPuzzlesCompleted()) {
+                audio.play("hellyes.wav");
                 gui.popUp("You completed all of the puzzles! Amazing!");
                 System.exit(0);
             }
@@ -157,7 +160,10 @@ public class GameController {
                 System.out.println("using item " + inventoryName );
                 Item itemToUse = inventory.getItem(inventoryName);
                 int value = inventory.use(itemToUse);
-                if (value > 0){
+                if (value == 999) {
+                    System.out.println();
+                }
+                else if (value > 0){
                     System.out.println(value);
                     playerStats.updateCurrentHealthGain(value);
                     gui.playerSetup(
