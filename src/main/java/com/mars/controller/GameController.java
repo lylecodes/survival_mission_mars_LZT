@@ -162,7 +162,7 @@ public class GameController {
                 System.out.println("using item " + inventoryName );
                 Item itemToUse = inventory.getItem(inventoryName);
                 int value = inventory.use(itemToUse);
-                if (value == 999) {
+                if (value == 999 || value == 998) {
                     System.out.println();
                 }
                 else if (value > 0){

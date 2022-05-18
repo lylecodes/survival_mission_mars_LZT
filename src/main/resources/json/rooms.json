@@ -10,7 +10,8 @@
       "puzzle" : "false",
       "items" : {
         "mealkit": "single use emergency meal healthItem",
-        "useless_tool": "a useless old rusty metal tool"
+        "useless_tool": "a useless old rusty metal tool",
+        "steve": "seems to be a cool guy"
       },
       "oxygen": "false",
       "asciiArt": "url"
