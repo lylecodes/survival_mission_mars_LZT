@@ -81,6 +81,9 @@ public class Inventory {
         } else if (item.getDescription().contains("cassette")) {
             audio.play("start.wav");
             return 999;
+        } else if (item.getDescription().contains("cool")) {
+            audio.play("developers.wav");
+            return 998;
         }
         else{
             System.out.println("cant eat " + item.getName());

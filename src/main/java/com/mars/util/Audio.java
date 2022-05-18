@@ -19,9 +19,9 @@ public class Audio implements Runnable {
 
     private void findAndPlay(String fileName) {
         if (PLAYED_AUDIO_NAMES.contains(fileName)) {
-            if ("start.wav".equals(fileName)) {
+            if ("start.wav".equals(fileName) || "developers.wav".equals(fileName)) {
                 stop();
-                PLAYED_AUDIO_NAMES.remove("start.wav");
+                PLAYED_AUDIO_NAMES.remove(fileName);
             }
             return;
         }
