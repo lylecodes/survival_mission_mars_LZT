@@ -26,6 +26,7 @@ Buttons:
     Go = enables you to move around space station
     Do GhPuzzle = used to get facility operational
     Game Menu = used to see mission log, game help screen, or quit
+    Mute Audio = turns game audio on/off
 
 Game Ends:
     Player runs out of time

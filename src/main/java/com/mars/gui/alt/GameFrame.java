@@ -458,7 +458,9 @@ public class GameFrame extends JFrame {
                 "Cancel",
                 "Quit",
                 "Game Help",
-                "Mission List" };
+                "Mission List",
+                "Mute Audio"
+        };
 
         int result = JOptionPane.showOptionDialog(
                 gameContainer,
