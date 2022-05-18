@@ -208,7 +208,10 @@ public class GameController {
         public void actionPerformed(ActionEvent e) {
             int reply = gui.popUpGameOption();
             System.out.println(reply);
-            if (reply == 3){
+            if (reply == 4) {
+                audio.toggleMute();
+            }
+            else if (reply == 3){
                 System.out.println("mission list");
                 StringBuilder sb = new StringBuilder("Mission To Do: \n");
                 sb.append("Green House operational: "  + GhPuzzle.isSolved + "\n");
