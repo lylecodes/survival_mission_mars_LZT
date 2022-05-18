@@ -14,6 +14,7 @@ import com.mars.util.Audio;
 import com.mars.util.CommandProcessor;
 import com.mars.util.JSONHandler;
 import com.mars.util.TextParser;
+import com.mars.util.*;
 import com.sun.tools.javac.Main;
 
 import javax.swing.*;
@@ -21,6 +22,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class GameController {
     private final Audio audio = Audio.getInstance();
@@ -31,11 +34,15 @@ public class GameController {
     private Location currentLocation;
     private Inventory inventory = Inventory.getInstance();
     private Display display = new Display();
+    private String dieTime;
+//    TIME
 
     public GameController(GameFrame gui) {
         this.gui = gui;
         this.currentLocation = locationMap.get("Docking Station");
         gui.setTitleScreenHandler(new TitleScreenHandler());
+//        TIME
+        dieTime = TimerSetUp.timeRun(20);
     }
 
     // Title Screen stuff
@@ -43,12 +50,12 @@ public class GameController {
         public void actionPerformed(ActionEvent event) {
 
             System.out.println("hello1");
-
-//            gui.setIntroScreenHandler(new IntroScreenHandler());
             gui.createGameScreen(
                     playerStats.getStats().get("Health"),
                     playerStats.getStats().get("Bone Density"),
-                    inventory.getInventory().toString()
+                    inventory.getInventory().toString(),
+                    TimeCalc.findDifferenceGUI(dieTime)
+
             );
             gui.setDirectionChoiceButtonListeners(new GameScreenHandler());
             gui.setChallengeButtonListeners(new PuzzleButtonHandler());
@@ -61,26 +68,6 @@ public class GameController {
             gui.popUp(storySplash);
         }
     }
-
-    // Intro Screen stuff
-//    class IntroScreenHandler implements ActionListener {
-//        public void actionPerformed(ActionEvent event){
-//            System.out.println("hello2");
-//            gui.createGameScreen(
-//                    playerStats.getStats().get("Health"),
-//                    playerStats.getStats().get("Bone Density"),
-//                    inventory.getInventory().toString()
-//            );
-//            gui.setDirectionChoiceButtonListeners(new GameScreenHandler());
-//            gui.setChallengeButtonListeners(new PuzzleButtonHandler());
-//            gui.setItemButtonListeners(new ItemButtonHandler());
-//            gui.setInventoryListener(new InventoryButtonHandler());
-//            gui.setMainMenuButtonListeners(new MainMenuButtonHandler());
-//
-//            gui.setLocationInfo(currentLocation);
-//
-//        }
-//    }
 
     // Game Screen stuff
     class GameScreenHandler implements ActionListener {
@@ -102,7 +89,8 @@ public class GameController {
                 gui.playerSetup(
                         playerStats.getStats().get("Health"),
                         playerStats.getStats().get("Bone Density"),
-                        inventory.getInventory().toString()
+                        inventory.getInventory().toString(),
+                        TimeCalc.findDifferenceGUI(dieTime)
                 );
                 gui.popUp("You just hit the gym, which restored your bone density");
             }
@@ -118,13 +106,14 @@ public class GameController {
             // update gui with new location info
             gui.setLocationInfo(currentLocation);
             // Subtract Health and Bone Density per turn
-            playerStats.updateCurrentBoneLoss(5);
-            playerStats.updateCurrentHealthLoss(10);
+            playerStats.updateCurrentBoneLoss(2);
+            playerStats.updateCurrentHealthLoss(5);
             //add User Stats
             gui.playerSetup(
                     playerStats.getStats().get("Health"),
                     playerStats.getStats().get("Bone Density"),
-                    inventory.getInventory().toString()
+                    inventory.getInventory().toString(),
+                    TimeCalc.findDifferenceGUI(dieTime)
             );
             if ("Green House".equals(currentLocation.getName())) {
                 audio.play("lobby.wav");
@@ -134,8 +123,6 @@ public class GameController {
                 gui.popUp("You completed all of the puzzles! Amazing!");
                 System.exit(0);
             }
-//            System.out.println(inventory.getInventory().size());
-//            gui.showInventoryItems((ArrayList<String>) inventory.getInventory());
         }
     }
 
@@ -182,7 +169,8 @@ public class GameController {
                     gui.playerSetup(
                             playerStats.getStats().get("Health"),
                             playerStats.getStats().get("Bone Density"),
-                            inventory.getInventory().toString()
+                            inventory.getInventory().toString(),
+                            TimeCalc.findDifferenceGUI(dieTime)
                     );
                     gui.popUp("You ate " + inventoryName + " and got " + value + " health back");
                 }
