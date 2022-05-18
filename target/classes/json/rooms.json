@@ -111,7 +111,8 @@
       "puzzle" : "false",
       "items" : {
         "chuck_taylors" : "classic all-American high tops",
-        "protein_powder" : "the most important macro nutrient healthItem"
+        "protein_powder" : "the most important macro nutrient healthItem",
+        "cassette_player" : "there is a cassette inside... I wonder if I can play it"
       },
       "oxygen": "false",
       "asciiArt": "url"
