@@ -5,9 +5,11 @@ import com.mars.objects.Inventory;
 import com.mars.objects.Location;
 import com.mars.util.ResourceUtils;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
@@ -36,6 +38,9 @@ public class GameFrame extends JFrame {
     private JButton[] choiceButtons;
     private JButton[] itemButtons, inventoryButtons;
     private Display display = new Display();
+
+
+
 
     public GameFrame() {
         setSize(1000, 800);
@@ -418,9 +423,20 @@ public class GameFrame extends JFrame {
                 gameContainer,
                 errorMessage
         );
-
+    }
+    public void popUpImage() {
+        ImageIcon imageIcon =
+                ResourceUtils.getImageIconScaledToLabelSizePopUp("images/happyMars.png");
+        JOptionPane.showMessageDialog(
+                gameContainer,
+                "Hello happy Mars",
+                "asdas",
+                0,
+                imageIcon
+        );
 
     }
+
 
     public int popUpInventory(String item, String description){
         Object[] options1 = { "cancel", "drop",

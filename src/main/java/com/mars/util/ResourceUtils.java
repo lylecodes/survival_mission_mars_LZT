@@ -18,6 +18,11 @@ public class ResourceUtils {
                 Image.SCALE_SMOOTH);
         return new ImageIcon(scaledInstance);
     }
+    public static ImageIcon getImageIconScaledToLabelSizePopUp(String fileName) {
+        BufferedImage bufferedImage = getBufferedImageFromResource(fileName);
+        Image scaledInstance = bufferedImage;
+        return new ImageIcon(scaledInstance);
+    }
 
     public static BufferedImage getBufferedImageFromResource(String fileName) {
         BufferedImage image = null;
