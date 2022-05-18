@@ -1,9 +1,33 @@
-Commands can be single or dual word commands.
+-----Survival Mission Mars-----
+Overview:
+You are placed on Mars and are tasked with getting the base operational.
+To get base operational you will need to get 3 facilities operational:
+    [ ] GreenHouse
+    [ ] Reactor
+    [ ] Solar Panel
+Once base is operational the game ends.
 
-Common single word commands:
-'QUIT'  --  quits the game
-'HELP'  --  brings up this help document
-'MAP'   --  displays Map with your location
+Player Stats:
+    Health: player looses health as he moves around to replenish
+            health you need to eat food which can be picked up.
+            If health reaches 0 game ends.
+    Bone Density: players looses bone density as he moves around.
+                  To replenish bones you need to workout at the gym.
 
-Common dual word commands, start with action words:  'GO', 'GET', 'DROP', 'LOOK', 'USE'
-...and follow with nouns: 'INVENTORY', 'ROOM', 'OXYGEN', 'CHALLENGE', or an item in your inventory, such as 'KEY'
+Items:
+    3 type of items in game.
+        - Junk does nothing
+        - Food replenishes health
+        - keyitems progress story
+
+Buttons:
+    Items Seen = are items that can be picked up
+    backpack items = can be used or dropped
+    Go = enables you to move around space station
+    Do GhPuzzle = used to get facility operational
+    Game Menu = used to see mission log, game help screen, or quit
+
+Game Ends:
+    Player runs out of time
+    Player bone density / health reaches 0
+    PLayer solves all puzzles

@@ -32,26 +32,10 @@ public class GameController {
     private Inventory inventory = Inventory.getInstance();
     private Display display = new Display();
 
-    public boolean isGhSolved() {
-        return isGhSolved;
-    }
-
-    public boolean isReactorSolved() {
-        return isReactorSolved;
-    }
-
-    public boolean isSolarSolved() {
-        return isSolarSolved;
-    }
-
     // Puzzles
     private static boolean isGhSolved = false;
     private static boolean isReactorSolved = false;
     private static boolean isSolarSolved = false;
-
-    public void setCurrentLocation(Location currentLocation) {
-        this.currentLocation = currentLocation;
-    }
 
     public GameController(GameFrame gui) {
         this.gui = gui;
@@ -236,9 +220,9 @@ public class GameController {
             if (reply == 3){
                 System.out.println("mission list");
                 StringBuilder sb = new StringBuilder("Mission To Do: \n");
-                sb.append("Green House operational: "  + isGhSolved() + "\n");
-                sb.append("Reactor Operational: " + isReactorSolved() + "\n");
-                sb.append("Solar Panels operation: " + isSolarSolved() + "\n");
+                sb.append("Green House operational: "  + GhPuzzle.isSolved + "\n");
+                sb.append("Reactor Operational: " +  ReactorPuzzle.isSolved + "\n");
+                sb.append("Solar Panels operation: " + SolarPuzzle.isSolved + "\n");
                 gui.popUp(sb.toString());
             }
             else if (reply == 2){
