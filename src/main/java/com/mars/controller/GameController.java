@@ -93,7 +93,7 @@ public class GameController {
                int response = gui.popUpPlayAgain();
                if(response == 0){
                    gui.setLocationInfo(locationMap.get("Docking Station"));
-                   currentLocation = locationMap.get("Docking Station");
+                   setCurrentLocation(locationMap.get("Docking Station"));
                    playerStats.updateCurrentHealthGain(120);
                    playerStats.updateCurrentBoneGain(120);
                }
