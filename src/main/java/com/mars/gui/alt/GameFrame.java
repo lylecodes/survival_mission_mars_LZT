@@ -116,7 +116,7 @@ public class GameFrame extends JFrame {
         mainTextPanel = new JPanel();
         // added 100 to x and y
         mainTextPanel.setBounds(200, 200, 600, 250);
-        mainTextPanel.setBackground(Color.GREEN);
+        mainTextPanel.setBackground(Color.decode("#d6723b"));
         gameContainer.add(mainTextPanel);
 
         createLocationNameLabel();
@@ -126,8 +126,8 @@ public class GameFrame extends JFrame {
     private void createMainTextArea() {
         mainTextArea = new JTextArea("");
         mainTextArea.setBounds(100, 100, 600, 250);
-        mainTextArea.setBackground(Color.black);
-        mainTextArea.setForeground(Color.white);
+        mainTextArea.setBackground(Color.decode("#d6723b"));
+        mainTextArea.setForeground(Color.darkGray);
         mainTextArea.setFont(normalFont);
         mainTextArea.setLineWrap(true);
         mainTextPanel.add(mainTextArea);
@@ -218,9 +218,9 @@ public class GameFrame extends JFrame {
 
         for (var directionPair : location.getDirections().entrySet()) {
             String direction = directionPair.getKey();
-            String directionName = directionPair.getKey();
+            String directionName = directionPair.getValue();
 
-            String str = "Go " + direction;
+            String str = "Go " + direction + " to " + directionName;
             choiceButtons[buttonIdx].setText(str);
             choiceButtons[buttonIdx].setVisible(true);
             buttonIdx++;
@@ -314,7 +314,7 @@ public class GameFrame extends JFrame {
 
     private void createItemPanel() {
         itemPanel = new JPanel();
-        itemPanel.setBackground(Color.RED);
+        itemPanel.setBackground(Color.decode("#d6723b"));
         itemPanel.setBounds(12, 200, 175, 155);
         itemPanelLabel = new JLabel("Items seen:");
         itemPanelLabel.setFont(menuLabelFont);
@@ -365,7 +365,7 @@ public class GameFrame extends JFrame {
     private void createItemButtonPanel() {
         itemButtonPanel = new JPanel();
         itemButtonPanel.setBounds(350, 450, 300, 400);
-        itemButtonPanel.setBackground(Color.MAGENTA);
+        itemButtonPanel.setBackground(Color.BLACK);
         itemButtonPanel.setLayout(new GridLayout(4, 1));
 
         itemButton1 = newItemButton();
