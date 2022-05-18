@@ -20,7 +20,7 @@ public class GameFrame extends JFrame {
     public static Container gameContainer;
 
     private JPanel titleNamePanel, startButtonPanel, backGroundStoryButtonPanel, mainTextPanel, choiceButtonPanel, playerPanel, backGroundStoryPanel, playerStats, itemPanel, itemButtonPanel, invetoryPanel, inventoryButtonPanel;
-    private JLabel titleNameLabel, playerPanelLabel, hpLabel, hpLabelNumber, inventoryLabel, inventoryLabelName, itemPanelLabel, locationNameLabel, invetoryPanelLabel;
+    private JLabel titleNameLabel, playerPanelLabel, hpLabel, hpLabelNumber, inventoryLabel, inventoryLabelName, itemPanelLabel, locationNameLabel, invetoryPanelLabel, timeLeft;
 
 
     private JProgressBar progressBar, progressBarHealth, progressBarOxygen;
@@ -88,7 +88,7 @@ public class GameFrame extends JFrame {
         startButton.addActionListener(l);
     }
 
-    public void createGameScreen(Integer hp, Integer oxygen, String inventory) {
+    public void createGameScreen(Integer hp, Integer oxygen, String inventory, String time) {
         backGroundStoryPanel.setVisible(false);
         titleNamePanel.setVisible(false);
         startButtonPanel.setVisible(false);
@@ -108,7 +108,7 @@ public class GameFrame extends JFrame {
 
 //        createPlayerStats();
 
-        playerSetup(hp, oxygen, inventory);
+        playerSetup(hp, oxygen, inventory, time);
 
     }
 
@@ -295,7 +295,7 @@ public class GameFrame extends JFrame {
         gameMenu = new JButton();
         gameMenu.setText("Game Menu");
 
-        JLabel timeLabel = newPlayerPanelLabels("Time: 5:00");
+        timeLeft = newPlayerPanelLabels("Time: 5:00");
         JLabel oxygenLabel = newPlayerPanelLabels("Bone Density: ");
         progressBarOxygen = newJProgressBar(0, 100, 100);
 
@@ -306,7 +306,7 @@ public class GameFrame extends JFrame {
         playerPanel.add(progressBarHealth);
         playerPanel.add(progressBarOxygen);
 
-        playerPanel.add(timeLabel);
+        playerPanel.add(timeLeft);
 //        playerPanel.add(inventoryLabel);
         playerPanel.add(gameMenu);
 
@@ -505,10 +505,12 @@ public class GameFrame extends JFrame {
     }
 
 
-    public void playerSetup(Integer hp, Integer oxygen, String inventory) {
+    public void playerSetup(Integer hp, Integer oxygen, String inventory, String time) {
         inventoryLabel.setText("Inventory: " + inventory);
         progressBarHealth.setValue(hp);
         progressBarOxygen.setValue(oxygen);
+        timeLeft.setText(time);
+
 
 //        solarPanel();
     }
