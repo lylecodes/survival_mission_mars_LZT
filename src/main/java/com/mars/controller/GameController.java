@@ -109,12 +109,14 @@ public class GameController {
             playerStats.updateCurrentBoneLoss(2);
             playerStats.updateCurrentHealthLoss(5);
             //add User Stats
+
             gui.playerSetup(
                     playerStats.getStats().get("Health"),
                     playerStats.getStats().get("Bone Density"),
                     inventory.getInventory().toString(),
                     TimeCalc.findDifferenceGUI(dieTime)
             );
+
             if ("Green House".equals(currentLocation.getName())) {
                 audio.play("lobby.wav");
             }
@@ -215,6 +217,8 @@ public class GameController {
                 sb.append("Reactor Operational: " +  ReactorPuzzle.isSolved + "\n");
                 sb.append("Solar Panels operation: " + SolarPuzzle.isSolved + "\n");
                 gui.popUp(sb.toString());
+//                gui.popUpImage();
+//                gui.popUp("hi");
             }
             else if (reply == 2){
                 System.out.println("game help");
