@@ -8,5 +8,6 @@ total failure, with your head held low.
 To Do:
 [ ] Solar Farm operational
 [ ] Reactor operational
-[ ] Hydro operational
 [ ] GreenHouse operational
+
+To see mission log and what needs to be done or get help please press Game Menu button

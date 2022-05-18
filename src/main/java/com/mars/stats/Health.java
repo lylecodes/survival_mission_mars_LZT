@@ -25,13 +25,13 @@ package com.mars.stats;
         }
 
         public void updateHealthGain(int healthGain){
-//            if (healthGain + health >= 100){
-//                health = 100;
-//            }
-//            else{
-//                health = health + healthGain;
-//            }
-            health = health + healthGain;
+            if (healthGain + health >= 100){
+                health = 100;
+            }
+            else{
+                health = health + healthGain;
+            }
+//            health = health + healthGain;
         }
 
         @Override
