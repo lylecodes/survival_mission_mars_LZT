@@ -38,6 +38,8 @@ public class GameFrame extends JFrame {
     private JButton[] choiceButtons;
     private JButton[] itemButtons, inventoryButtons;
     private Display display = new Display();
+    private ImageIcon imageIcon =
+            ResourceUtils.getImageIconScaledToLabelSizePopUp("images/happyMars.png");
 
 
 
@@ -421,7 +423,10 @@ public class GameFrame extends JFrame {
 
         JOptionPane.showMessageDialog(
                 gameContainer,
-                errorMessage
+                errorMessage,
+                "mars",
+                0,
+                imageIcon
         );
     }
     public void popUpImage() {
@@ -448,7 +453,7 @@ public class GameFrame extends JFrame {
                 "Item: " + item,
                 JOptionPane.YES_NO_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
-                null,
+                imageIcon,
                 options1,
                 options1[2]);
         return result;
@@ -463,7 +468,7 @@ public class GameFrame extends JFrame {
                 "Game Over",
                 JOptionPane.YES_NO_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
-                null,
+                imageIcon,
                 options1,
                 options1[0]);
         return result;
@@ -484,7 +489,7 @@ public class GameFrame extends JFrame {
                 "Game Option",
                 JOptionPane.YES_NO_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
-                null,
+                imageIcon,
                 options1,
                 options1[0]);
         return result;
