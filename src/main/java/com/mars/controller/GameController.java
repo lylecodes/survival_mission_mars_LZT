@@ -169,8 +169,19 @@ public class GameController {
                 System.out.println("using item " + inventoryName );
                 Item itemToUse = inventory.getItem(inventoryName);
                 int value = inventory.use(itemToUse);
-                if (value == 999 || value == 998) {
+                if (value == 999) {
                     System.out.println();
+                }
+                else if (value == 998){
+                    System.out.println("Steve activated");
+                    gui.popUp("You feel the motivation and the hype that was felts during Windows95 release. \n" +
+                            "In your ears you hear a slow chant 'Developers, Developers, DEVELOPERS!, DEVELOPERS!!' \n" +
+                            "your hyped");
+                    int response = gui.popUpGodMode();
+                    if (response == 0){
+                        System.out.println("GODMODE");
+//                        INSERT AUDIO HERE
+                    }
                 }
                 else if (value > 0){
                     System.out.println(value);
