@@ -432,7 +432,7 @@ public class GameFrame extends JFrame {
                 imageIcon
         );
     }
-    
+    //For map
     public void popUpImage() {
         ImageIcon imageIcon =
                 ResourceUtils.getImageIconScaledToLabelSizePopUp("images/mappymap.jpg");
@@ -440,7 +440,6 @@ public class GameFrame extends JFrame {
                 gameContainer,
                 imageIcon
         );
-
     }
 
     public int popUpInventory(String item, String description){
@@ -708,111 +707,3 @@ public class GameFrame extends JFrame {
         choiceButton4.setVisible(false);
     }
 }
-
-
-//    public  class ChoiceHandler implements ActionListener {
-//        public void actionPerformed(ActionEvent event) {
-//            String yourChoice = event.getActionCommand();
-//            switch (position) {
-//                case "solarPanel":
-//                    switch (yourChoice) {
-//                        case "c1":
-//                            //if (keys == 1)
-//                                ending();
-//                            //else
-//                                challenge();
-//                            break;
-//                        case "c2":
-//                            challenge();
-//                            if(playerHP < 1)
-//                                lose();
-//                            break;
-//                        case "c3":
-//                            crossRoad();
-//                            break;
-//                    }
-//                    break;
-//                case "north":
-//                    switch (yourChoice) {
-//                        case "c1":
-//                            solarPanel();
-//                            break;
-//                    }
-//                    break;
-//                case "south":
-//                    switch (yourChoice) {
-//                        case "c1":
-//                            solarPanel();
-//                            break;
-//                    }
-//                    break;
-//                case "east":
-//                    switch (yourChoice) {
-//                        case "c1":
-//                            north();
-//                            break;
-//                        case "c2":
-//                            east();
-//                            break;
-//                        case "c3":
-//                            solarPanel();
-//                            break;
-//                        case "c4":
-//                            west();
-//                            break;
-//                    }
-//                    break;
-//                case "west":
-//                    switch (yourChoice) {
-//                        case "c1":
-//                            //place();//todo places into case
-//                            break;
-//                        case "c2":
-//                            crossRoad();
-//                            break;
-//                    }
-//                    break;
-//                case "use":
-//                    switch (yourChoice) {
-//                        case "c1":
-//                            north();
-//                            break;
-//                        case "c2":
-//                            crossRoad();
-//                            break;
-//                    }
-//                    break;
-//                case "playerdamage":
-//                    switch (yourChoice) {
-//                        case "c1":
-//                            if (airdamageHP < 1) {
-//                                win();
-//                            } else {
-//                                airdamageAttack();
-//                            }
-//                            break;
-//                    }
-//                    break;
-//
-//                case "bonedamage":
-//
-//                    switch (yourChoice) {
-//                        case "c1":
-//                            if (playerHP < 1) {
-//                                lose();
-//                            } else {
-//                                lose();
-//                            }
-//                            break;
-//                    }
-//                    break;
-//                case "win":
-//                    switch (yourChoice) {
-//                        case "c1":
-//                            crossRoad();
-//                    }
-//                    break;
-//            }
-//        }
-//    }
-//}
