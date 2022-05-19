@@ -70,7 +70,6 @@ public class GameController {
     // Game Screen stuff
     private class GameScreenHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-
 //            Game Events will go here
             IsGameEventActive.playerAtGym(gui,
                     playerStats, currentLocation, locationMap,
@@ -200,11 +199,19 @@ public class GameController {
 
     private class PuzzleButtonHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            Puzzle puzzle = currentLocation.getTypePuzzle();
-            boolean puzzleComplete = puzzle.runPuzzle();
-            if (puzzleComplete) {
+            if (e.toString().contains("gym")){
+                IsGameEventActive.playerAtGym(gui,
+                        playerStats, currentLocation, locationMap,
+                        inventory, dieTime, minutesToCompleteGame);
+            }
+            else{
+                Puzzle puzzle = currentLocation.getTypePuzzle();
+                boolean puzzleComplete = puzzle.runPuzzle();
+                if (puzzleComplete) {
 
-                ((JButton) e.getSource()).setVisible(false);
+                    ((JButton) e.getSource()).setVisible(false);
+            }
+
             }
         }
     }
