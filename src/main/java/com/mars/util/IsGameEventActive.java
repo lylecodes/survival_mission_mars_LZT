@@ -48,6 +48,15 @@ public final class IsGameEventActive {
             audio.play("lobby.wav");
         }
     }
-//    public static void playerActivatesGodMode(){
-//    }
+    public static void playerActivatesGodMode(Stats playerStats, boolean isGodMode){
+        if (isGodMode) {
+            GameController.setBoneLoss(0);
+            GameController.setHealthLoss(0);
+            GameController.setGodMode(true);
+            playerStats.updateCurrentBoneGain(120);
+            playerStats.updateCurrentHealthGain(120);
+            GameController.setDieTime(TimerSetUp.timeRun(999));
+//            audio.play("developers_song.wav");
+        }
+    }
 }
