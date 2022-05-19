@@ -467,6 +467,22 @@ public class GameFrame extends JFrame {
                 options1[2]);
         return result;
     }
+    public int popUpGodMode(){
+        Object[] options1 = {
+                "Yes",
+                "No"
+        };
+        int result = JOptionPane.showOptionDialog(
+                gameContainer,
+                "You are pumped, do you want to activate God mode?",
+                "Steve B Secret",
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                imageIcon,
+                options1,
+                options1[1]);
+        return result;
+    }
 
     public int popUpPlayAgain(){
         Object[] options1 = { "Play Again!",
