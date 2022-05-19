@@ -432,6 +432,7 @@ public class GameFrame extends JFrame {
                 imageIcon
         );
     }
+    
     public void popUpImage() {
         ImageIcon imageIcon =
                 ResourceUtils.getImageIconScaledToLabelSizePopUp("images/mappymap.jpg");
@@ -441,7 +442,6 @@ public class GameFrame extends JFrame {
         );
 
     }
-
 
     public int popUpInventory(String item, String description){
         Object[] options1 = { "cancel", "drop",
