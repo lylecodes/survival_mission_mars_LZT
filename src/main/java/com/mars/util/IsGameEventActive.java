@@ -21,7 +21,6 @@ public final class IsGameEventActive {
             int minutesToCompleteGame
     ) {
         if (currentLocation.equals(locationMap.get("Gym"))) {
-
             playerStats.updateCurrentBoneGain(120);
             gui.playerSetup(
                     playerStats.getStats().get("Health"),
@@ -32,10 +31,18 @@ public final class IsGameEventActive {
             gui.popUp("You just hit the gym, which restored your bone density");
         }
     }
-
+    public static void playerAtGreenHouse(
+            Location currentLocation,
+            Audio audio
+    ) {
+        if ("Green House".equals(currentLocation.getName())) {
+            audio.play("lobby.wav");
+        }
+    }
     public static void playerAtMiddleBuilding(
             Location currentLocation,
-            Audio audio){
+            Audio audio
+    ){
         if ("Middle Building".equals(currentLocation.getName())) {
             audio.play("lobby.wav");
         }
