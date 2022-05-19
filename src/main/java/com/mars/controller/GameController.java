@@ -16,14 +16,13 @@ import com.mars.util.JSONHandler;
 import com.mars.util.TextParser;
 import com.mars.util.*;
 import com.sun.tools.javac.Main;
+import org.w3c.dom.ls.LSOutput;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Map;
+import java.util.*;
 import java.util.Timer;
-import java.util.TimerTask;
 
 public class GameController {
     private final Audio audio = Audio.getInstance();
@@ -36,13 +35,19 @@ public class GameController {
     private Display display = new Display();
     private String dieTime;
     private int minutesToCompleteGame = 10;
+    private Random rand;
+//    TIME
+
 
     public GameController(GameFrame gui) {
         this.gui = gui;
         this.currentLocation = locationMap.get("Docking Station");
         gui.setTitleScreenHandler(new TitleScreenHandler());
+
 //        TIME set up end time
         dieTime = TimerSetUp.timeRun(minutesToCompleteGame);
+        rand = new Random();
+
     }
 
     // Title Screen stuff
@@ -72,6 +77,7 @@ public class GameController {
     // Game Screen stuff
     class GameScreenHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
+
 //            Game Events will go here
             IsGameEventActive.playerAtGym(gui,
                     playerStats, currentLocation, locationMap,
@@ -79,6 +85,31 @@ public class GameController {
             IsGameEventActive.playerAtGreenHouse(currentLocation, audio);
 
 //            Game GUI
+            checkForRandomEventAndEditLocation();
+
+//             if (playerStats.getStats().get("Health") <= 0 || playerStats.getStats().get("Bone Density") <= 0){
+//                int response = gui.popUpPlayAgain();
+//                if(response == 0){
+//                    gui.setLocationInfo(locationMap.get("Docking Station"));
+//                    currentLocation = locationMap.get("Docking Station");
+//                    playerStats.updateCurrentHealthGain(120);
+//                    playerStats.updateCurrentBoneGain(120);
+//                }
+//                else{
+//                    System.exit(0);
+//                }
+//             }
+//             if (currentLocation.equals(locationMap.get("Gym"))){
+//                 playerStats.updateCurrentBoneGain(120);
+//                 gui.playerSetup(
+//                         playerStats.getStats().get("Health"),
+//                         playerStats.getStats().get("Bone Density"),
+//                         inventory.getInventory().toString(),
+//                         TimeCalc.findDifferenceGUI(dieTime)
+//                 );
+//                 gui.popUp("You just hit the gym, which restored your bone density");
+//             }
+
             System.out.println("hello3");
             // get text input from field
             String choice = ((JButton) e.getSource()).getText();
@@ -105,9 +136,40 @@ public class GameController {
             IsGameOverYet.timeUp(gui, TimeCalc.findDifferenceGUI(dieTime, minutesToCompleteGame));
             IsGameOverYet.puzzlesSolved(gui, audio);
             IsGameOverYet.statsAtZero(gui,playerStats);
+            if ("Middle Building".equals(currentLocation.getName())) {
+                audio.play("lobby.wav");
+            }
+//             if (allPuzzlesCompleted()) {
+//                 audio.play("hellyes.wav");
+//                 gui.popUp("You completed all of the puzzles! Amazing!");
+//                 System.exit(0);
+//             }
         }
 
 
+    }
+
+    public void checkForRandomEventAndEditLocation() {
+        Item item = null;
+        int randomNum = rand.nextInt(20);
+        if (randomNum != 1) {
+            item = new Item("Steve", "seems like a cool guy");
+        }
+
+        if (randomNum != 5) {
+            Item alien = new Item("lil alien", "\"I work for Amazon\"");
+            Item banana = new Item("banana", "it is a glowing banana");
+            List<Item> roomItems = new ArrayList<>(Arrays.asList(alien ,banana));
+            Map<String,String> directions = Map.of("north", "Green House");
+            locationMap.put("Middle Building",
+                    new Location("Middle Building",
+                            directions,
+                            "I don't remember this place being here...",
+                            roomItems, false, "", false));
+            locationMap.get("Hydro").getDirections().put("south", "Middle Building");
+        }
+
+        if (item != null) currentLocation.addItem(item);
     }
 
     class ItemButtonHandler implements ActionListener {
@@ -161,8 +223,6 @@ public class GameController {
                 else{
                     gui.popUp("You cant use " + inventoryName);
                 }
-
-
             }
             else if(answer == 1){
                 System.out.println("dropping item " + inventoryName);
@@ -192,10 +252,10 @@ public class GameController {
         public void actionPerformed(ActionEvent e) {
             int reply = gui.popUpGameOption();
             System.out.println(reply);
-            if (reply == 4) {
+            if (reply == 5) {
                 audio.toggleMute();
             }
-            else if (reply == 3){
+            else if (reply == 4){
                 System.out.println("mission list");
                 StringBuilder sb = new StringBuilder("Mission To Do: \n");
                 sb.append("Green House operational: "  + GhPuzzle.isSolved + "\n");
@@ -204,6 +264,10 @@ public class GameController {
                 gui.popUp(sb.toString());
 //                gui.popUpImage();
 //                gui.popUp("hi");
+            }
+            else if (reply == 3){
+                System.out.println("map");
+                gui.popUpImage();
             }
             else if (reply == 2){
                 System.out.println("game help");

@@ -149,7 +149,7 @@ public class GameFrame extends JFrame {
     private void createButtonPanel() {
         choiceButtonPanel = new JPanel();
         // added 100 to x and y
-        choiceButtonPanel.setBounds(350, 450, 300, 150);
+        choiceButtonPanel.setBounds(300, 450, 400, 200);
         choiceButtonPanel.setBackground(Color.BLACK);
         choiceButtonPanel.setLayout(new GridLayout(5, 1));
         gameContainer.add(choiceButtonPanel);
@@ -169,6 +169,9 @@ public class GameFrame extends JFrame {
 
 
         choiceButtons = new JButton[]{choiceButton1, choiceButton2, choiceButton3, choiceButton4};
+        for (JButton button : choiceButtons) {
+            button.setPreferredSize(new Dimension(300, 100));
+        }
     }
 
     public void createIntroScreen() {
@@ -431,12 +434,9 @@ public class GameFrame extends JFrame {
     }
     public void popUpImage() {
         ImageIcon imageIcon =
-                ResourceUtils.getImageIconScaledToLabelSizePopUp("images/happyMars.png");
+                ResourceUtils.getImageIconScaledToLabelSizePopUp("images/mappymap.jpg");
         JOptionPane.showMessageDialog(
                 gameContainer,
-                "Hello happy Mars",
-                "asdas",
-                0,
                 imageIcon
         );
 
@@ -479,6 +479,7 @@ public class GameFrame extends JFrame {
                 "Cancel",
                 "Quit",
                 "Game Help",
+                "Map",
                 "Mission List",
                 "Mute Audio"
         };
