@@ -179,15 +179,14 @@ public class GameController {
                 }
                 else if (value == 998){
                     System.out.println("Steve activated");
-                    gui.popUp("You feel the motivation and the hype that was felts during Windows95 release. \n" +
-                            "In your ears you hear a slow chant 'Developers, Developers, DEVELOPERS!, DEVELOPERS!!' \n" +
-                            "your hyped");
+                    gui.popUp("You feel the motivation and hype that was felt during the Windows95 release. \n" +
+                            "In your ears you hear a slow chant 'Developers, Developers, DEVELOPERS!, DEVELOPERS!!'");
                     int response = gui.popUpGodMode();
                     if (response == 0){
                         System.out.println("GODMODE");
                         gui.popUp("GODMODE!!!!");
                         isGodMode = true;
-//                        INSERT AUDIO HERE
+                        audio.play("developers_song.wav");
                     }
                 }
                 else if (value > 0){
