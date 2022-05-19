@@ -28,13 +28,30 @@ public class GameController {
     private Location currentLocation;
     private final Inventory inventory = Inventory.getInstance();
     private final Display display = new Display();
-    private String dieTime;
+    private static String dieTime;
     private Random rand = new Random();
     private List<String> randomEventNames = new ArrayList<>();
     private int minutesToCompleteGame = 10;
-    private boolean isGodMode = false;
-    private int boneLoss = 2;
-    private int healthLoss = 5;
+    private static boolean isGodMode = false;
+    private static int boneLoss = 2;
+
+    public static void setDieTime(String dieTime) {
+        GameController.dieTime = dieTime;
+    }
+
+    public static void setGodMode(boolean godMode) {
+        isGodMode = godMode;
+    }
+
+    public static void setBoneLoss(int boneLoss) {
+        GameController.boneLoss = boneLoss;
+    }
+
+    public static void setHealthLoss(int healthLoss) {
+        GameController.healthLoss = healthLoss;
+    }
+
+    private static int healthLoss = 5;
 //    TIME
 
     public GameController(GameFrame gui) {
@@ -75,14 +92,7 @@ public class GameController {
         public void actionPerformed(ActionEvent e) {
 //            Game Events will go here
             IsGameEventActive.playerAtMiddleBuilding(currentLocation, audio);
-            if (isGodMode){
-                boneLoss = 0;
-                healthLoss = 0;
-                playerStats.updateCurrentBoneGain(120);
-                playerStats.updateCurrentHealthGain(120);
-                dieTime = TimerSetUp.timeRun(9999);
-
-            }
+            IsGameEventActive.playerActivatesGodMode(playerStats, isGodMode);
 //            Game GUI
             checkForRandomEventAndEditLocation();
             System.out.println("hello3");
@@ -187,6 +197,7 @@ public class GameController {
                         gui.popUp("GODMODE!!!!");
                         isGodMode = true;
                         audio.play("developers_song.wav");
+
                     }
                 }
                 else if (value > 0){
