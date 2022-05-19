@@ -77,9 +77,6 @@ public class GameController {
     class GameScreenHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
 //            Game Events will go here
-            IsGameEventActive.playerAtGym(gui,
-                    playerStats, currentLocation, locationMap,
-                    inventory, dieTime, minutesToCompleteGame);
             IsGameEventActive.playerAtMiddleBuilding(currentLocation, audio);
 
 //            Game GUI
