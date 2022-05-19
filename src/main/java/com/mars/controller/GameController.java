@@ -16,14 +16,13 @@ import com.mars.util.JSONHandler;
 import com.mars.util.TextParser;
 import com.mars.util.*;
 import com.sun.tools.javac.Main;
+import org.w3c.dom.ls.LSOutput;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Map;
+import java.util.*;
 import java.util.Timer;
-import java.util.TimerTask;
 
 public class GameController {
     private final Audio audio = Audio.getInstance();
@@ -35,6 +34,7 @@ public class GameController {
     private Inventory inventory = Inventory.getInstance();
     private Display display = new Display();
     private String dieTime;
+    private Random rand;
 //    TIME
 
     public GameController(GameFrame gui) {
@@ -43,6 +43,7 @@ public class GameController {
         gui.setTitleScreenHandler(new TitleScreenHandler());
 //        TIME
         dieTime = TimerSetUp.timeRun(20);
+        rand = new Random();
     }
 
     // Title Screen stuff
@@ -72,6 +73,8 @@ public class GameController {
     // Game Screen stuff
     class GameScreenHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
+            checkForRandomEventAndEditLocation();
+
             if (playerStats.getStats().get("Health") <= 0 || playerStats.getStats().get("Bone Density") <= 0){
                int response = gui.popUpPlayAgain();
                if(response == 0){
@@ -117,7 +120,7 @@ public class GameController {
                     TimeCalc.findDifferenceGUI(dieTime)
             );
 
-            if ("Green House".equals(currentLocation.getName())) {
+            if ("Middle Building".equals(currentLocation.getName())) {
                 audio.play("lobby.wav");
             }
             if (allPuzzlesCompleted()) {
@@ -126,6 +129,29 @@ public class GameController {
                 System.exit(0);
             }
         }
+    }
+
+    public void checkForRandomEventAndEditLocation() {
+        Item item = null;
+        int randomNum = rand.nextInt(20);
+        if (randomNum != 1) {
+            item = new Item("Steve", "seems like a cool guy");
+        }
+
+        if (randomNum != 5) {
+            Item alien = new Item("lil alien", "\"I work for Amazon\"");
+            Item banana = new Item("banana", "it is a glowing banana");
+            List<Item> roomItems = new ArrayList<>(Arrays.asList(alien ,banana));
+            Map<String,String> directions = Map.of("north", "Green House");
+            locationMap.put("Middle Building",
+                    new Location("Middle Building",
+                            directions,
+                            "I don't remember this place being here...",
+                            roomItems, false, "", false));
+            locationMap.get("Hydro").getDirections().put("south", "Middle Building");
+        }
+
+        if (item != null) currentLocation.addItem(item);
     }
 
     class ItemButtonHandler implements ActionListener {
@@ -179,8 +205,6 @@ public class GameController {
                 else{
                     gui.popUp("You cant use " + inventoryName);
                 }
-
-
             }
             else if(answer == 1){
                 System.out.println("dropping item " + inventoryName);
