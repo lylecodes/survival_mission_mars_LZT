@@ -21,6 +21,7 @@ public final class IsGameEventActive {
             int minutesToCompleteGame
     ) {
         if (currentLocation.equals(locationMap.get("Gym"))) {
+
             playerStats.updateCurrentBoneGain(120);
             gui.playerSetup(
                     playerStats.getStats().get("Health"),
