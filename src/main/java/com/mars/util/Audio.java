@@ -20,10 +20,13 @@ public class Audio implements Runnable {
     private void findAndPlay(String fileName) {
         if (PLAYED_AUDIO_NAMES.contains(fileName)) {
             if ("start.wav".equals(fileName) || "developers.wav".equals(fileName)) {
-                if (clip.isActive()) stop();
-                PLAYED_AUDIO_NAMES.remove(fileName);
+                if (clip.isActive()) {
+                    clip.stop();
+                    return;
+                }
+            } else {
+                return;
             }
-            return;
         }
         PLAYED_AUDIO_NAMES.add(fileName);
         AudioInputStream audioInputStream = null;

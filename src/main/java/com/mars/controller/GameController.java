@@ -34,8 +34,9 @@ public class GameController {
     private Inventory inventory = Inventory.getInstance();
     private Display display = new Display();
     private String dieTime;
+    private Random rand = new Random();
+    private List<String> randomEventNames = new ArrayList<>();
     private int minutesToCompleteGame = 10;
-    private Random rand;
 //    TIME
 
 
@@ -46,8 +47,6 @@ public class GameController {
 
 //        TIME set up end time
         dieTime = TimerSetUp.timeRun(minutesToCompleteGame);
-        rand = new Random();
-
     }
 
     // Title Screen stuff
@@ -117,10 +116,13 @@ public class GameController {
     }
 
     public void checkForRandomEventAndEditLocation() {
-        Item item = null;
         int randomNum = rand.nextInt(20);
         if (randomNum != 1) {
-            item = new Item("Steve", "seems like a cool guy");
+            if (randomEventNames.contains("steve")) return;
+
+            randomEventNames.add("steve");
+            Item item = new Item("Steve", "seems like a cool guy");
+            currentLocation.addItem(item);
         }
 
         if (randomNum != 5) {
@@ -136,7 +138,6 @@ public class GameController {
             locationMap.get("Hydro").getDirections().put("south", "Middle Building");
         }
 
-        if (item != null) currentLocation.addItem(item);
     }
 
     class ItemButtonHandler implements ActionListener {
