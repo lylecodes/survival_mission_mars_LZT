@@ -186,6 +186,7 @@ public class GameController {
                         System.out.println("GODMODE");
                         gui.popUp("GODMODE!!!!");
                         isGodMode = true;
+                        gui.setFireImage();
                         audio.play("developers_song.wav");
                     }
                 }
