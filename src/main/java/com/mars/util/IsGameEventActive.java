@@ -3,6 +3,7 @@ package com.mars.util;
  * Hanldes all the
  */
 
+import com.mars.controller.GameController;
 import com.mars.gui.alt.GameFrame;
 import com.mars.objects.Inventory;
 import com.mars.objects.Location;
@@ -47,4 +48,6 @@ public final class IsGameEventActive {
             audio.play("lobby.wav");
         }
     }
+//    public static void playerActivatesGodMode(){
+//    }
 }
