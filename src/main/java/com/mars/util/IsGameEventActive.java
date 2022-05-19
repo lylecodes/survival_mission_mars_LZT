@@ -39,4 +39,12 @@ public final class IsGameEventActive {
             audio.play("lobby.wav");
         }
     }
+    public static void playerAtMiddleBuilding(
+            Location currentLocation,
+            Audio audio
+    ){
+        if ("Middle Building".equals(currentLocation.getName())) {
+            audio.play("lobby.wav");
+        }
+    }
 }
