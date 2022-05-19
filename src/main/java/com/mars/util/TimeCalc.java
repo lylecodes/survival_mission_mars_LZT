@@ -29,7 +29,7 @@ public class TimeCalc {
         }
     }
 
-    public static String findDifferenceGUI(String dieTime) {
+    public static String findDifferenceGUI(String dieTime, int timelimit) {
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
         String timeStamp = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss").format(Calendar.getInstance().getTime());
         // Try Block
@@ -40,8 +40,12 @@ public class TimeCalc {
             long difference_In_Time = d2.getTime() - d1.getTime();
             long difference_In_Minutes = (difference_In_Time / (1000 * 60)) % 60;
             long difference_In_Seconds = (difference_In_Time / 1000) % 60;
-            sb.append(difference_In_Minutes + ":" +difference_In_Seconds);
-
+            if (difference_In_Minutes <= 0 && difference_In_Seconds <= 0){
+                sb.append("gameOver");
+            }
+            else{
+                sb.append(difference_In_Minutes + ":" +difference_In_Seconds);
+            }
         }
         // Catch the Exception
         catch (ParseException e) {
