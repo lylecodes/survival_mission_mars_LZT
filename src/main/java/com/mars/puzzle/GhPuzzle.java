@@ -33,8 +33,8 @@ public class GhPuzzle implements Puzzle{
                     "Would you like to plant some seeds?", this.getName());
             if (res == 0) {
                 inventory.drop("seeds");
-                Audio audio = Audio.getInstance();
-                audio.play("planting_seeds.wav");
+//                Audio audio = Audio.getInstance();
+//                audio.play("planting_seeds.wav");
                 isSolved = true;
                 popUpDialogueEnd("Congratulations! You are able to grow food on Mars!", this.getName());
             } else if (res == 1) {
