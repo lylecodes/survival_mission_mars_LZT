@@ -32,6 +32,9 @@ public class GameController {
     private Random rand = new Random();
     private List<String> randomEventNames = new ArrayList<>();
     private int minutesToCompleteGame = 10;
+    private boolean isGodMode = false;
+    private int boneLoss = 2;
+    private int healthLoss = 5;
 //    TIME
 
     public GameController(GameFrame gui) {
@@ -72,7 +75,14 @@ public class GameController {
         public void actionPerformed(ActionEvent e) {
 //            Game Events will go here
             IsGameEventActive.playerAtMiddleBuilding(currentLocation, audio);
+            if (isGodMode){
+                boneLoss = 0;
+                healthLoss = 0;
+                playerStats.updateCurrentBoneGain(120);
+                playerStats.updateCurrentHealthGain(120);
+                dieTime = TimerSetUp.timeRun(9999);
 
+            }
 //            Game GUI
             checkForRandomEventAndEditLocation();
             System.out.println("hello3");
@@ -87,8 +97,8 @@ public class GameController {
             // update gui with new location info
             gui.setLocationInfo(currentLocation);
             // Subtract Health and Bone Density per turn
-            playerStats.updateCurrentBoneLoss(2);
-            playerStats.updateCurrentHealthLoss(5);
+            playerStats.updateCurrentBoneLoss(boneLoss);
+            playerStats.updateCurrentHealthLoss(healthLoss);
             //add User Stats
             gui.playerSetup(
                     playerStats.getStats().get("Health"),
@@ -174,6 +184,8 @@ public class GameController {
                     int response = gui.popUpGodMode();
                     if (response == 0){
                         System.out.println("GODMODE");
+                        gui.popUp("GODMODE!!!!");
+                        isGodMode = true;
                         audio.play("developers_song.wav");
                     }
                 }
