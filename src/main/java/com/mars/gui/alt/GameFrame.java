@@ -431,12 +431,9 @@ public class GameFrame extends JFrame {
     }
     public void popUpImage() {
         ImageIcon imageIcon =
-                ResourceUtils.getImageIconScaledToLabelSizePopUp("images/happyMars.png");
+                ResourceUtils.getImageIconScaledToLabelSizePopUp("images/mappymap.jpg");
         JOptionPane.showMessageDialog(
                 gameContainer,
-                "Hello happy Mars",
-                "asdas",
-                0,
                 imageIcon
         );
 
@@ -479,6 +476,7 @@ public class GameFrame extends JFrame {
                 "Cancel",
                 "Quit",
                 "Game Help",
+                "Map",
                 "Mission List",
                 "Mute Audio"
         };

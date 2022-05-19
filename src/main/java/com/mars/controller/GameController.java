@@ -210,10 +210,10 @@ public class GameController {
         public void actionPerformed(ActionEvent e) {
             int reply = gui.popUpGameOption();
             System.out.println(reply);
-            if (reply == 4) {
+            if (reply == 5) {
                 audio.toggleMute();
             }
-            else if (reply == 3){
+            else if (reply == 4){
                 System.out.println("mission list");
                 StringBuilder sb = new StringBuilder("Mission To Do: \n");
                 sb.append("Green House operational: "  + GhPuzzle.isSolved + "\n");
@@ -222,6 +222,10 @@ public class GameController {
                 gui.popUp(sb.toString());
 //                gui.popUpImage();
 //                gui.popUp("hi");
+            }
+            else if (reply == 3){
+                System.out.println("map");
+                gui.popUpImage();
             }
             else if (reply == 2){
                 System.out.println("game help");
