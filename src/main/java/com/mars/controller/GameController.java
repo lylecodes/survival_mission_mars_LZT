@@ -34,16 +34,20 @@ public class GameController {
     private Inventory inventory = Inventory.getInstance();
     private Display display = new Display();
     private String dieTime;
+    private int minutesToCompleteGame = 10;
     private Random rand;
 //    TIME
+
 
     public GameController(GameFrame gui) {
         this.gui = gui;
         this.currentLocation = locationMap.get("Docking Station");
         gui.setTitleScreenHandler(new TitleScreenHandler());
-//        TIME
-        dieTime = TimerSetUp.timeRun(20);
+
+//        TIME set up end time
+        dieTime = TimerSetUp.timeRun(minutesToCompleteGame);
         rand = new Random();
+
     }
 
     // Title Screen stuff
@@ -55,7 +59,7 @@ public class GameController {
                     playerStats.getStats().get("Health"),
                     playerStats.getStats().get("Bone Density"),
                     inventory.getInventory().toString(),
-                    TimeCalc.findDifferenceGUI(dieTime)
+                    TimeCalc.findDifferenceGUI(dieTime, minutesToCompleteGame)
 
             );
             gui.setDirectionChoiceButtonListeners(new GameScreenHandler());
@@ -73,30 +77,39 @@ public class GameController {
     // Game Screen stuff
     class GameScreenHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
+
+//            Game Events will go here
+            IsGameEventActive.playerAtGym(gui,
+                    playerStats, currentLocation, locationMap,
+                    inventory, dieTime, minutesToCompleteGame);
+            IsGameEventActive.playerAtGreenHouse(currentLocation, audio);
+
+//            Game GUI
             checkForRandomEventAndEditLocation();
 
-            if (playerStats.getStats().get("Health") <= 0 || playerStats.getStats().get("Bone Density") <= 0){
-               int response = gui.popUpPlayAgain();
-               if(response == 0){
-                   gui.setLocationInfo(locationMap.get("Docking Station"));
-                   currentLocation = locationMap.get("Docking Station");
-                   playerStats.updateCurrentHealthGain(120);
-                   playerStats.updateCurrentBoneGain(120);
-               }
-               else{
-                   System.exit(0);
-               }
-            }
-            if (currentLocation.equals(locationMap.get("Gym"))){
-                playerStats.updateCurrentBoneGain(120);
-                gui.playerSetup(
-                        playerStats.getStats().get("Health"),
-                        playerStats.getStats().get("Bone Density"),
-                        inventory.getInventory().toString(),
-                        TimeCalc.findDifferenceGUI(dieTime)
-                );
-                gui.popUp("You just hit the gym, which restored your bone density");
-            }
+//             if (playerStats.getStats().get("Health") <= 0 || playerStats.getStats().get("Bone Density") <= 0){
+//                int response = gui.popUpPlayAgain();
+//                if(response == 0){
+//                    gui.setLocationInfo(locationMap.get("Docking Station"));
+//                    currentLocation = locationMap.get("Docking Station");
+//                    playerStats.updateCurrentHealthGain(120);
+//                    playerStats.updateCurrentBoneGain(120);
+//                }
+//                else{
+//                    System.exit(0);
+//                }
+//             }
+//             if (currentLocation.equals(locationMap.get("Gym"))){
+//                 playerStats.updateCurrentBoneGain(120);
+//                 gui.playerSetup(
+//                         playerStats.getStats().get("Health"),
+//                         playerStats.getStats().get("Bone Density"),
+//                         inventory.getInventory().toString(),
+//                         TimeCalc.findDifferenceGUI(dieTime)
+//                 );
+//                 gui.popUp("You just hit the gym, which restored your bone density");
+//             }
+
             System.out.println("hello3");
             // get text input from field
             String choice = ((JButton) e.getSource()).getText();
@@ -112,23 +125,28 @@ public class GameController {
             playerStats.updateCurrentBoneLoss(2);
             playerStats.updateCurrentHealthLoss(5);
             //add User Stats
-
             gui.playerSetup(
                     playerStats.getStats().get("Health"),
                     playerStats.getStats().get("Bone Density"),
                     inventory.getInventory().toString(),
-                    TimeCalc.findDifferenceGUI(dieTime)
+                    TimeCalc.findDifferenceGUI(dieTime, minutesToCompleteGame)
             );
 
+//            is game over yet??
+            IsGameOverYet.timeUp(gui, TimeCalc.findDifferenceGUI(dieTime, minutesToCompleteGame));
+            IsGameOverYet.puzzlesSolved(gui, audio);
+            IsGameOverYet.statsAtZero(gui,playerStats);
             if ("Middle Building".equals(currentLocation.getName())) {
                 audio.play("lobby.wav");
             }
-            if (allPuzzlesCompleted()) {
-                audio.play("hellyes.wav");
-                gui.popUp("You completed all of the puzzles! Amazing!");
-                System.exit(0);
-            }
+//             if (allPuzzlesCompleted()) {
+//                 audio.play("hellyes.wav");
+//                 gui.popUp("You completed all of the puzzles! Amazing!");
+//                 System.exit(0);
+//             }
         }
+
+
     }
 
     public void checkForRandomEventAndEditLocation() {
@@ -174,9 +192,9 @@ public class GameController {
                 gui.popUp("You inventory is full, drop items if needed.");
                 gui.setLocationInfo(currentLocation);
             }
-
         }
     }
+
     class InventoryButtonHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             String inventoryName = ((JButton) e.getSource()).getText();
@@ -198,7 +216,7 @@ public class GameController {
                             playerStats.getStats().get("Health"),
                             playerStats.getStats().get("Bone Density"),
                             inventory.getInventory().toString(),
-                            TimeCalc.findDifferenceGUI(dieTime)
+                            TimeCalc.findDifferenceGUI(dieTime, minutesToCompleteGame)
                     );
                     gui.popUp("You ate " + inventoryName + " and got " + value + " health back");
                 }
@@ -265,7 +283,6 @@ public class GameController {
             }
         }
     }
-
     boolean allPuzzlesCompleted() {
         return GhPuzzle.isSolved && SolarPuzzle.isSolved && ReactorPuzzle.isSolved;
     }
