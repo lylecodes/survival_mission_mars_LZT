@@ -77,8 +77,9 @@ public class GameController {
     class GameScreenHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
 //            Game Events will go here
-
-            IsGameEventActive.playerAtGreenHouse(currentLocation, audio);
+            IsGameEventActive.playerAtGym(gui,
+                    playerStats, currentLocation, locationMap,
+                    inventory, dieTime, minutesToCompleteGame);
             IsGameEventActive.playerAtMiddleBuilding(currentLocation, audio);
 
 //            Game GUI
@@ -112,7 +113,7 @@ public class GameController {
         }
     }
 
-    public void checkForRandomEventAndEditLocation() {
+    private void checkForRandomEventAndEditLocation() {
         int randomNum = rand.nextInt(20);
         if (randomNum != 1) {
             if (randomEventNames.contains("steve")) return;
@@ -137,7 +138,7 @@ public class GameController {
 
     }
 
-    class ItemButtonHandler implements ActionListener {
+    private class ItemButtonHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             // get item name from button click
             String itemName = ((JButton) e.getSource()).getText();
@@ -160,7 +161,7 @@ public class GameController {
         }
     }
 
-    class InventoryButtonHandler implements ActionListener {
+    private class InventoryButtonHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             String inventoryName = ((JButton) e.getSource()).getText();
             String inventoryDescription = inventory.getItemDescription(inventoryName);
@@ -202,7 +203,7 @@ public class GameController {
         }
     }
 
-    class PuzzleButtonHandler implements ActionListener {
+    private class PuzzleButtonHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             if (e.toString().contains("gym")){
                 IsGameEventActive.playerAtGym(gui,
@@ -221,7 +222,7 @@ public class GameController {
         }
     }
 
-    class MainMenuButtonHandler implements ActionListener {
+    private class MainMenuButtonHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             int reply = gui.popUpGameOption();
             System.out.println(reply);
@@ -253,8 +254,5 @@ public class GameController {
                 System.out.println("Cancel");
             }
         }
-    }
-    boolean allPuzzlesCompleted() {
-        return GhPuzzle.isSolved && SolarPuzzle.isSolved && ReactorPuzzle.isSolved;
     }
 }
