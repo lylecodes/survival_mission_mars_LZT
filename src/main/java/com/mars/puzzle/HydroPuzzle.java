@@ -7,15 +7,13 @@ import com.mars.util.TextParser;
 import java.util.Scanner;
 
 public class HydroPuzzle implements Puzzle {
-    String name = "HydroPuzzle";
+    String name = "Hydro Puzzle";
     boolean isSolved = false;           // full challenge logic / completion check
     boolean checkFilter = false;        // check filter logic / completion check
     boolean checkMonitors = false;      // check monitors logic / completion check
     boolean isTankProper = false;       // water tank logic / completion check
     boolean isPowered = false;          // tank power logic / completion check
     boolean isElectrolysis = false;     // electrolysis system logic / completion check
-    Display display = new Display();            // calling a new display
-    TextParser parser = new TextParser();       // calling on TextParser
 
     @Override // Puzzle interface
     // launch challenge, display text

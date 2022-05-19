@@ -24,7 +24,7 @@
         "east": "Reactor"
       },
       "description":"It appears to be an old hydro station-an essential part of restoring water to the outpost.\n There appears to be a helpful placard on the tank.",
-      "puzzle" : "true",
+      "puzzle" : "false",
       "items" : {
         "flashlight" : "a useful light source",
         "batteries" : "a pack of AA batteries"

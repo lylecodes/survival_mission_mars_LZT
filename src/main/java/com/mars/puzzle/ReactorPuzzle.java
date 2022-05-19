@@ -11,7 +11,7 @@ import static com.mars.puzzle.Dialogue.*;
 
 
 public class ReactorPuzzle implements Puzzle {
-    private String name = "ReactorPuzzle";
+    private String name = "Reactor Puzzle";
     public static boolean isSolved = false;
     TextParser parser = new TextParser();
     Audio audio = Audio.getInstance();

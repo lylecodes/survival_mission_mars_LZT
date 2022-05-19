@@ -11,18 +11,13 @@ import com.mars.puzzle.ReactorPuzzle;
 import com.mars.puzzle.SolarPuzzle;
 import com.mars.stats.Stats;
 import com.mars.util.Audio;
-import com.mars.util.CommandProcessor;
 import com.mars.util.JSONHandler;
-import com.mars.util.TextParser;
 import com.mars.util.*;
-import com.sun.tools.javac.Main;
-import org.w3c.dom.ls.LSOutput;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
-import java.util.Timer;
 
 public class GameController {
     private final Audio audio = Audio.getInstance();
@@ -31,14 +26,13 @@ public class GameController {
     private final Stats playerStats = new Stats();
     private final GameFrame gui;
     private Location currentLocation;
-    private Inventory inventory = Inventory.getInstance();
-    private Display display = new Display();
+    private final Inventory inventory = Inventory.getInstance();
+    private final Display display = new Display();
     private String dieTime;
     private Random rand = new Random();
     private List<String> randomEventNames = new ArrayList<>();
     private int minutesToCompleteGame = 10;
 //    TIME
-
 
     public GameController(GameFrame gui) {
         this.gui = gui;
@@ -50,7 +44,7 @@ public class GameController {
     }
 
     // Title Screen stuff
-    class TitleScreenHandler implements ActionListener {
+    private class TitleScreenHandler implements ActionListener {
         public void actionPerformed(ActionEvent event) {
 
             System.out.println("hello1");
@@ -74,7 +68,7 @@ public class GameController {
     }
 
     // Game Screen stuff
-    class GameScreenHandler implements ActionListener {
+    private class GameScreenHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
 //            Game Events will go here
             IsGameEventActive.playerAtMiddleBuilding(currentLocation, audio);
@@ -114,17 +108,18 @@ public class GameController {
         int randomNum = rand.nextInt(20);
         if (randomNum != 1) {
             if (randomEventNames.contains("steve")) return;
-
             randomEventNames.add("steve");
             Item item = new Item("Steve", "seems like a cool guy");
             currentLocation.addItem(item);
         }
 
         if (randomNum != 5) {
+            if (randomEventNames.contains("middle")) return;
+            randomEventNames.add("middle");
             Item alien = new Item("lil alien", "\"I work for Amazon\"");
             Item banana = new Item("banana", "it is a glowing banana healthItem");
             List<Item> roomItems = new ArrayList<>(Arrays.asList(alien ,banana));
-            Map<String,String> directions = Map.of("north", "Green House");
+            Map<String,String> directions = Map.of("north", "Hydro");
             locationMap.put("Middle Building",
                     new Location("Middle Building",
                             directions,
