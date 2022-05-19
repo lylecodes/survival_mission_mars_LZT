@@ -30,7 +30,7 @@ public class GameFrame extends JFrame {
     private Font menuLabelFont = new Font("Dialog", Font.BOLD, 20);
     private Font normalFont = new Font("Times New Roman", Font.PLAIN, 28);
     private Font itemButtonFont = new Font("Times New Roman", Font.PLAIN, 18);
-    private  JButton startButton, backGroundStoryButton, choiceButton, choiceButton1, choiceButton2, choiceButton3, choiceButton4, challengeButton, itemButton, itemButton1, itemButton2, itemButton3, itemButton4, inventoryButton, inventoryButton1, inventoryButton2, gameMenu;
+    private  JButton startButton, backGroundStoryButton, choiceButton, choiceButton1, choiceButton2, choiceButton3, choiceButton4, challengeButton, itemButton, itemButton1, itemButton2, itemButton3, itemButton4, inventoryButton, inventoryButton1, inventoryButton2, gameMenu, hitTheGym;
     private JTextArea mainTextArea, backGroundTextArea;
     private int playerHP, airdamageHP, silverRing;
     private String inventoryGame, position;
@@ -151,7 +151,7 @@ public class GameFrame extends JFrame {
         // added 100 to x and y
         choiceButtonPanel.setBounds(300, 450, 400, 200);
         choiceButtonPanel.setBackground(Color.BLACK);
-        choiceButtonPanel.setLayout(new GridLayout(5, 1));
+        choiceButtonPanel.setLayout(new GridLayout(6, 1));
         gameContainer.add(choiceButtonPanel);
 
         choiceButton1 = newChoiceButton("Choice 1", "c1");
@@ -160,12 +160,15 @@ public class GameFrame extends JFrame {
         choiceButton4 = newChoiceButton("Choice 4", "c4");
         challengeButton = newChoiceButton("", "");
         challengeButton.setFont(normalFont);
+        hitTheGym = newChoiceButton("Hit the Gym","gymButton");
+        hitTheGym.setFont(normalFont);
 
         choiceButtonPanel.add(choiceButton1);
         choiceButtonPanel.add(choiceButton2);
         choiceButtonPanel.add(choiceButton3);
         choiceButtonPanel.add(choiceButton4);
         choiceButtonPanel.add(challengeButton);
+        choiceButtonPanel.add(hitTheGym);
 
 
         choiceButtons = new JButton[]{choiceButton1, choiceButton2, choiceButton3, choiceButton4};
@@ -243,6 +246,12 @@ public class GameFrame extends JFrame {
         } else {
             challengeButton.setVisible(false);
         }
+        if (location.getName().equals("Gym")){
+            hitTheGym.setVisible(true);
+        }
+        else{
+            hitTheGym.setVisible(false);
+        }
 
         while (buttonIdx < choiceButtons.length) {
             choiceButtons[buttonIdx].setVisible(false);
@@ -261,6 +270,7 @@ public class GameFrame extends JFrame {
 
     public void setChallengeButtonListeners(ActionListener listener) {
         challengeButton.addActionListener(listener);
+        hitTheGym.addActionListener(listener);
     }
 
     private JButton newChoiceButton(String buttonName, String actionCommandName) {
@@ -458,6 +468,7 @@ public class GameFrame extends JFrame {
                 options1[2]);
         return result;
     }
+
     public int popUpPlayAgain(){
         Object[] options1 = { "Play Again!",
                 "Quit" };
