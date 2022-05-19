@@ -435,8 +435,9 @@ public class GameFrame extends JFrame {
         JOptionPane.showMessageDialog(
                 gameContainer,
                 imageIcon
-        );
 
+        );
+        setSize(10, 10);
     }
 
 
@@ -475,6 +476,7 @@ public class GameFrame extends JFrame {
         Object[] options1 = {
                 "Cancel",
                 "Quit",
+                "Map",
                 "Game Help",
                 "Map",
                 "Mission List",
