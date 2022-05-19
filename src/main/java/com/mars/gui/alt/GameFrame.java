@@ -48,6 +48,7 @@ public class GameFrame extends JFrame {
         setSize(1000, 800);
         setResizable(false);
         getContentPane().setBackground(Color.BLACK);
+
         setLayout(null);
 
         gameContainer = getContentPane();
@@ -64,6 +65,33 @@ public class GameFrame extends JFrame {
         gameContainer.add(startButtonPanel);
         createIntroScreen();
     }
+
+    public void setFireImage() {
+        JPanel panel = new JPanel();
+        panel.setBounds(0, 600, 1000, 200);
+        panel.setBackground(Color.black);
+        JLabel fireLabel = new JLabel() {{
+            setSize(1000, 200);
+        }};
+
+        ImageIcon imageIcon =
+                ResourceUtils.getImageIconScaledToLabelSize("images/fire_gif.gif", fireLabel);
+        fireLabel.setIcon(imageIcon);
+        panel.add(fireLabel);
+        gameContainer.add(panel);
+    }
+
+//    private void createInventoryPanel() {
+//        invetoryPanel = new JPanel();
+//        invetoryPanel.setBounds(800, 15, 175, 150);
+//        invetoryPanel.setBackground(Color.black);
+//
+//        invetoryPanel.add(createInventoryLogoLabel());
+//
+//        createInventoryButtonPanel();
+//
+//        gameContainer.add(invetoryPanel);
+//    }
 
     private void createTitleNamePanel() {
         titleNamePanel = new JPanel();
