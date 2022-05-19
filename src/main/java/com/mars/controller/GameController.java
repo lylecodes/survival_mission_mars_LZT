@@ -111,17 +111,18 @@ public class GameController {
         int randomNum = rand.nextInt(20);
         if (randomNum != 1) {
             if (randomEventNames.contains("steve")) return;
-
             randomEventNames.add("steve");
             Item item = new Item("Steve", "seems like a cool guy");
             currentLocation.addItem(item);
         }
 
         if (randomNum != 5) {
+            if (randomEventNames.contains("middle")) return;
+            randomEventNames.add("middle");
             Item alien = new Item("lil alien", "\"I work for Amazon\"");
             Item banana = new Item("banana", "it is a glowing banana healthItem");
             List<Item> roomItems = new ArrayList<>(Arrays.asList(alien ,banana));
-            Map<String,String> directions = Map.of("north", "Green House");
+            Map<String,String> directions = Map.of("north", "Hydro");
             locationMap.put("Middle Building",
                     new Location("Middle Building",
                             directions,

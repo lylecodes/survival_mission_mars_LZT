@@ -1,5 +1,7 @@
 package com.mars.puzzle;
 
+import com.mars.objects.Inventory;
+import com.mars.util.Audio;
 import com.mars.util.JSONHandler;
 import static com.mars.puzzle.Dialogue.*;
 
@@ -7,7 +9,7 @@ import java.util.*;
 
 public class GhPuzzle implements Puzzle{
     //fields
-    private String name = "GhPuzzle";
+    private String name = "GreenHouse Puzzle";
     public static boolean isSolved = false;
 
     @Override
@@ -17,6 +19,11 @@ public class GhPuzzle implements Puzzle{
 
     @Override
     public boolean runPuzzle() {
+        Inventory inventory = Inventory.getInstance();
+        if (inventory.getItem("seeds") == null) {
+            popUpDialogueEnd("You need seeds to start this puzzle", this.getName());
+            return false;
+        }
         popUpDialogueEnd(showIntro(), this.getName());
         int res = popUpDialogue("You notice a valve in the corner of the room connected to " +  //challenge hard coded/very guided at this point
                 "the water main. Do you turn it on?", this.getName());
@@ -25,6 +32,9 @@ public class GhPuzzle implements Puzzle{
             res = popUpDialogue("You see the water mister engage and moisten the soil." +
                     "Would you like to plant some seeds?", this.getName());
             if (res == 0) {
+                inventory.drop("seeds");
+                Audio audio = Audio.getInstance();
+                audio.play("planting_seeds.wav");
                 isSolved = true;
                 popUpDialogueEnd("Congratulations! You are able to grow food on Mars!", this.getName());
             } else if (res == 1) {
