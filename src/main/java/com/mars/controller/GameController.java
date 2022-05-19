@@ -83,33 +83,10 @@ public class GameController {
                     playerStats, currentLocation, locationMap,
                     inventory, dieTime, minutesToCompleteGame);
             IsGameEventActive.playerAtGreenHouse(currentLocation, audio);
+            IsGameEventActive.playerAtMiddleBuilding(currentLocation, audio);
 
 //            Game GUI
             checkForRandomEventAndEditLocation();
-
-//             if (playerStats.getStats().get("Health") <= 0 || playerStats.getStats().get("Bone Density") <= 0){
-//                int response = gui.popUpPlayAgain();
-//                if(response == 0){
-//                    gui.setLocationInfo(locationMap.get("Docking Station"));
-//                    currentLocation = locationMap.get("Docking Station");
-//                    playerStats.updateCurrentHealthGain(120);
-//                    playerStats.updateCurrentBoneGain(120);
-//                }
-//                else{
-//                    System.exit(0);
-//                }
-//             }
-//             if (currentLocation.equals(locationMap.get("Gym"))){
-//                 playerStats.updateCurrentBoneGain(120);
-//                 gui.playerSetup(
-//                         playerStats.getStats().get("Health"),
-//                         playerStats.getStats().get("Bone Density"),
-//                         inventory.getInventory().toString(),
-//                         TimeCalc.findDifferenceGUI(dieTime)
-//                 );
-//                 gui.popUp("You just hit the gym, which restored your bone density");
-//             }
-
             System.out.println("hello3");
             // get text input from field
             String choice = ((JButton) e.getSource()).getText();
@@ -136,17 +113,7 @@ public class GameController {
             IsGameOverYet.timeUp(gui, TimeCalc.findDifferenceGUI(dieTime, minutesToCompleteGame));
             IsGameOverYet.puzzlesSolved(gui, audio);
             IsGameOverYet.statsAtZero(gui,playerStats);
-            if ("Middle Building".equals(currentLocation.getName())) {
-                audio.play("lobby.wav");
-            }
-//             if (allPuzzlesCompleted()) {
-//                 audio.play("hellyes.wav");
-//                 gui.popUp("You completed all of the puzzles! Amazing!");
-//                 System.exit(0);
-//             }
         }
-
-
     }
 
     public void checkForRandomEventAndEditLocation() {
@@ -158,7 +125,7 @@ public class GameController {
 
         if (randomNum != 5) {
             Item alien = new Item("lil alien", "\"I work for Amazon\"");
-            Item banana = new Item("banana", "it is a glowing banana");
+            Item banana = new Item("banana", "it is a glowing banana healthItem");
             List<Item> roomItems = new ArrayList<>(Arrays.asList(alien ,banana));
             Map<String,String> directions = Map.of("north", "Green House");
             locationMap.put("Middle Building",
@@ -262,8 +229,6 @@ public class GameController {
                 sb.append("Reactor Operational: " +  ReactorPuzzle.isSolved + "\n");
                 sb.append("Solar Panels operation: " + SolarPuzzle.isSolved + "\n");
                 gui.popUp(sb.toString());
-//                gui.popUpImage();
-//                gui.popUp("hi");
             }
             else if (reply == 3){
                 System.out.println("map");
