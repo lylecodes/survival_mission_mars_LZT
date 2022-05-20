@@ -56,17 +56,52 @@ public class GameFrame extends JFrame {
 
     public void setFireImage() {
         JPanel panel = new JPanel();
-        panel.setBounds(0, 600, 1000, 200);
+        panel.setBounds(0, 600, 1000, 190);
         panel.setBackground(Color.black);
+        JPanel panelTop = new JPanel();
+        panelTop.setBounds(200, 110, 600, 90);
+        panelTop.setBackground(Color.black);
+        JPanel panelAlien = new JPanel();
+        panelAlien.setBounds(0, 300, 200, 200);
+        panelAlien.setBackground(Color.black);
+        JPanel panelGalaxy2 = new JPanel();
+        panelGalaxy2.setBounds(850, 300, 200, 200);
+        panelGalaxy2.setBackground(Color.black);
+
         JLabel fireLabel = new JLabel() {{
-            setSize(1000, 200);
+            setSize(1000, 190);
         }};
+        JLabel fireLabelTop = new JLabel() {{
+            setSize(600, 90);
+        }};
+        JLabel alienLabel = new JLabel() {{
+            setSize(200, 200);
+        }};
+        JLabel galaxy2Label = new JLabel() {{
+            setSize(200, 200);
+        }};
+
 
         ImageIcon imageIcon =
                 ResourceUtils.getImageIconScaledToLabelSize("images/fire_gif.gif", fireLabel);
+        ImageIcon imageIconSmall =
+                ResourceUtils.getImageIconScaledToLabelSize("images/fire_gif.gif", fireLabelTop);
+        ImageIcon alienIcon =
+                ResourceUtils.getImageIconScaledToLabelSize("images/galaxy.png", alienLabel);
+        ImageIcon galaxy2Icon =
+                ResourceUtils.getImageIconScaledToLabelSize("images/galaxy2.png", alienLabel);
         fireLabel.setIcon(imageIcon);
+        fireLabelTop.setIcon(imageIconSmall);
+        alienLabel.setIcon(alienIcon);
+        galaxy2Label.setIcon(galaxy2Icon);
         panel.add(fireLabel);
+        panelTop.add(fireLabelTop);
+        panelAlien.add(alienLabel);
+        panelGalaxy2.add(galaxy2Label);
         gameContainer.add(panel);
+        gameContainer.add(panelTop);
+        gameContainer.add(panelAlien);
+        gameContainer.add(panelGalaxy2);
     }
 
     private void createTitleNamePanel() {

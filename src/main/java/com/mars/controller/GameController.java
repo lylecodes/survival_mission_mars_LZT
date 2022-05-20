@@ -109,14 +109,14 @@ public class GameController {
 
     private void checkForRandomEventAndEditLocation() {
         int randomNum = rand.nextInt(20);
-        if (randomNum != 1) {
+        if (true) {
             if (randomEventNames.contains("steve")) return;
             randomEventNames.add("steve");
             Item item = new Item("Steve", "seems like a cool guy");
             currentLocation.addItem(item);
         }
 
-        if (randomNum != 5) {
+        if (randomNum == 5) {
             if (randomEventNames.contains("middle")) return;
             randomEventNames.add("middle");
             Item alien = new Item("lil alien", "\"I work for Amazon\"");
