@@ -5,44 +5,36 @@ import com.mars.objects.Inventory;
 import com.mars.objects.Location;
 import com.mars.util.ResourceUtils;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Objects;
 import javax.swing.JOptionPane;
-
-
 
 public class GameFrame extends JFrame {
 
     public static Container gameContainer;
 
-    private JPanel titleNamePanel, startButtonPanel, backGroundStoryButtonPanel, mainTextPanel, choiceButtonPanel, playerPanel, backGroundStoryPanel, playerStats, itemPanel, itemButtonPanel, invetoryPanel, inventoryButtonPanel;
-    private JLabel titleNameLabel, playerPanelLabel, hpLabel, hpLabelNumber, inventoryLabel, inventoryLabelName, itemPanelLabel, locationNameLabel, invetoryPanelLabel, timeLeft;
-
-
+    private JPanel titleNamePanel, startButtonPanel, backGroundStoryButtonPanel, mainTextPanel, choiceButtonPanel, playerPanel, backGroundStoryPanel,  itemPanel, itemButtonPanel, invetoryPanel, inventoryButtonPanel;
+    private JLabel titleNameLabel, playerPanelLabel, hpLabel, inventoryLabel, itemPanelLabel, locationNameLabel, timeLeft;
     private JProgressBar progressBar, progressBarHealth, progressBarOxygen;
-    private Font titleFont = new Font("Times New Roman", Font.PLAIN, 90);
+
     private Font menuLabelFont = new Font("Dialog", Font.BOLD, 20);
     private Font normalFont = new Font("Times New Roman", Font.PLAIN, 28);
     private Font itemButtonFont = new Font("Times New Roman", Font.PLAIN, 18);
     private  JButton startButton, backGroundStoryButton, choiceButton, choiceButton1, choiceButton2, choiceButton3, choiceButton4, challengeButton, itemButton, itemButton1, itemButton2, itemButton3, itemButton4, inventoryButton, inventoryButton1, inventoryButton2, gameMenu, hitTheGym;
     private JTextArea mainTextArea, backGroundTextArea;
+
     private int playerHP;
     private String inventoryGame, position;
+
     private Inventory inventory = Inventory.getInstance();
     private JButton[] choiceButtons;
     private JButton[] itemButtons, inventoryButtons;
     private Display display = new Display();
     private ImageIcon imageIcon =
             ResourceUtils.getImageIconScaledToLabelSizePopUp("images/happyMars.png");
-
-
-
 
     public GameFrame() {
         setSize(1000, 800);
@@ -68,30 +60,53 @@ public class GameFrame extends JFrame {
 
     public void setFireImage() {
         JPanel panel = new JPanel();
-        panel.setBounds(0, 600, 1000, 200);
+        panel.setBounds(0, 600, 1000, 190);
         panel.setBackground(Color.black);
+        JPanel panelTop = new JPanel();
+        panelTop.setBounds(200, 110, 600, 90);
+        panelTop.setBackground(Color.black);
+        JPanel panelAlien = new JPanel();
+        panelAlien.setBounds(0, 300, 200, 200);
+        panelAlien.setBackground(Color.black);
+        JPanel panelGalaxy2 = new JPanel();
+        panelGalaxy2.setBounds(850, 300, 200, 200);
+        panelGalaxy2.setBackground(Color.black);
+
         JLabel fireLabel = new JLabel() {{
-            setSize(1000, 200);
+            setSize(1000, 190);
         }};
+        JLabel fireLabelTop = new JLabel() {{
+            setSize(600, 90);
+        }};
+        JLabel alienLabel = new JLabel() {{
+            setSize(200, 200);
+        }};
+        JLabel galaxy2Label = new JLabel() {{
+            setSize(200, 200);
+        }};
+
 
         ImageIcon imageIcon =
                 ResourceUtils.getImageIconScaledToLabelSize("images/fire_gif.gif", fireLabel);
+        ImageIcon imageIconSmall =
+                ResourceUtils.getImageIconScaledToLabelSize("images/fire_gif.gif", fireLabelTop);
+        ImageIcon alienIcon =
+                ResourceUtils.getImageIconScaledToLabelSize("images/galaxy.png", alienLabel);
+        ImageIcon galaxy2Icon =
+                ResourceUtils.getImageIconScaledToLabelSize("images/galaxy2.png", alienLabel);
         fireLabel.setIcon(imageIcon);
+        fireLabelTop.setIcon(imageIconSmall);
+        alienLabel.setIcon(alienIcon);
+        galaxy2Label.setIcon(galaxy2Icon);
         panel.add(fireLabel);
+        panelTop.add(fireLabelTop);
+        panelAlien.add(alienLabel);
+        panelGalaxy2.add(galaxy2Label);
         gameContainer.add(panel);
+        gameContainer.add(panelTop);
+        gameContainer.add(panelAlien);
+        gameContainer.add(panelGalaxy2);
     }
-
-//    private void createInventoryPanel() {
-//        invetoryPanel = new JPanel();
-//        invetoryPanel.setBounds(800, 15, 175, 150);
-//        invetoryPanel.setBackground(Color.black);
-//
-//        invetoryPanel.add(createInventoryLogoLabel());
-//
-//        createInventoryButtonPanel();
-//
-//        gameContainer.add(invetoryPanel);
-//    }
 
     private void createTitleNamePanel() {
         Color myBrickColor = new Color(134, 57, 57);
@@ -146,7 +161,6 @@ public class GameFrame extends JFrame {
 
     private void createMainTextPanel() {
         mainTextPanel = new JPanel();
-        // added 100 to x and y
         mainTextPanel.setBounds(200, 200, 600, 250);
         mainTextPanel.setBackground(Color.decode("#d6723b"));
         gameContainer.add(mainTextPanel);
@@ -207,13 +221,8 @@ public class GameFrame extends JFrame {
         createBackGroundStoryPanel();
         createBackGroundStoryArea();
 
-//        createBackGroundStoryButtonPanel();
-//        createBackGroundStoryButton();
-
         backGroundStoryPanel.add(backGroundTextArea);
-//        backGroundStoryButtonPanel.add(backGroundStoryButton);
         gameContainer.add(backGroundStoryPanel);
-//        gameContainer.add(backGroundStoryButtonPanel);
     }
 
     private void createBackGroundStoryPanel() {
@@ -324,35 +333,41 @@ public class GameFrame extends JFrame {
     }
 
     private void createPlayerPanel() {
-        // Colors the progress bar green
+        /*
+         * Creates Player HUD which encompasses HEALTH, BONE, GAME OPTION, and TIMER
+         */
+
+        // Colors the progress bar percentage number Green
         UIManager.put("ProgressBar.selectionForeground", Color.GREEN);
 
+        // Create and place Player Panel
         playerPanel = new JPanel();
         playerPanel.setBounds(120, 15, 600, 100);
         playerPanel.setBackground(Color.BLACK);
         playerPanel.setLayout(new GridLayout(3, 2));
         gameContainer.add(playerPanel);
 
+        // Create player items
         hpLabel = newPlayerPanelLabels("HP: ");
         progressBarHealth = newJProgressBar(0, 100, 100);
         inventoryLabel = newPlayerPanelLabels("Inventory: ");
-
         gameMenu = new JButton();
         gameMenu.setText("Game Menu");
-
         timeLeft = newPlayerPanelLabels("Time: 5:00");
         JLabel oxygenLabel = newPlayerPanelLabels("Bone Density: ");
         progressBarOxygen = newJProgressBar(0, 100, 100);
 
-//        Labels
+        // add created items Panel, 3 items in row and 3 columns
+        // row 1
         playerPanel.add(hpLabel);
         playerPanel.add(oxygenLabel);
 
+        // row 2
         playerPanel.add(progressBarHealth);
         playerPanel.add(progressBarOxygen);
 
+        // row 3
         playerPanel.add(timeLeft);
-//        playerPanel.add(inventoryLabel);
         playerPanel.add(gameMenu);
 
     }
@@ -373,34 +388,40 @@ public class GameFrame extends JFrame {
     }
 
     private void createInventoryPanel() {
+        /*
+         * Inventory Panel holds items that user picks up
+         */
         invetoryPanel = new JPanel();
         invetoryPanel.setBounds(800, 15, 175, 150);
+
         invetoryPanel.setBackground(Color.black);
-//        invetoryPanelLabel = new JLabel("use invt item: ");
-//        invetoryPanelLabel.setFont(normalFont);
-//        invetoryPanelLabel.setForeground(Color.white);
-//        invetoryPanelLabel.setHorizontalAlignment(JLabel.CENTER);
-
         invetoryPanel.add(createInventoryLogoLabel());
-//        invetoryPanel.add(invetoryPanelLabel);
 
+        // Create items picked up
         createInventoryButtonPanel();
 
+        // Add to main JFrame
         gameContainer.add(invetoryPanel);
     }
 
     private void createInventoryButtonPanel() {
+        /*
+         * Creates buttons for the Inventory items picks up
+         */
+        // Panel
         inventoryButtonPanel = new JPanel();
         inventoryButtonPanel.setBounds(350, 450, 200, 300);
         inventoryButtonPanel.setBackground(Color.BLACK);
         inventoryButtonPanel.setLayout(new GridLayout(4, 1));
 
+        // Buttons
         inventoryButton1 = newInventoryButton();
         inventoryButton2 = newInventoryButton();
 
         inventoryButtonPanel.add(inventoryButton1);
         inventoryButtonPanel.add(inventoryButton2);
 
+        // Add Buttons to inventory Panel
         invetoryPanel.add(inventoryButtonPanel);
 
         inventoryButtons = new JButton[]{inventoryButton1, inventoryButton2};
@@ -444,6 +465,9 @@ public class GameFrame extends JFrame {
     }
 
     public void showInventoryItems(ArrayList<String> list) {
+        /*
+         * Go through buttons and once that have items set them visisble
+         */
         int buttonIdx = 0;
         for (String item : list) {
             inventoryButtons[buttonIdx].setText(item);
@@ -458,7 +482,9 @@ public class GameFrame extends JFrame {
     }
 
     public void popUp(String errorMessage){
-
+        /*
+         * Pop up used to inform player
+         */
         JOptionPane.showMessageDialog(
                 gameContainer,
                 errorMessage,
@@ -467,7 +493,7 @@ public class GameFrame extends JFrame {
                 imageIcon
         );
     }
-    //For map
+
     public void popUpImage() {
         ImageIcon imageIcon =
                 ResourceUtils.getImageIconScaledToLabelSizePopUp("images/mappymap.jpg");
@@ -478,9 +504,15 @@ public class GameFrame extends JFrame {
     }
 
     public int popUpInventory(String item, String description){
+        /*
+         * Create popUp that gives player options on what they can do with each item
+         */
+
+        // Options that are available to player
         Object[] options1 = { "cancel", "drop",
                 "use" };
 
+        // return index of Option picked by player. And Create pop up based off of below specs
         int result = JOptionPane.showOptionDialog(
                 gameContainer,
                 "Item: " + item + "\n" + "Description: " + description,
@@ -492,7 +524,11 @@ public class GameFrame extends JFrame {
                 options1[2]);
         return result;
     }
+
     public int popUpGodMode(){
+        /*
+         * Asks user if they would like to use God Mode
+         */
         Object[] options1 = {
                 "Yes",
                 "No"
@@ -510,6 +546,9 @@ public class GameFrame extends JFrame {
     }
 
     public int popUpPlayAgain(){
+        /*
+         * Pop up used when player dies. To see if they would like to play again
+         */
         Object[] options1 = { "Play Again!",
                 "Quit" };
 
@@ -526,6 +565,9 @@ public class GameFrame extends JFrame {
     }
 
     public int popUpGameOption(){
+        /*
+         * Player Option for the game
+         */
         Object[] options1 = {
                 "Cancel",
                 "Quit",
@@ -547,6 +589,8 @@ public class GameFrame extends JFrame {
         return result;
     }
 
+    // Listeners for various events
+    // TODO look into combining them
     public void setItemButtonListeners(ActionListener l) {
         for (JButton button : itemButtons) {
             button.addActionListener(l);
@@ -573,6 +617,9 @@ public class GameFrame extends JFrame {
     }
 
     private JProgressBar newJProgressBar(int min, int max, int currentHealth) {
+        /*
+         * Progress bar used to visualize player Health and Bone
+         */
         progressBar = new JProgressBar(min, max);
         progressBar.setStringPainted(true);
         progressBar.setValue(currentHealth);
@@ -581,20 +628,16 @@ public class GameFrame extends JFrame {
 
 
     public void playerSetup(Integer hp, Integer oxygen, String inventory, String time) {
+        /*
+         * Updates player information, as he moves through rooms
+         */
         inventoryLabel.setText("Inventory: " + inventory);
         progressBarHealth.setValue(hp);
         progressBarOxygen.setValue(oxygen);
         timeLeft.setText(time);
-
-
-//        solarPanel();
     }
 
     private JLabel createInventoryLogoLabel() {
-//        inventoryLogoPanel = new JPanel() {{
-//            setBackground(Color.blue);
-//            setSize(10, 10);
-//        }};
         JLabel inventoryLogoLabel = new JLabel() {{
             setSize(50, 50);
         }};
@@ -605,90 +648,5 @@ public class GameFrame extends JFrame {
         return inventoryLogoLabel;
 //        mainTextPanel.add(inventoryLogoLabel);
     }
-    /*
-    private void solarPanel() {
-        position = "In freaking space";
-        mainTextArea.setText("You are stuck in a dying mars outpost. \n\nWhat do you do?");
-        choiceButton1.setText("Go North");
-        choiceButton2.setText("Go South");
-        choiceButton3.setText("Go East");
-        choiceButton4.setText("Do challenge");
-    }
 
-
-    private void south() {
-        position = "south";
-        mainTextArea.setText("There is a river.");
-        playerHP = playerHP + 2;
-        hpLabelNumber.setText("" + playerHP);
-        choiceButton1.setText("Go south");
-        choiceButton2.setText("");
-        choiceButton3.setText("");
-        choiceButton4.setText("");
-    }
-
-    private void east() {
-        position = "east";
-        mainTextArea.setText("You walked east");
-        inventoryGame = "";
-        inventoryLabelName.setText(inventoryGame);
-        choiceButton1.setText("Go west");
-        choiceButton2.setText("");
-        choiceButton3.setText("");
-        choiceButton4.setText("");
-    }
-
-    private void west() {
-        position = "west";
-        mainTextArea.setText("You go west!");
-        choiceButton1.setText("");
-        choiceButton2.setText("");
-        choiceButton3.setText("");
-        choiceButton4.setText("");
-    }
-
-    private void north() {
-        position = "north";
-        mainTextArea.setText("What do you do?");
-        choiceButton1.setText("");
-        choiceButton2.setText("");
-        choiceButton3.setText("");
-        choiceButton4.setText("");
-    }
-
-    private void win() {
-        position = "win";
-
-        mainTextArea.setText("You defeated .\n\n(You obtained blank )");
-
-
-
-        choiceButton1.setText("Go east");
-        choiceButton2.setText("");
-        choiceButton3.setText("");
-        choiceButton4.setText("");
-    }
-
-    private void lose() {
-        position = "lose";
-        mainTextArea.setText("You are dead!\n\n");
-        disableChoices();
-    }
-
-    private void ending() {
-        position = "ending";
-        mainTextArea.setText(" You are true hero.");
-        disableChoices();
-    }
-*/
-    private void disableChoices() {
-        choiceButton1.setText("");
-        choiceButton2.setText("");
-        choiceButton3.setText("");
-        choiceButton4.setText("");
-        choiceButton1.setVisible(false);
-        choiceButton2.setVisible(false);
-        choiceButton3.setVisible(false);
-        choiceButton4.setVisible(false);
-    }
 }
