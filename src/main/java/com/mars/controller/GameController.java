@@ -35,24 +35,7 @@ public class GameController {
     private static boolean isGodMode = false;
     private static int boneLoss = 2;
 
-    public static void setDieTime(String dieTime) {
-        GameController.dieTime = dieTime;
-    }
-
-    public static void setGodMode(boolean godMode) {
-        isGodMode = godMode;
-    }
-
-    public static void setBoneLoss(int boneLoss) {
-        GameController.boneLoss = boneLoss;
-    }
-
-    public static void setHealthLoss(int healthLoss) {
-        GameController.healthLoss = healthLoss;
-    }
-
     private static int healthLoss = 5;
-//    TIME
 
     public GameController(GameFrame gui) {
         this.gui = gui;
@@ -280,5 +263,22 @@ public class GameController {
                 System.out.println("Cancel");
             }
         }
+    }
+//    Getter and Setter
+
+    public static void setDieTime(String dieTime) {
+        GameController.dieTime = dieTime;
+    }
+
+    public static void setGodMode(boolean godMode) {
+        isGodMode = godMode;
+    }
+
+    public static void setBoneLoss(int boneLoss) {
+        GameController.boneLoss = boneLoss;
+    }
+
+    public static void setHealthLoss(int healthLoss) {
+        GameController.healthLoss = healthLoss;
     }
 }
