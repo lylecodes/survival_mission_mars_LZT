@@ -1,6 +1,6 @@
 package com.mars.util;
 /*
- * Hanldes all the
+ * Hanldes all the game events in the game (helper Class)
  */
 
 import com.mars.controller.GameController;
@@ -12,6 +12,7 @@ import com.mars.stats.Stats;
 import java.util.Map;
 
 public final class IsGameEventActive {
+    // Gym Event, used for restoring players bone density
     public static void playerAtGym(
             GameFrame gui,
             Stats playerStats,
@@ -33,6 +34,7 @@ public final class IsGameEventActive {
         }
     }
     public static void playerAtGreenHouse(
+            // Player Green House used for playing sound
             Location currentLocation,
             Audio audio
     ) {
@@ -41,6 +43,7 @@ public final class IsGameEventActive {
         }
     }
     public static void playerAtMiddleBuilding(
+
             Location currentLocation,
             Audio audio
     ){
@@ -49,6 +52,7 @@ public final class IsGameEventActive {
         }
     }
     public static void playerActivatesGodMode(Stats playerStats, boolean isGodMode){
+        // Activates God Mode giving player maximum on all stats
         if (isGodMode) {
             GameController.setBoneLoss(0);
             GameController.setHealthLoss(0);
