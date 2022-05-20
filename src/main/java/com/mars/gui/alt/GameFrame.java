@@ -25,6 +25,10 @@ public class GameFrame extends JFrame {
     private Font itemButtonFont = new Font("Times New Roman", Font.PLAIN, 18);
     private  JButton startButton, backGroundStoryButton, choiceButton, choiceButton1, choiceButton2, choiceButton3, choiceButton4, challengeButton, itemButton, itemButton1, itemButton2, itemButton3, itemButton4, inventoryButton, inventoryButton1, inventoryButton2, gameMenu, hitTheGym;
     private JTextArea mainTextArea, backGroundTextArea;
+
+    private int playerHP;
+    private String inventoryGame, position;
+
     private Inventory inventory = Inventory.getInstance();
     private JButton[] choiceButtons;
     private JButton[] itemButtons, inventoryButtons;
@@ -644,4 +648,5 @@ public class GameFrame extends JFrame {
         return inventoryLogoLabel;
 //        mainTextPanel.add(inventoryLogoLabel);
     }
+
 }
