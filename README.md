@@ -1,5 +1,5 @@
 # survival_mission_mars "Survival_Mars"
- Rev 2.3 
+Rev 2.3
 ![](../mars1.jpg)
 # You have been deployed from Mars HQ to a remote outpost.  Your objective is to return this outpost to operational status.
 ![](../marsgamehelp.jpg)

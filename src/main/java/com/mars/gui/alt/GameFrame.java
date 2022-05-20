@@ -32,7 +32,7 @@ public class GameFrame extends JFrame {
     private Font itemButtonFont = new Font("Times New Roman", Font.PLAIN, 18);
     private  JButton startButton, backGroundStoryButton, choiceButton, choiceButton1, choiceButton2, choiceButton3, choiceButton4, challengeButton, itemButton, itemButton1, itemButton2, itemButton3, itemButton4, inventoryButton, inventoryButton1, inventoryButton2, gameMenu, hitTheGym;
     private JTextArea mainTextArea, backGroundTextArea;
-    private int playerHP, airdamageHP, silverRing;
+    private int playerHP;
     private String inventoryGame, position;
     private Inventory inventory = Inventory.getInstance();
     private JButton[] choiceButtons;
@@ -139,11 +139,6 @@ public class GameFrame extends JFrame {
         createItemPanel();
 
         createInventoryPanel();
-
-//        createInventoryLogoLabel();
-
-
-//        createPlayerStats();
 
         playerSetup(hp, oxygen, inventory, time);
 
@@ -610,7 +605,7 @@ public class GameFrame extends JFrame {
         return inventoryLogoLabel;
 //        mainTextPanel.add(inventoryLogoLabel);
     }
-
+    /*
     private void solarPanel() {
         position = "In freaking space";
         mainTextArea.setText("You are stuck in a dying mars outpost. \n\nWhat do you do?");
@@ -620,34 +615,6 @@ public class GameFrame extends JFrame {
         choiceButton4.setText("Do challenge");
     }
 
-    private void challenge() {
-        position = "challenge";
-        mainTextArea.setText("town.");
-        choiceButton1.setText(">");
-        choiceButton2.setText("");
-        choiceButton3.setText("");
-        choiceButton4.setText("");
-    }
-
-    private void spacestation() {
-        position = "spacestation";
-        mainTextArea.setText("you are at 30");
-        playerHP = playerHP - 3;
-        hpLabelNumber.setText("" + playerHP);
-        choiceButton1.setText(">");
-        choiceButton2.setText("");
-        choiceButton3.setText("");
-        choiceButton4.setText("");
-    }
-
-    private void crossRoad() {
-        position = "crossRoad";
-        mainTextArea.setText("You are at a crossroad.\nIf you go south, you will go back to the town.");
-        choiceButton1.setText("Go north");
-        choiceButton2.setText("Go east");
-        choiceButton3.setText("Go south");
-        choiceButton4.setText("Go west");
-    }
 
     private void south() {
         position = "south";
@@ -689,51 +656,12 @@ public class GameFrame extends JFrame {
         choiceButton4.setText("");
     }
 
-    private void playerAttack() {
-        position = "playerAttack";
-
-        int playerDamage = 0;
-
-        if (inventoryGame.equals("key")) {
-            playerDamage = new java.util.Random().nextInt(3);
-        } else if (inventoryGame.equals("nothing")) {
-            playerDamage = new java.util.Random().nextInt(12);
-        }
-
-        mainTextArea.setText("You " + playerDamage + " damage!");
-
-        airdamageHP = airdamageHP - playerDamage;
-
-        choiceButton1.setText(">");
-        choiceButton2.setText("");
-        choiceButton3.setText("");
-        choiceButton4.setText("");
-    }
-
-    private void airdamageAttack() {
-        position = "airdamageAttack";
-
-        int airdamageDamage = 0;
-
-        airdamageDamage = new java.util.Random().nextInt(6);
-
-        mainTextArea.setText("The airdamage attacked you and gave " + airdamageDamage + " damage!");
-
-        playerHP = playerHP - airdamageDamage;
-        hpLabelNumber.setText("" + playerHP);
-
-        choiceButton1.setText(">");
-        choiceButton2.setText("");
-        choiceButton3.setText("");
-        choiceButton4.setText("");
-    }
-
     private void win() {
         position = "win";
 
-        mainTextArea.setText("You defeated the airdamage.\n\n(You obtained blank )");
+        mainTextArea.setText("You defeated .\n\n(You obtained blank )");
 
-        silverRing = 1;
+
 
         choiceButton1.setText("Go east");
         choiceButton2.setText("");
@@ -752,7 +680,7 @@ public class GameFrame extends JFrame {
         mainTextArea.setText(" You are true hero.");
         disableChoices();
     }
-
+*/
     private void disableChoices() {
         choiceButton1.setText("");
         choiceButton2.setText("");
