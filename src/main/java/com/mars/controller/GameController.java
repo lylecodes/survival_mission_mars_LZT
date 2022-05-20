@@ -13,7 +13,6 @@ import com.mars.stats.Stats;
 import com.mars.util.Audio;
 import com.mars.util.JSONHandler;
 import com.mars.util.*;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,23 +33,21 @@ public class GameController {
     private int minutesToCompleteGame = 10;
     private static boolean isGodMode = false;
     private static int boneLoss = 2;
-
     private static int healthLoss = 5;
+
 
     public GameController(GameFrame gui) {
         this.gui = gui;
         this.currentLocation = locationMap.get("Docking Station");
         gui.setTitleScreenHandler(new TitleScreenHandler());
 
-//        TIME set up end time
+        // TIME, set when the game ends for the player
         dieTime = TimerSetUp.timeRun(minutesToCompleteGame);
     }
 
     // Title Screen stuff
     private class TitleScreenHandler implements ActionListener {
         public void actionPerformed(ActionEvent event) {
-
-            System.out.println("hello1");
             gui.createGameScreen(
                     playerStats.getStats().get("Health"),
                     playerStats.getStats().get("Bone Density"),
@@ -70,15 +67,14 @@ public class GameController {
         }
     }
 
-    // Game Screen stuff
+    // Game Screen Menu, (Main game)
     private class GameScreenHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-//            Game Events will go here
+            // Game Event listeners that check if certain events have been activated
             IsGameEventActive.playerAtMiddleBuilding(currentLocation, audio);
             IsGameEventActive.playerActivatesGodMode(playerStats, isGodMode);
-//            Game GUI
+            // Game GUI
             checkForRandomEventAndEditLocation();
-            System.out.println("hello3");
             // get text input from field
             String choice = ((JButton) e.getSource()).getText();
             // get direction from input
@@ -92,7 +88,7 @@ public class GameController {
             // Subtract Health and Bone Density per turn
             playerStats.updateCurrentBoneLoss(boneLoss);
             playerStats.updateCurrentHealthLoss(healthLoss);
-            //add User Stats
+            //Update user stats
             gui.playerSetup(
                     playerStats.getStats().get("Health"),
                     playerStats.getStats().get("Bone Density"),
@@ -100,7 +96,7 @@ public class GameController {
                     TimeCalc.findDifferenceGUI(dieTime, minutesToCompleteGame)
             );
 
-//            is game over yet??
+            // Check if game is over yet
             IsGameOverYet.timeUp(gui, TimeCalc.findDifferenceGUI(dieTime, minutesToCompleteGame));
             IsGameOverYet.puzzlesSolved(gui, audio);
             IsGameOverYet.statsAtZero(gui,playerStats);
@@ -134,20 +130,25 @@ public class GameController {
     }
 
     private class ItemButtonHandler implements ActionListener {
+        /*
+         * Listener for adding items to inventory
+         */
         public void actionPerformed(ActionEvent e) {
             // get item name from button click
             String itemName = ((JButton) e.getSource()).getText();
             // remove item from current location and get reference
             if (inventory.getInventory().size() <= 1){
                 System.out.println(inventory.getInventory().size());
+                // remove item from location
                 Item removedItem = currentLocation.removeItem(itemName);
-                // add item to inventory
+                // add item to player inventory
                 inventory.add(removedItem);
                 // reload location to show item is gone
                 System.out.println("Inventory: " + inventory.getInventory());
                 gui.setLocationInfo(currentLocation);
 
             }
+            // If player has 2 items which is max inform him
             else {
                 System.out.println("Inventory full");
                 gui.popUp("You inventory is full, drop items if needed.");
@@ -157,19 +158,26 @@ public class GameController {
     }
 
     private class InventoryButtonHandler implements ActionListener {
+        /*
+         * Listener that listens for user action for individual items
+         */
         public void actionPerformed(ActionEvent e) {
             String inventoryName = ((JButton) e.getSource()).getText();
             String inventoryDescription = inventory.getItemDescription(inventoryName);
 
+            // pop up asking user what they want to do with the item
             int answer = gui.popUpInventory(inventoryName, inventoryDescription);
+            // use item
             if (answer == 2){
                 gui.setLocationInfo(currentLocation);
                 System.out.println("using item " + inventoryName );
                 Item itemToUse = inventory.getItem(inventoryName);
                 int value = inventory.use(itemToUse);
+                // Item does nothing
                 if (value == 999) {
                     System.out.println();
                 }
+                // Item Steve activates GodMode
                 else if (value == 998){
                     System.out.println("Steve activated");
                     gui.popUp("You feel the motivation and hype that was felt during the Windows95 release. \n" +
@@ -184,6 +192,7 @@ public class GameController {
 
                     }
                 }
+                //  Checks to see if item is conumable if its consumable give player health else tell em they cant use
                 else if (value > 0){
                     System.out.println(value);
                     playerStats.updateCurrentHealthGain(value);
@@ -207,31 +216,38 @@ public class GameController {
             else{
                 System.out.println("cancel");
             }
-
+            // Refresh Page
             gui.setLocationInfo(currentLocation);
         }
     }
 
     private class PuzzleButtonHandler implements ActionListener {
+        /*
+         * Listens for player clicking the workout button
+         */
         public void actionPerformed(ActionEvent e) {
             if (e.toString().contains("gym")){
+                // if player is at the gym and clicks button give them 100 Bone Density
                 IsGameEventActive.playerAtGym(gui,
                         playerStats, currentLocation, locationMap,
                         inventory, dieTime, minutesToCompleteGame);
             }
+            // If player is not at the gym dont display buttons
             else{
                 Puzzle puzzle = currentLocation.getTypePuzzle();
                 boolean puzzleComplete = puzzle.runPuzzle();
                 if (puzzleComplete) {
 
                     ((JButton) e.getSource()).setVisible(false);
-            }
-
+                }
             }
         }
     }
 
     private class MainMenuButtonHandler implements ActionListener {
+        /*
+         * Main Menu Buttons
+         */
         public void actionPerformed(ActionEvent e) {
             int reply = gui.popUpGameOption();
             System.out.println(reply);
@@ -265,7 +281,6 @@ public class GameController {
         }
     }
 //    Getter and Setter
-
     public static void setDieTime(String dieTime) {
         GameController.dieTime = dieTime;
     }
