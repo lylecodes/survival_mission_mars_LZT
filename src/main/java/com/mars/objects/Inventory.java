@@ -1,9 +1,12 @@
 package com.mars.objects;
 
+import com.mars.util.Audio;
+
 import java.util.*;
 
 public class Inventory {
     private static Inventory single_instance = null;
+    private Audio audio = Audio.getInstance();
     private List<Item> inventory;
 
     private Inventory(){
@@ -68,8 +71,25 @@ public class Inventory {
     }
 
 
-    public void use(Item item){
-        System.out.println("You used " + item.getName());
+    public int use(Item item){
+        if (item.getDescription().contains("healthItem")){
+            System.out.println("eating item " + item.getName());
+            // Remove from inventory
+            inventory.remove(item);
+            // Give player health
+            return 20;
+        } else if (item.getDescription().contains("cassette")) {
+            audio.play("start.wav");
+            return 999;
+        } else if (item.getDescription().contains("cool")) {
+            audio.play("developers.wav");
+            return 998;
+        }
+        else{
+            System.out.println("cant eat " + item.getName());
+            // Let player know they cant eat this
+            return 0;
+        }
     }
     public List<String> getInventory() {
         List<String> holder = new ArrayList<>();

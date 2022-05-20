@@ -9,7 +9,7 @@
       "description":"Your space craft is docked and you see the remains of an old abandoned outpost.",
       "puzzle" : "false",
       "items" : {
-        "mealkit": "single use emergency meal",
+        "mealkit": "single use emergency meal healthItem",
         "useless_tool": "a useless old rusty metal tool"
       },
       "oxygen": "false",
@@ -24,7 +24,7 @@
         "east": "Reactor"
       },
       "description":"It appears to be an old hydro station-an essential part of restoring water to the outpost.\n There appears to be a helpful placard on the tank.",
-      "puzzle" : "true",
+      "puzzle" : "false",
       "items" : {
         "flashlight" : "a useful light source",
         "batteries" : "a pack of AA batteries"
@@ -94,7 +94,7 @@
       "puzzle" : "false",
       "items" : {
         "air_fryer" : "only the fanciest appliances for NASA's finest",
-        "freeze_dried_ice_cream" : "almost as good as the real thing"
+        "freeze_dried_ice_cream" : "almost as good as the real thing healthItem"
       },
       "oxygen": "false",
       "asciiArt": "url"
@@ -111,7 +111,8 @@
       "puzzle" : "false",
       "items" : {
         "chuck_taylors" : "classic all-American high tops",
-        "protein_powder" : "the most important macro nutrient"
+        "protein_powder" : "the most important macro nutrient healthItem",
+        "cassette_player" : "there is a cassette inside... I wonder if I can play it"
       },
       "oxygen": "false",
       "asciiArt": "url"

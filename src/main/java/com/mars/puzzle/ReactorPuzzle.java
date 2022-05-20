@@ -1,22 +1,20 @@
 package com.mars.puzzle;
 
-import com.mars.display.Display;
 import com.mars.objects.Inventory;
+import com.mars.util.Audio;
 import com.mars.util.JSONHandler;
 import com.mars.util.TextParser;
 
-import javax.swing.*;
 import java.util.List;
 import java.util.Scanner;
 import static com.mars.puzzle.Dialogue.*;
 
 
 public class ReactorPuzzle implements Puzzle {
-    String name = "ReactorPuzzle";
-    boolean isSolved = false;
-    Display display = new Display();
+    private String name = "Reactor Puzzle";
+    public static boolean isSolved = false;
     TextParser parser = new TextParser();
-
+    Audio audio = Audio.getInstance();
 
     @Override
     public String showIntro() {
@@ -32,6 +30,7 @@ public class ReactorPuzzle implements Puzzle {
             if (res == 0) {
                 popUpDialogueEnd("Reactor recognizes key and lever lights up", this.getName());
                 res = popUpDialogue("Do you want to pull the lever?", this.getName());
+                audio.play("turbine_start.wav");
                 if (res == 0) {
                     popUpDialogueEnd("You pulled the lever", this.getName());
                     popUpDialogueEnd("The reactor whirrs as it spins up", this.getName());
