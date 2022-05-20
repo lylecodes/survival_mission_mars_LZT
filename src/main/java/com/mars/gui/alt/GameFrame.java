@@ -94,15 +94,17 @@ public class GameFrame extends JFrame {
 //    }
 
     private void createTitleNamePanel() {
+        Color myBrickColor = new Color(134, 57, 57);
         titleNamePanel = new JPanel();
         titleNamePanel.setBounds(200, 200, 600, 150);
-        titleNamePanel.setBackground(Color.red);
+        titleNamePanel.setBackground(myBrickColor);
     }
 
     private void createTitleNameLabel() {
-        titleNameLabel = new JLabel("Survival Mars");
-        titleNameLabel.setForeground(Color.white);
-        titleNameLabel.setFont(titleFont);
+        titleNameLabel = new JLabel();
+        ImageIcon imageIcon =
+                ResourceUtils.getImageIconScaledToLabelSizePopUp("images/title.png");
+        titleNameLabel.setIcon(imageIcon);
     }
 
     private void createStartButtonPanel() {
@@ -114,7 +116,7 @@ public class GameFrame extends JFrame {
     private void createStartButton() {
         startButton = new JButton("START");
         startButton.setBackground(Color.black);
-        startButton.setForeground(Color.RED);
+        startButton.setForeground(Color.GREEN);
         startButton.setFont(normalFont);
 //        startButton.addActionListener(titleScreenHandler);
     }
